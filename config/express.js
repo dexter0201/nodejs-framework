@@ -50,7 +50,8 @@ module.exports = function (app, config, passport) {
         app.use(passport.initialize());
         app.use(passport.session());
 
-        app.use(config.router);
+        // routes should be at the last
+        app.use(app.router);
 
         app.use(function (err, req, res, next) {
             if (~err.message.indexOf('not found')) {

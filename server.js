@@ -20,10 +20,19 @@ fs.readdirSync(models_path).forEach(function (file) {
 // bootstrap passport config
 require('./config/passport')(passport, config);
 
-
 // Express
 var app = express();
 
 // Express setting
 require('./config/express')(app, config, passport);
 
+// Bootstrap routers
+require('./config/routes')(app, passport, auth);
+
+// Start the app by listening on <port>
+var port = process.env.PORT || 3000;
+app.listen(port);
+console.log('Express app started on port: ' + port);
+
+// Expose app
+exports = module.exports = app;
