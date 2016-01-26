@@ -12,8 +12,7 @@ var UserSchema = new Schema({
     username: String,
     provider: String,
     hashed_password: String,
-    salt: String,
-    facebook: {}
+    salt: String
 });
 
 UserSchema
@@ -33,7 +32,7 @@ UserSchema.pre('save', function (next) {
         return next();
     }
 
-    if (!validatePresenceOf(this._password) && authTypes.indexOf(this.provider) === -1) {
+    if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {
         next(new Error('Invalid password'));
     } else {
         next();
@@ -53,16 +52,31 @@ UserSchema.path('name').validate(function (name) {
     return name.length;
 }, 'Name cannot be blank');
 
+UserSchema.path('email').validate(function (email) {
+    // if you are authenticating by any of the oauth strategies, don't validate
+    if (authTypes.indexOf(this.provider) !== -1) {
+        return true;
+    }
+
+    return email.length;
+}, 'Email cannot be blank');
+
 UserSchema.path('username').validate(function (username) {
     // If you are authenticating by any of the oauth strategies, don't validate
-    if (authTypes.indexOf(this.provider) !== -1) return true
-    return username.length
+    if (authTypes.indexOf(this.provider) !== -1) {
+        return true;
+    }
+
+    return username.length;
 }, 'Username cannot be blank');
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
     // If you are authenticating by any of the oauth strategies, don't validate
-    if (authTypes.indexOf(this.provider) !== -1) return true
-    return hashed_password.length
+    if (authTypes.indexOf(this.provider) !== -1) {
+        return true;
+    }
+
+    return hashed_password.length;
 }, 'Password cannot be blank');
 
 UserSchema.methods = {
