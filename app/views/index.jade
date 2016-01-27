@@ -1,6 +1,6 @@
 extends layouts/default
 
 block content
-    h1 This is index page
+    section(data-ng-view)
     script(type='text/javascript').
         window.user = !{user};

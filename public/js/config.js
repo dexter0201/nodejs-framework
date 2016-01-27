@@ -13,5 +13,6 @@ window.app.config(['$httpProvider', function ($httpProvider) {
 }]);
 
 window.app.config(['$locationProvider', function ($locationProvider) {
-
+    //$locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
 }]);
