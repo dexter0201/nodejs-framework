@@ -21,9 +21,23 @@ exports.signup = function (req, res) {
     });
 };
 
-exports.logout = function (req, res) {
+exports.signout = function (req, res) {
     req.logout();
     res.redirect('/');
+};
+
+exports.me = function (req, res) {
+    res.jsonp(req.user || null);
+};
+
+// Show profile
+exports.show = function (req, res) {
+    var user = req.profile;
+
+    res.render('/users/show', {
+        title: user.name,
+        user: user
+    });
 };
 
 exports.session = function (req, res) {

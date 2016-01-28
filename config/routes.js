@@ -13,6 +13,9 @@ module.exports = function (app, passport, auth) {
         failureFlash: 'Invalid email or password! Please try again!'
     }), users.session);
 
+    app.get('/signout', users.signout);
+    app.get('/users/me', users.me);
+
     var index = require('../app/controllers/index');
 
     app.get('/', index.render);
