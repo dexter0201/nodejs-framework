@@ -42,4 +42,11 @@ module.exports = function (passport, config) {
     }));
 
     // Facebook Authentication
+    passport.use(new FacebookStrategy({
+        clientID: config.facebook.clientID,
+        clientSecret: config.facebook.clientSecret,
+        callbackURL: config.facebook.callbackURL
+    }, function (accessToken, refreshToken, profile, done) {
+        console.log(accessToken, refreshToken, profile, done);
+    }));
 };

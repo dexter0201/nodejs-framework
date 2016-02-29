@@ -16,6 +16,11 @@ module.exports = function (app, passport, auth) {
     app.get('/signout', users.signout);
     app.get('/users/me', users.me);
 
+    app.get('/auth/facebook', passport.authenticate('facebook', {
+        scope: [ 'email', 'user_about_me' ],
+        failureRedirect: '/signin'
+    }), users.signin);
+
     var index = require('../app/controllers/index');
 
     app.get('/', index.render);

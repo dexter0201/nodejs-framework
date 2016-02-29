@@ -13,9 +13,9 @@ module.exports = {
             name: 'Kalel\'s nodejs framework'
         },
         facebook: {
-            clientID: '123',
-            clientSecret: '12121',
-            callbackURL: 'http://...'
+            clientID: '1562841474033434',
+            clientSecret: '834273fab74cc3d494c4e362e2b3609b',
+            callbackURL: 'http://abc.com'
         }
     },
     test: {
