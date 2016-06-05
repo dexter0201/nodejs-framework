@@ -19,7 +19,8 @@
         "underscore": "latest",
         "view-helpers": "latest",
         "async": "latest",
-        "mean-logger": "latest"
+        "mean-logger": "latest",
+        "bower": "latest"
     },
     "devDependencies": {
         "supertest": "latest",
