@@ -1,6 +1,7 @@
 var express = require('express'),
     fs = require('fs'),
-    passport = require('passport');
+    passport = require('passport'),
+    logger = require('mean-logger');
 
 var env = process.env.NODE_ENV || 'development',
     config = require('./config/config')[env],
@@ -33,6 +34,9 @@ require('./config/routes')(app, passport, auth);
 var port = process.env.PORT || 3000;
 app.listen(port);
 console.log('Express app started on port: ' + port);
+
+// Initialazing logger
+logger.init(app, passport, mongoose);
 
 // Expose app
 exports = module.exports = app;

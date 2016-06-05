@@ -18,7 +18,8 @@
         "passport-facebook": "latest",
         "underscore": "latest",
         "view-helpers": "latest",
-        "async": "latest"
+        "async": "latest",
+        "mean-logger": "latest"
     },
     "devDependencies": {
         "supertest": "latest",
