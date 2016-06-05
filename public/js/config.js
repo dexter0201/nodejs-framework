@@ -1,16 +1,16 @@
 window.app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when('/acticles', {
-            templateUrl: 'views/acticles/list.html'
+        .when('/articles', {
+            templateUrl: '/views/articles/list.html'
         })
-        .when('/acticles/create', {
-            templateUrl: '/views/acticles/create.html'
+        .when('/articles/create', {
+            templateUrl: '/views/articles/create.html'
         })
-        .when('/acticles/:acticleId/edit', {
-            templateUrl: 'views/acticles/edit.html'
+        .when('/articles/:acticleId/edit', {
+            templateUrl: 'views/articles/edit.html'
         })
-        .when('/acticles/:acticleId', {
-            templateUrl: 'views/acticles/view.html'
+        .when('/articles/:acticleId', {
+            templateUrl: 'views/articles/view.html'
         })
         .when('/', {
             templateUrl: 'views/index.html'

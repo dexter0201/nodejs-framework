@@ -20,6 +20,13 @@ module.exports = function (app, passport, auth) {
         scope: [ 'email', 'user_about_me' ],
         failureRedirect: '/signin'
     }), users.signin);
+    
+    var articles = require('../app/controllers/acticles');
+    
+    app.get('/articles', articles.all);
+    app.post('/articles', auth.requiresLogin, articles.create);
+    
+    app.param('articleId', articles.acticle);
 
     var index = require('../app/controllers/index');
 
