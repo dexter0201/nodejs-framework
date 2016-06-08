@@ -26,6 +26,12 @@
         "supertest": "latest",
         "should": "latest",
         "mocha": "latest",
-        "nodemon": "latest"
+        "nodemon": "latest",
+        "grunt": "~0.4.1",
+        "grunt-contrib-compass": "~0.3.0",
+        "grunt-contrib-watch": "~0.4.4",
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-nodemon": "0.0.8",
+        "grunt-concurrent": "~0.3.0"
     }
 }
