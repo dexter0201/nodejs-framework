@@ -52,7 +52,6 @@ exports.destroy = function (req, res) {
 };
 
 exports.show = function (req, res) {
-    console.log('epxorts.show is running...');
     res.jsonp(req.article);
 };
 
