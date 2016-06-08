@@ -78,5 +78,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
 
-    grunt.registerTask('default', ['jshint', 'compass']);
+    grunt.registerTask('default', ['jshint']);
 };
