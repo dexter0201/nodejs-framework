@@ -1,1 +1,1 @@
-window.app = angular.module('KALEL', ['ngCookies', 'ngResource']);
+window.app = angular.module('KALEL', ['ngCookies', 'ngResource', 'ui.bootstrap']);

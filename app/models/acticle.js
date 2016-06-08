@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var ActicleSchema = new Schema({
+var ArticleSchema = new Schema({
     created: {
         type: Date,
         'default': Date.now
@@ -22,7 +22,7 @@ var ActicleSchema = new Schema({
     }
 });
 
-ActicleSchema.statics = {
+ArticleSchema.statics = {
     load: function (id, cb) {
         //'use strict';
         
@@ -30,4 +30,4 @@ ActicleSchema.statics = {
     }
 };
 
-mongoose.model('Acticle', ActicleSchema);
+mongoose.model('Article', ArticleSchema);

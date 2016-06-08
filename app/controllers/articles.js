@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    Article = mongoose.model('Acticle'),
+    Article = mongoose.model('Article'),
     _ = require('underscore');
 
 exports.article = function (req, res, next, id) {

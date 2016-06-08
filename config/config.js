@@ -1,14 +1,10 @@
 var path = require('path'),
-    rootPath = path.normalize(__dirname + '/..'),
-    templatePath = path.normalize(__dirname + '/../app/public'),
-    notifier = {};
+    rootPath = path.normalize(__dirname + '/..');
 
 module.exports = {
     development: {
         db: 'mongodb://localhost/nodejs-framework-dev',
         root: rootPath,
-        notifier: notifier,
-        templatePath: templatePath,
         app: {
             name: 'Kalel\'s nodejs framework'
         },

@@ -1,0 +1,10 @@
+<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
+    <span>{{ article.created | date: 'medium' }}</span> /
+    <span>{{ article.user.name }}</span>
+    <h2>{{ article.title }} 
+        <a href="/#!/articles/{{article._id}}/edit" data-ng-show="global.user.id === article.user._id">
+            edit
+        </a>
+    </h2>
+    <div>{{ article.content }}</div>
+</section>

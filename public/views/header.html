@@ -1,8 +1,8 @@
 <div class="navbar-inner" data-ng-controller="HeaderController" data-ng-init="init()">
     <ul class="nav">
         <li><a href="/" class="brand">Kalel - NodeJs Frameword</a></li>
-        <li ng-data-repeat="item in menu" data-ng-show="global.user" data-ng-class="{active: isSelected(item)}">
-            <a href="#/{{item.link}}">
+        <li data-ng-repeat="item in menu" data-ng-show="global.user" data-ng-class="{active: isSelected(item)}">
+            <a href="#!/{{item.link}}">
                 {{item.title}}
             </a>
         </li>
