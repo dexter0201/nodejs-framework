@@ -21,12 +21,12 @@ module.exports = function (app, passport, auth) {
         failureRedirect: '/signin'
     }), users.signin);
     
-    var articles = require('../app/controllers/acticles');
+    var articles = require('../app/controllers/articles');
     
     app.get('/articles', articles.all);
     app.post('/articles', auth.requiresLogin, articles.create);
-    
-    app.param('articleId', articles.acticle);
+    app.get('/articles/:articleId', articles.show);
+    app.param('articleId', articles.article);
 
     var index = require('../app/controllers/index');
 

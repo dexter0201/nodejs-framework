@@ -2,19 +2,19 @@ var mongoose = require('mongoose'),
     Acticle = mongoose.model('Acticle'),
     _ = require('underscore');
 
-exports.acticle = function (req, res, next, id) {
+exports.article = function (req, res, next, id) {
     var User = mongoose.model('User');
     
-    Acticle.load(id, function (err, acticle) {
+    Acticle.load(id, function (err, article) {
         if (err) {
             return next(err);
         }
         
-        if (!acticle) {
+        if (!article) {
             return next(new Error('Failed to load article ' + id));
         }
         
-        req.acticle = acticle;
+        req.article = article;
         next();
     });
 };
@@ -24,7 +24,7 @@ exports.create = function (req, res) {
     
     article.user = req.user;
     article.save();
-    res.jsonp(article);
+    article.jsonp(article);
 };
 
 exports.update = function (req, res) {
@@ -52,6 +52,7 @@ exports.destroy = function (req, res) {
 };
 
 exports.show = function (req, res) {
+    console.log('epxorts.show is running...');
     res.jsonp(req.article);
 };
 

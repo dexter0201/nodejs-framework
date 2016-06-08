@@ -1,4 +1,4 @@
-function ArticlesController($scope, Articles, $location) {
+function ArticlesController($scope, Articles, $location, $routeParams) {
     $scope.articles = [];
     $scope.article = {};
 
@@ -20,5 +20,18 @@ function ArticlesController($scope, Articles, $location) {
         Articles.query(query, function (articles) {
             $scope.articles = articles;
         });
+    };
+    
+    $scope.findOne = function () {
+        console.log('$routeParams.articleId: ', $routeParams.articleId);
+        Articles.get({
+            articleId: $routeParams.articleId
+        }, function (article) {
+            $scope.article = article;
+        });
+    };
+    
+    $scope.update = function () {
+        
     };
 }
