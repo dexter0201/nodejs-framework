@@ -1,11 +1,11 @@
 var mongoose = require('mongoose'),
-    Acticle = mongoose.model('Acticle'),
+    Article = mongoose.model('Acticle'),
     _ = require('underscore');
 
 exports.article = function (req, res, next, id) {
     var User = mongoose.model('User');
     
-    Acticle.load(id, function (err, article) {
+    Article.load(id, function (err, article) {
         if (err) {
             return next(err);
         }
@@ -20,11 +20,11 @@ exports.article = function (req, res, next, id) {
 };
 
 exports.create = function (req, res) {
-    var article = new Acticle(req.body);
+    var article = new Article(req.body);
     
     article.user = req.user;
     article.save();
-    article.jsonp(article);
+    res.jsonp(article);
 };
 
 exports.update = function (req, res) {
@@ -38,7 +38,7 @@ exports.update = function (req, res) {
 };
 
 exports.destroy = function (req, res) {
-    var article = req.acticle;
+    var article = req.Article;
     
     article.remove(function (err) {
         if (err) {
@@ -57,7 +57,7 @@ exports.show = function (req, res) {
 };
 
 exports.all = function (req, res) {
-    Acticle
+    Article
         .find()
         .sort('-created')
         .populate('user')

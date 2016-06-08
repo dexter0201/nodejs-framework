@@ -32,6 +32,15 @@ function ArticlesController($scope, Articles, $location, $routeParams) {
     };
     
     $scope.update = function () {
-        
+        var article = $scope.article;
+
+        if (!article.updated) {
+            article.updated = [];
+        }
+
+        article.updated.push(new Date().getTime());
+        article.$update(function () {
+            $location.path('articles/' + article._id);
+        })
     };
 }
