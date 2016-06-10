@@ -3,8 +3,6 @@ var mongoose = require('mongoose'),
     _ = require('underscore');
 
 exports.article = function (req, res, next, id) {
-    var User = mongoose.model('User');
-    
     Article.load(id, function (err, article) {
         if (err) {
             return next(err);
