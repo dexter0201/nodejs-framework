@@ -29,8 +29,6 @@ module.exports = function (app, config, passport) {
     app.enable('jsonp callback');
 
     app.configure(function () {
-        // dynamic helpers
-        app.use(helpers(config.app.name));
         app.use(express.cookieParser());
         app.use(express.bodyParser());
         app.use(express.methodOverride());
@@ -45,6 +43,9 @@ module.exports = function (app, config, passport) {
 
         // connect flash for flash message
         app.use(flash());
+
+        // dynamic helpers
+        app.use(helpers(config.app.name));
 
         // express session
         app.use(passport.initialize());
