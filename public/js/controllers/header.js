@@ -16,6 +16,6 @@ function HeaderController($scope, $location, Global) {
     };
 
     $scope.isSelected = function (item) {
-        
+        return $location.path() === ('/' + item.link) ? 'active' : '';
     };
 }
