@@ -1,4 +1,4 @@
-window.app.factory('Global', function () {
+angular.module('dexter.system').factory('Global', function () {
     var _this = this;
 
     _this._data = {

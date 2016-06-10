@@ -1,5 +1,5 @@
 window.bootstrap = function () {
-    angular.bootstrap(document, ['KALEL']);
+    angular.bootstrap(document, ['dexter']);
 };
 
 window.init = function () {

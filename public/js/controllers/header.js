@@ -1,21 +1,15 @@
-function HeaderController($scope, $location, Global) {
-    $scope.global = Global;
+angular
+    .module('dexter.system')
+    .controller('HeaderController', ['$scope', '$location', 'Global', function ($scope, $location, Global) {
+        $scope.global = Global;
 
-    $scope.menu = [
-        {
-            "title": "Articles",
-            "link": "articles"
-        }, {
-            "title": "Create New Article",
-            "link": "articles/create"
-        }
-    ];
-
-    $scope.init = function () {
-
-    };
-
-    $scope.isSelected = function (item) {
-        return $location.path() === ('/' + item.link) ? 'active' : '';
-    };
-}
+        $scope.menu = [
+            {
+                "title": "Articles",
+                "link": "articles"
+            }, {
+                "title": "Create New Article",
+                "link": "articles/create"
+            }
+        ];
+    }]);

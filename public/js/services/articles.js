@@ -1,4 +1,4 @@
-window.app.factory('Articles', function ($resource) {
+angular.module('dexter.articles').factory('Articles', function ($resource) {
     return $resource('articles/:articleId',
             {
             articleId: '@_id'
