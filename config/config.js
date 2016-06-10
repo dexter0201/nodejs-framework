@@ -3,7 +3,8 @@ var path = require('path'),
 
 module.exports = {
     development: {
-        db: 'mongodb://localhost/nodejs-framework-dev',
+        //db: 'mongodb://localhost/nodejs-framework-dev',
+        db: 'mongodb://dbadmin:dbadmin@ds021943.mlab.com:21943/nodejs-framework',
         root: rootPath,
         app: {
             name: 'Kalel\'s nodejs framework'
