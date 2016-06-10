@@ -1,4 +1,4 @@
-angular.module('dexter.system').factory('Global', function () {
+angular.module('dexter.system').factory('Global', [function () {
     var _this = this;
 
     _this._data = {
@@ -7,4 +7,4 @@ angular.module('dexter.system').factory('Global', function () {
     };
 
     return _this._data;
-});
+}]);
