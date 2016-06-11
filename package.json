@@ -26,7 +26,8 @@
         "async": "latest",
         "mean-logger": "latest",
         "bower": "latest",
-        "forever": "latest"
+        "forever": "latest",
+        "forman": "0.0.25"
     },
     "devDependencies": {
         "supertest": "latest",
@@ -38,6 +39,7 @@
         "grunt-contrib-watch": "~0.4.4",
         "grunt-contrib-jshint": "~0.6.0",
         "grunt-nodemon": "0.0.8",
-        "grunt-concurrent": "~0.3.0"
+        "grunt-concurrent": "~0.3.0",
+        "web-mocha": "0.0.10"
     }
 }

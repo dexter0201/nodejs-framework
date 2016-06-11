@@ -3,9 +3,10 @@
 var express = require('express'),
     helpers = require('view-helpers'),
     mongoStore = require('connect-mongo')(express),
-    flash = require('connect-flash');
+    flash = require('connect-flash'),
+    config = require('./config');
 
-module.exports = function (app, config, passport) {
+module.exports = function (app, passport) {
     app.set('showStackError', true);
 
     app.use(express.compress({
