@@ -1,7 +1,5 @@
 // 'use strict'
 
-var async = require('async');
-
 module.exports = function (app, passport, auth) {
     var users = require('../app/controllers/users');
 
@@ -20,9 +18,9 @@ module.exports = function (app, passport, auth) {
         scope: [ 'email', 'user_about_me' ],
         failureRedirect: '/signin'
     }), users.signin);
-    
+
     var articles = require('../app/controllers/articles');
-    
+
     app.get('/articles', articles.all);
     app.post('/articles', auth.requiresLogin, articles.create);
     app.get('/articles/:articleId', articles.show);

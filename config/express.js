@@ -8,6 +8,7 @@ var express = require('express'),
 
 module.exports = function (app, passport, db) {
     app.set('showStackError', true);
+    app.local.pretty = true;
 
     app.use(express.compress({
         filter: function (req, res) {

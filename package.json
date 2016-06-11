@@ -27,7 +27,6 @@
         "passport-facebook": "latest",
         "underscore": "latest",
         "view-helpers": "latest",
-        "async": "latest",
         "mean-logger": "latest",
         "bower": "latest",
         "forever": "latest",
