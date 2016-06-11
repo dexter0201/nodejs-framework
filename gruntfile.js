@@ -30,7 +30,7 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-            all: ['gruntfile.js']
+            all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js']
         },
         compass: {
             dist: {

@@ -22,10 +22,14 @@ var ArticleSchema = new Schema({
     }
 });
 
+ArticleSchema.path('title').validate(function (title) {
+    return title.length;
+}, 'Title cannot empty');
+
 ArticleSchema.statics = {
     load: function (id, cb) {
         //'use strict';
-        
+
         this.findOne({ '_id': id }).populate('user').exec(cb);
     }
 };

@@ -7,11 +7,11 @@ exports.article = function (req, res, next, id) {
         if (err) {
             return next(err);
         }
-        
+
         if (!article) {
             return next(new Error('Failed to load article ' + id));
         }
-        
+
         req.article = article;
         next();
     });
@@ -19,17 +19,26 @@ exports.article = function (req, res, next, id) {
 
 exports.create = function (req, res) {
     var article = new Article(req.body);
-    
+
     article.user = req.user;
-    article.save();
-    res.jsonp(article);
+
+    article.save(function (err) {
+        if (err) {
+            return res.send('users/signup', {
+                errors: err.errors,
+                article: article
+            });
+        } else {
+            res.jsonp(article);
+        }
+    });
 };
 
 exports.update = function (req, res) {
     var article = req.article;
-    
+
     article = _.extend(article, req.body);
-    
+
     article.save(function (err) {
         res.jsonp(article);
     });
@@ -37,14 +46,14 @@ exports.update = function (req, res) {
 
 exports.destroy = function (req, res) {
     var article = req.Article;
-    
+
     article.remove(function (err) {
         if (err) {
             res.render('error', {
                 status: 500
             });
         }
-        
+
         res.jsonp(article);
     });
 };
