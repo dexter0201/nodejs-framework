@@ -34,7 +34,8 @@
         "foreman": "0.0.25",
         "grunt-bower-task": "latest",
         "grunt": "latest",
-        "grunt-cli": "latest"
+        "grunt-cli": "latest",
+        "bcrypt": "latest"
     },
     "devDependencies": {
         "supertest": "latest",

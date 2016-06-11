@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    crypto = require('crypto'),
+    bcrypt = require('bcrypt'),
     _ = require('underscore'),
     authTypes = ['facebook'];
 
@@ -12,14 +12,13 @@ var UserSchema = new Schema({
     username: String,
     provider: String,
     hashed_password: String,
-    salt: String
+    facebook: {}
 });
 
 UserSchema
     .virtual('password')
     .set(function (password) {
         this._password = password;
-        this.salt = this.makeSalt(password);
         this.hashed_password = this.encryptPassword(password);
     })
     .get(function () {
@@ -80,20 +79,17 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
 }, 'Password cannot be blank');
 
 UserSchema.methods = {
-    makeSalt: function () {
-        return Math.round((new Date().valueOf() * Math.random())) + '';
-    },
 
     encryptPassword: function (password) {
         if (!password) {
             return '';
         }
 
-        return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
+        return bcrypt.hashSync(password, 10);
     },
 
     authenticate: function (plainText) {
-        return this.encryptPassword(plainText) === this.hashed_password;
+        return bcrypt.compareSync(plainText, this.hashed_password);
     }
 };
 
