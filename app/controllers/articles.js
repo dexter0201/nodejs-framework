@@ -66,7 +66,7 @@ exports.all = function (req, res) {
     Article
         .find()
         .sort('-created')
-        .populate('user')
+        .populate('user', 'name username')
         .exec(function (err, articles) {
             if (err) {
                 res.render('error', { status: 500 });

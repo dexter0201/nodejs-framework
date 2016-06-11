@@ -30,7 +30,10 @@ ArticleSchema.statics = {
     load: function (id, cb) {
         //'use strict';
 
-        this.findOne({ '_id': id }).populate('user').exec(cb);
+        this.findOne({
+            '_id': id
+        }).populate('user', 'name username')
+        .exec(cb);
     }
 };
 
