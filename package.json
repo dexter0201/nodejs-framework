@@ -2,11 +2,15 @@
     "name": "kalel-node-framework",
     "version": "0.0.1",
     "description": "This is the kalel's node framework",
-    "author": "kalel",
+    "author": "Dexter Nguyen",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Kalel0201/nodejs-framework.git"
+    },
     "scripts": {
         "start": "make start",
         "test": "make test",
-        "postinstall": "node_modules/bower/bin/bower install"
+        "postinstall": "node node_modules/grunt-cli/bin/grunt install"
     },
     "engines": {
         "node": "0.10.x",
@@ -28,7 +32,9 @@
         "bower": "latest",
         "forever": "latest",
         "foreman": "0.0.25",
-        "grunt-bower-task": "latest"
+        "grunt-bower-task": "latest",
+        "grunt": "latest",
+        "grunt-cli": "latest"
     },
     "devDependencies": {
         "supertest": "latest",

@@ -11,7 +11,7 @@ exports.signin = function (req, res) {
     res.render('users/signin', {
         title: 'Sign in',
         message: req.flash('error')
-    })
+    });
 };
 
 exports.signup = function (req, res) {
@@ -65,5 +65,5 @@ exports.create = function (req, res) {
             }
             return res.redirect('/');
         });
-    })
+    });
 };

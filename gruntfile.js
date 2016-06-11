@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         nodemon: {
             dev: {
                 options: {
-                    files: 'server.js',
+                    file: 'server.js',
                     args: [],
                     ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
                     watchedExtensions: ['js'],
@@ -49,11 +49,9 @@ module.exports = function (grunt) {
             }
         },
         concurrent: {
-            target: {
-                tasks: ['nodemon', 'watch'],
-                options: {
-                    logConcurrentOutput: true
-                }
+            tasks: ['nodemon', 'watch'],
+            options: {
+                logConcurrentOutput: true
             }
         },
         mochaTest: {

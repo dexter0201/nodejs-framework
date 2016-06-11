@@ -12,7 +12,7 @@ angular
             article.$save(function (res) {
                 $location.path('articles/' + res._id);
             });
-            
+
             this.title = '';
             this.content = '';
         };
@@ -41,6 +41,6 @@ angular
             article.updated.push(new Date().getTime());
             article.$update(function () {
                 $location.path('articles/' + article._id);
-            })
+            });
         };
     }]);
