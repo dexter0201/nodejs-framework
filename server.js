@@ -9,7 +9,7 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     mongoose = require('mongoose');
 
 // bootstrap db connection
-mongoose.connect(config.db);
+var db = mongoose.connect(config.db);
 
 // bootstrap models
 var models_path = __dirname + '/app/models';
@@ -37,7 +37,7 @@ require('./config/passport')(passport);
 var app = express();
 
 // Express setting
-require('./config/express')(app, passport);
+require('./config/express')(app, passport, db);
 
 // Bootstrap routers
 require('./config/routes')(app, passport, auth);

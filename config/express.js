@@ -6,7 +6,7 @@ var express = require('express'),
     flash = require('connect-flash'),
     config = require('./config');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, db) {
     app.set('showStackError', true);
 
     app.use(express.compress({
@@ -37,6 +37,7 @@ module.exports = function (app, passport) {
         app.use(express.session({
             secret: 'KALEL',
             store: new mongoStore({
+                //db: db.connection.db,
                 url: config.db,
                 collection : 'sessions'
             })

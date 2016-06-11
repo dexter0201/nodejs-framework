@@ -17,8 +17,8 @@ angular
             this.content = '';
         };
 
-        $scope.find = function (query) {
-            Articles.query(query, function (articles) {
+        $scope.find = function () {
+            Articles.query(function (articles) {
                 $scope.articles = articles;
             });
         };

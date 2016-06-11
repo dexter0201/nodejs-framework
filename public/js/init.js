@@ -6,6 +6,6 @@ window.init = function () {
     window.bootstrap();
 };
 
-$(document).ready(function() {
+angular.element(document).ready(function() {
     window.init();
 });
