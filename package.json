@@ -8,7 +8,7 @@
         "url": "git@github.com:Kalel0201/nodejs-framework.git"
     },
     "scripts": {
-        "start": "make start",
+        "start": "node node_modules/grunt-cli/bin/grunt",
         "test": "make test",
         "postinstall": "node node_modules/grunt-cli/bin/grunt install"
     },
