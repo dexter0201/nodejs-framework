@@ -11,6 +11,16 @@
         "json3": "~3.2.4",
         "jquery": "~1.9.1"
     },
+    "exportsOverride": {
+        "bootstrap": {
+            "css": "docs/assets/css/bootstrap*.css",
+            "js": "docs/assets/js/bootstrap.js",
+            "img": "docs/assets/img/glyphicons-halflings*.png"
+        },
+        "angular-ui-utils": {
+            "modules": "modules/route/route.js"
+        }
+    },
     "devDependencies": {
         "angular-mocks": "~1.0.5",
         "angular-scenario": "~1.0.5"

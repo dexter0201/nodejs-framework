@@ -15,37 +15,21 @@ module.exports = function (grunt) {
                 }
             },
             js: {
-                files: ['public/js/**'],
+                files: ['public/js/**', 'app/**/*.js'],
+                tasks: ['jshint'],
                 options: {
                     livereload: true
                 }
             },
             css: {
-                files: ['public/scss/**'],
-                tasks: ['compass'],
+                files: ['public/css/**'],
                 options: {
-                    livereload: true,
-                    force: true
+                    livereload: true
                 }
             }
         },
         jshint: {
             all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js']
-        },
-        compass: {
-            dist: {
-                options: {
-                    sassDir: 'public/scss',
-                    cssDir: 'public/css',
-                    environment: 'production'
-                }
-            },
-            dev: {
-                options: {
-                    sassDir: 'public/scss',
-                    cssDir: 'public/css'
-                }
-            }
         },
         nodemon: {
             dev: {
@@ -62,11 +46,6 @@ module.exports = function (grunt) {
                     },
                     cwd: __dirname
                 }
-            },
-            exec: {
-                options: {
-                    exec: 'less'
-                }
             }
         },
         concurrent: {
@@ -76,16 +55,40 @@ module.exports = function (grunt) {
                     logConcurrentOutput: true
                 }
             }
+        },
+        mochaTest: {
+            options: {
+                reporter: 'spec'
+            },
+            src: ['test/**/*.js']
+        },
+        bower: {
+            install: {
+                options: {
+                    targetDir: './public/lib',
+                    layout: 'byComponent',
+                    install: true,
+                    verbose: true,
+                    cleanBowerDir: true
+                }
+            }
         }
     });
 
     grunt.option('force', true);
 
-    grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-nodemon');
+    grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-bower-task');
 
-    grunt.registerTask('default', ['compass', 'jshint', 'concurrent:target']);
+    grunt.registerTask('default', ['jshint', 'concurrent']);
+
+    //Test task.
+    grunt.registerTask('test', ['mochaTest']);
+
+    //Bower task.
+    grunt.registerTask('install', ['bower']);
 };
