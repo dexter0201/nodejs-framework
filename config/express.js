@@ -34,6 +34,7 @@ module.exports = function (app, passport, db) {
         app.use(express.cookieParser());
         //app.use(express.bodyParser());
         app.use(express.urlencoded());
+        app.use(express.json());
         app.use(express.methodOverride());
 
         app.use(express.session({
