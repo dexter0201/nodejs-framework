@@ -1,4 +1,4 @@
-window.app.config(['$routeProvider', function ($routeProvider) {
+angular.module('dexter').config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/articles', {
             templateUrl: 'views/articles/list.html'
@@ -20,11 +20,11 @@ window.app.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-window.app.config(['$httpProvider', function ($httpProvider) {
+angular.module('dexter').config(['$httpProvider', function ($httpProvider) {
 
 }]);
 
-window.app.config(['$locationProvider', function ($locationProvider) {
+angular.module('dexter').config(['$locationProvider', function ($locationProvider) {
     //$locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
 }]);
