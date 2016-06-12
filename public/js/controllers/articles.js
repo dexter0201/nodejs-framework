@@ -43,4 +43,19 @@ angular
                 $location.path('articles/' + article._id);
             });
         };
+
+        $scope.remove = function (article) {
+            if (article) {
+                article.$remove();
+
+                for (var i in $scope.artices) {
+                    if ($scope.artices[i] == article) {
+                        scope.articles.splice(i, 1);
+                    }
+                }
+            } else {
+                $scope.article.$remove();
+                $location.path('articles');
+            }
+        };
     }]);

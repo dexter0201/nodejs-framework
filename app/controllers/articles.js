@@ -45,7 +45,7 @@ exports.update = function (req, res) {
 };
 
 exports.destroy = function (req, res) {
-    var article = req.Article;
+    var article = req.article;
 
     article.remove(function (err) {
         if (err) {

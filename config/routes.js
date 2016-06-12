@@ -24,7 +24,8 @@ module.exports = function (app, passport, auth) {
     app.get('/articles', articles.all);
     app.post('/articles', auth.requiresLogin, articles.create);
     app.get('/articles/:articleId', articles.show);
-    app.put('/articles/:articleId', articles.update);
+    app.put('/articles/:articleId', auth.requiresLogin, auth.article.hasAuthorization, articles.update);
+    app.del('/articles/:articleId', auth.requiresLogin, auth.article.hasAuthorization, articles.destroy);
     app.param('articleId', articles.article);
 
     var index = require('../app/controllers/index');
