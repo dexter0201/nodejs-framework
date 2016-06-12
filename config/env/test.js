@@ -1,7 +1,8 @@
-{
-    "db": "mongodb://localhost/mean",
+module.exports = {
+    "db": "mongodb://localhost/dexter-test",
+    "port": 3001,
     "app": {
-        "name": "MEAN - A Modern Stack - Production"
+        "name": "MEAN - A Modern Stack - Test"
     },
     "facebook": {
         "clientID": "APP_ID",
@@ -23,4 +24,4 @@
         "clientSecret": "APP_SECRET",
         "callbackURL": "http://localhost:3000/auth/google/callback"
     }
-}
+};
