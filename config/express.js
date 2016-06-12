@@ -32,7 +32,8 @@ module.exports = function (app, passport, db) {
 
     app.configure(function () {
         app.use(express.cookieParser());
-        app.use(express.bodyParser());
+        //app.use(express.bodyParser());
+        app.use(express.urlencoded());
         app.use(express.methodOverride());
 
         app.use(express.session({
