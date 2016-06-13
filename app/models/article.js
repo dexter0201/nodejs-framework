@@ -26,15 +26,12 @@ ArticleSchema.path('title').validate(function (title) {
     return title.length;
 }, 'Title cannot empty');
 
-ArticleSchema.statics = {
-    load: function (id, cb) {
-        //'use strict';
-
-        this.findOne({
-            '_id': id
-        }).populate('user', 'name username')
-        .exec(cb);
-    }
+ArticleSchema.statics.load = function (id, cb) {
+    //'use strict';
+    this.findOne({
+        '_id': id
+    }).populate('user', 'name username')
+    .exec(cb);
 };
 
 mongoose.model('Article', ArticleSchema);
