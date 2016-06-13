@@ -55,7 +55,7 @@ module.exports = function (grunt) {
             }
         },
         concurrent: {
-            tasks: ['nodemon', 'watch', 'karma:unit'],
+            tasks: ['nodemon', 'watch'],
             options: {
                 logConcurrentOutput: true
             }
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['jshint', 'concurrent']);
 
     //Test task.
-    grunt.registerTask('test', ['mochaTest']);
+    grunt.registerTask('test', ['mochaTest', 'karma:unit']);
 
     //Bower task.
     grunt.registerTask('install', ['bower']);
