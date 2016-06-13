@@ -3,6 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     bcrypt = require('bcrypt'),
+    crypto = require('crypto'),
     _ = require('underscore'),
     authTypes = ['facebook'];
 
@@ -10,6 +11,7 @@ var UserSchema = new Schema({
     name: String,
     email: String,
     username: String,
+    salt: String,
     provider: String,
     hashed_password: String,
     facebook: {}
@@ -19,6 +21,7 @@ UserSchema
     .virtual('password')
     .set(function (password) {
         this._password = password;
+        this.salt = this.makeSalt();
         this.hashed_password = this.encryptPassword(password);
     })
     .get(function () {
@@ -80,16 +83,23 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
 
 UserSchema.methods = {
 
+    makeSalt: function () {
+        return crypto.randomBytes(16).toString('base64');
+    },
+
     encryptPassword: function (password) {
         if (!password) {
             return '';
         }
 
-        return bcrypt.hashSync(password, 10);
+        var salt = new Buffer(this.salt, 'base64');
+        return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+        //return bcrypt.hashSync(password, 10);
     },
 
     authenticate: function (plainText) {
-        return bcrypt.compareSync(plainText, this.hashed_password);
+        return this.encryptPassword(plainText) === this.hashed_password;
+        //return bcrypt.compareSync(plainText, this.hashed_password);
     }
 };
 
