@@ -8,8 +8,12 @@
         "angular-cookies": "~1.0.6",
         "angular-bootstrap": "~0.4.0",
         "angular-ui-utils": "~0.0.4",
+        "angular-mocks": "~1.0.8",
         "json3": "~3.2.4",
         "jquery": "~1.9.1"
+    },
+    "resolutions" : {
+        "angular": "1.0.6"
     },
     "exportsOverride": {
         "bootstrap": {
