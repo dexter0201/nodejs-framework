@@ -17,9 +17,6 @@ module.exports = function (app, passport, db) {
         level: 9
     }));
 
-    app.use(express.favicon());
-    app.use(express.static(config.root + '/public'));
-
     if (process.env.ENV !== 'test') {
         app.use(express.logger('dev'));
     }
@@ -58,6 +55,9 @@ module.exports = function (app, passport, db) {
 
         // routes should be at the last
         app.use(app.router);
+
+        app.use(express.favicon());
+        app.use(express.static(config.root + '/public'));
 
         app.use(function (err, req, res, next) {
             if (~err.message.indexOf('not found')) {
