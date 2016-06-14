@@ -2,7 +2,12 @@ extends auth
 
 block auth
     form.signin.form-horizontal(action='/user/session', method='post')
-        p.error= message
+        if (typeof errors !== 'undefined' && errors.length)
+                .fade.in.alert.alert-block.alert-error
+                    a.close(data-dismiss='alert', href='javascript:void(0)')
+                    ul
+                        each error in errors
+                            li= error
         .control-group
             label.control-label(for='email') Email
             .controls
