@@ -52,11 +52,24 @@ exports.create = function (req, res) {
         email: req.body.email,
         provider: 'local'
     });
+    var message = null;
     //var user = new User(req.body);
 
     user.save(function (err) {
         if (err) {
-            return res.render('users/signup', { error: err.errors, user: user });
+            switch (err.code) {
+                case 11000:
+                case 11001:
+                    message = 'Username already exists';
+                    break;
+                default:
+                    message = 'Please fill all required fields';
+            }
+
+            return res.render('users/signup', {
+                message: message,
+                user: user
+            });
         }
 
         req.logIn(user, function (err) {
