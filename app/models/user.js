@@ -88,7 +88,7 @@ UserSchema.methods = {
     },
 
     encryptPassword: function (password) {
-        if (!password) {
+        if (!password || !this.salt) {
             return '';
         }
 
