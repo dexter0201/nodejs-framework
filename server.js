@@ -40,7 +40,23 @@ var app = express();
 require('./config/express')(app, passport, db);
 
 // Bootstrap routers
-require('./config/routes')(app, passport, auth);
+var routes_path = './app/routes';
+var walk2 = function (path) {
+    fs.readdirSync(path).forEach(function (file) {
+        var newPath = path + '/' + file;
+        var stat = fs.statSync(newPath);
+
+        if (stat.isFile() &&
+            /(.*)\.(js$|coffee$)/.test(file)) {
+            require(newPath)(app, passport, auth);
+        } else if (stat.isDirectory()) {
+            walk2(newPath);
+        }
+    });
+};
+
+walk2(routes_path);
+// require('./config/routes')(app, passport, auth);
 
 // Start the app by listening on <port>
 var port = process.env.PORT || config.port;
