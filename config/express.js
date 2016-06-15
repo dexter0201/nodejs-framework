@@ -35,11 +35,11 @@ module.exports = function (app, passport, db) {
         app.use(express.methodOverride());
 
         app.use(express.session({
-            secret: 'KALEL',
+            secret: config.sessionSecret,
             store: new mongoStore({
                 //db: db.connection.db,
                 url: config.db,
-                collection : 'sessions'
+                collection : config.sessionController
             })
         }));
 

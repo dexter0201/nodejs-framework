@@ -4,8 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     bcrypt = require('bcrypt'),
     crypto = require('crypto'),
-    _ = require('underscore'),
-    authTypes = ['facebook'];
+    _ = require('underscore');
 
 var UserSchema = new Schema({
     name: String,
@@ -34,7 +33,7 @@ UserSchema.pre('save', function (next) {
         return next();
     }
 
-    if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {
+    if (!validatePresenceOf(this.password) && !this.provider) {
         next(new Error('Invalid password'));
     } else {
         next();
@@ -47,7 +46,7 @@ var validatePresenceOf = function (value) {
 
 UserSchema.path('name').validate(function (name) {
     // If you are authenticating by any of the oauth strategies, don't validate
-    if (authTypes.indexOf(this.provider) !== -1) {
+    if (!this.provider) {
         return true;
     }
 
@@ -56,7 +55,7 @@ UserSchema.path('name').validate(function (name) {
 
 UserSchema.path('email').validate(function (email) {
     // if you are authenticating by any of the oauth strategies, don't validate
-    if (authTypes.indexOf(this.provider) !== -1) {
+    if (!this.provider) {
         return true;
     }
 
@@ -65,7 +64,7 @@ UserSchema.path('email').validate(function (email) {
 
 UserSchema.path('username').validate(function (username) {
     // If you are authenticating by any of the oauth strategies, don't validate
-    if (authTypes.indexOf(this.provider) !== -1) {
+    if (!this.provider) {
         return true;
     }
 
@@ -74,7 +73,7 @@ UserSchema.path('username').validate(function (username) {
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
     // If you are authenticating by any of the oauth strategies, don't validate
-    if (authTypes.indexOf(this.provider) !== -1) {
+    if (!this.provider) {
         return true;
     }
 
