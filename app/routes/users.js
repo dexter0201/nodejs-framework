@@ -4,7 +4,7 @@ module.exports = function (app, passport) {
     app.get('/signin', users.signin);
     app.get('/signup', users.signup);
     app.post('/users', users.create);
-    app.post('/user/session', passport.authenticate('local', {
+    app.post('/users/session', passport.authenticate('local', {
         failureRedirect: '/signin',
         failureFlash: true
     }), users.session);

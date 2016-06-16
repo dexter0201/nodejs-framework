@@ -1,18 +1,24 @@
-extends auth
+{% extends 'auth.html' %}
 
-block auth
-    form.signin.form-horizontal(action='/user/session', method='post')
-        .control-group
-            label.control-label(for='email') Email
-            .controls
-                input#email(type='text', name='email', placeholder='Email')
-
-        .control-group
-            label.control-label(for='password') Password
-            .controls
-                input#password(type='password', name='password', placeholder='Password')
-
-        .form-actions
-            button.btn.btn-primary(type='submit') Sign in
-            &nbsp;| or&nbsp;
-            a.show-signup(href='/signup') Sign up
+{% block auth %}
+    <form class="signin form-horizontal" action="/users/session" method="post">
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="email">Email</label>
+            <div class="col-md-8">
+                <input id="email" class="form-control" type="text" name="email" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="password">Password</label>
+            <div class="col-md-8">
+                <input id="password" class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <button class="btn btn-primary" type="submit">Sign in</button>&nbsp;
+                or&nbsp;<a class="show-signup" href="/signup">Sign up</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -7,5 +7,5 @@ module.exports = {
     db: process.env.MONGOHQ_URL,
     sessionSecret: 'KALEL',
     sessionController: 'sessions',
-    templateEngine: 'jade'
+    templateEngine: 'swig'
 };

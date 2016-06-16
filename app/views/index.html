@@ -1,6 +1,8 @@
-extends layouts/default
+{% extends 'layouts/default.html' %}
 
-block content
-    section(data-ng-view)
-    script(type='text/javascript').
-        window.user = !{user};
+{% block content %}
+    <section data-ng-view></section>
+     <script type='text/javascript'>
+         window.user = {{user | safe}};
+     </script>
+{% endblock %}

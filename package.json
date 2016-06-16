@@ -35,7 +35,8 @@
         "grunt": "latest",
         "grunt-cli": "latest",
         "bcrypt": "latest",
-        "consolidate": "~0.10.0"
+        "consolidate": "~0.10.0",
+        "swig": "~1.3.2"
     },
     "devDependencies": {
         "supertest": "latest",
