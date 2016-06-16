@@ -43,8 +43,6 @@ module.exports = function (app, passport, db) {
             })
         }));
 
-        // connect flash for flash message
-        app.use(flash());
 
         // dynamic helpers
         app.use(helpers(config.app.name));
@@ -52,6 +50,9 @@ module.exports = function (app, passport, db) {
         // express session
         app.use(passport.initialize());
         app.use(passport.session());
+
+        // connect flash for flash message
+        app.use(flash());
 
         // routes should be at the last
         app.use(app.router);
