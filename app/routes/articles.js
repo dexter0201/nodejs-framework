@@ -8,7 +8,7 @@ var hasAuthorization = function (req, res, next) {
     next();
 };
 
-module.exports = function (app, passport) {
+module.exports = function (app) {
 
     app.get('/articles', articles.all);
     app.post('/articles', authorization.requiresLogin, articles.create);
