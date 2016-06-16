@@ -49,7 +49,8 @@ var walk2 = function (path) {
         if (stat.isFile() &&
             /(.*)\.(js$|coffee$)/.test(file)) {
             require(newPath)(app, passport, auth);
-        } else if (stat.isDirectory()) {
+        } else if (stat.isDirectory() &&
+            file != 'middlewares') {
             walk2(newPath);
         }
     });

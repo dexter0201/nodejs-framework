@@ -1,4 +1,4 @@
-module.exports = function (app, passport, auth) {
+module.exports = function (app, passport) {
     var index = require('../controllers/index');
 
     app.get('/', index.render);

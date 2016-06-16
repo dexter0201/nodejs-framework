@@ -1,6 +1,12 @@
-module.exports = function (app, passport, auth) {
-    var users = require('../controllers/users');
+var users = require('../controllers/users');
+var hasAuthorization = function (req, res, next) {
+    if (req.profile.id != req.user.id) {
+        res.send(401, 'User is not authorized');
+    }
+    next();
+};
 
+module.exports = function (app, passport) {
     app.get('/signin', users.signin);
     app.get('/signup', users.signup);
     app.post('/users', users.create);
