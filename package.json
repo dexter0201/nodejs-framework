@@ -34,7 +34,8 @@
         "grunt-bower-task": "latest",
         "grunt": "latest",
         "grunt-cli": "latest",
-        "bcrypt": "latest"
+        "bcrypt": "latest",
+        "consolidate": "~0.10.0"
     },
     "devDependencies": {
         "supertest": "latest",

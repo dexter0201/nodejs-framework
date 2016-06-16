@@ -2,6 +2,7 @@
 
 var express = require('express'),
     helpers = require('view-helpers'),
+    consolidate = require('consolidate'),
     mongoStore = require('connect-mongo')(express),
     flash = require('connect-flash'),
     config = require('./config');
@@ -21,9 +22,12 @@ module.exports = function (app, passport, db) {
         app.use(express.logger('dev'));
     }
 
+    // Assign the template engine to .html files
+    app.engine('html', consolidate[config.templateEngine]);
+
     // Set view path, template, engine, default layout
     app.set('views', config.root + '/app/views');
-    app.set('view engine', 'jade');
+    app.set('view engine', 'html');
 
     app.enable('jsonp callback');
 
@@ -73,8 +77,8 @@ module.exports = function (app, passport, db) {
         });
 
         // assume 404 since no middleware responded
-        app.use(function(req, res, next){
-            res.status(404).render('404', { url: req.originalUrl, error: 'Not found' })
+        app.use(function(req, res){
+            res.status(404).render('404', { url: req.originalUrl, error: 'Not found' });
         });
     });
 };

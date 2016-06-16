@@ -6,5 +6,6 @@ module.exports = {
     port: process.env.PORT || 3000,
     db: process.env.MONGOHQ_URL,
     sessionSecret: 'KALEL',
-    sessionController: 'sessions'
+    sessionController: 'sessions',
+    templateEngine: 'jade'
 };
