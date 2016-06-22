@@ -39,11 +39,11 @@ module.exports = function (grunt) {
         },
         nodemon: {
             dev: {
+                script: 'server.js',
                 options: {
-                    file: 'server.js',
                     args: [],
-                    ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
-                    watchedExtensions: ['js'],
+                    ignore: ['README.md', 'node_modules/**', '.DS_Store'],
+                    ext: 'js',
                     watchedFolders: ['app', 'config'],
                     debug: true,
                     delayTime: 1,

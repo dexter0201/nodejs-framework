@@ -9,7 +9,11 @@ var express = require('express'),
 
 module.exports = function (app, passport, db) {
     app.set('showStackError', true);
-    //app.local.pretty = true;
+
+    // pretty HTML
+    app.locals.pretty = true;
+    // cache=memory or swig die in NODE_ENV=production
+    app.locals.cache = 'memory';
 
     app.use(express.compress({
         filter: function (req, res) {
