@@ -1,22 +1,26 @@
-angular.module('dexter').config(['$routeProvider', function ($routeProvider) {
-    $routeProvider
-        .when('/articles', {
+angular.module('dexter').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+        .state('all articles', {
+            url: '/articles',
             templateUrl: 'views/articles/list.html'
         })
-        .when('/articles/create', {
+        .state('create article', {
+            url: '/articles/create',
             templateUrl: '/views/articles/create.html'
         })
-        .when('/articles/:articleId/edit', {
+        .state('edit article', {
+            url: '/articles/:articleId/edit',
             templateUrl: 'views/articles/edit.html'
         })
-        .when('/articles/:articleId', {
+        .state('view an article', {
+            url: '/articles/:articleId',
             templateUrl: 'views/articles/view.html'
         })
-        .when('/', {
+        .state('home', {
+            url: '/',
             templateUrl: 'views/index.html'
-        })
-        .otherwise({
-            redirectTo: '/'
         });
 }]);
 

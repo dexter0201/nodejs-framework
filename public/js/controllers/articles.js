@@ -1,6 +1,6 @@
 angular
     .module('dexter.articles')
-    .controller('ArticlesController', ['$scope', 'Global', 'Articles', '$location', '$routeParams', function ($scope, Global, Articles, $location, $routeParams) {
+    .controller('ArticlesController', ['$scope', 'Global', 'Articles', '$location', '$stateParams', function ($scope, Global, Articles, $location, $stateParams) {
         $scope.global = Global;
 
         $scope.create = function () {
@@ -25,7 +25,7 @@ angular
 
         $scope.findOne = function () {
             Articles.get({
-                articleId: $routeParams.articleId
+                articleId: $stateParams.articleId
             }, function (article) {
                 $scope.article = article;
             });
