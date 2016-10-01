@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "dependencies": {
         "bootstrap": "2.3.2",
-        "angular": "1.0.6",
+        "angular": "1.2.10",
         "angular-resource": "~1.0.6",
         "angular-cookies": "~1.0.6",
         "angular-bootstrap": "~0.4.0",

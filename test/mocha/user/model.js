@@ -2,12 +2,12 @@
  * Module dependencies.
  */
 var should = require('should'),
-    app = require('../../server'),
+    app = require('../../../server'),
     mongoose = require('mongoose'),
     User = mongoose.model('User');
 
 //Globals
-var user;
+var user, user2;
 
 //The tests
 describe('<Unit Test>', function() {
@@ -17,7 +17,16 @@ describe('<Unit Test>', function() {
                 name: 'Full name',
                 email: 'test@test.com',
                 username: 'user',
-                password: 'password'
+                password: 'password',
+                provider: 'local'
+            });
+
+            user2 = new User({
+                name: 'Full name',
+                email: 'test@test.com',
+                username: 'user',
+                password: 'password',
+                provider: 'local'
             });
 
             done();

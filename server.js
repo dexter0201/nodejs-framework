@@ -5,7 +5,6 @@ var express = require('express'),
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     config = require('./config/config'),
-    auth = require('./config/middlewares/authorization'),
     mongoose = require('mongoose');
 
 // bootstrap db connection
@@ -48,7 +47,7 @@ var walk2 = function (path) {
 
         if (stat.isFile() &&
             /(.*)\.(js$|coffee$)/.test(file)) {
-            require(newPath)(app, passport, auth);
+            require(newPath)(app, passport);
         } else if (stat.isDirectory() &&
             file != 'middlewares') {
             walk2(newPath);
@@ -57,7 +56,6 @@ var walk2 = function (path) {
 };
 
 walk2(routes_path);
-// require('./config/routes')(app, passport, auth);
 
 // Start the app by listening on <port>
 var port = process.env.PORT || config.port;

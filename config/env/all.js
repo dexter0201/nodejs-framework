@@ -5,7 +5,7 @@ module.exports = {
     root: rootPath,
     port: process.env.PORT || 3000,
     db: process.env.MONGOHQ_URL,
-    sessionSecret: 'KALEL',
+    sessionSecret: 'Dexter',
     sessionController: 'sessions',
     templateEngine: 'swig'
 };

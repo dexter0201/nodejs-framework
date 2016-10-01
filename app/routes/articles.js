@@ -1,3 +1,5 @@
+'use strict';
+
 var articles = require('../controllers/articles');
 var authorization = require('./middlewares/authorization');
 

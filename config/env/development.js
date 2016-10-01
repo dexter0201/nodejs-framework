@@ -1,7 +1,7 @@
 module.exports = {
     "db": "mongodb://dbadmin:dbadmin@ds021943.mlab.com:21943/nodejs-framework",
     "app": {
-        "name": "MEAN - A Modern Stack - Development"
+        "name": "Dexter Nguyen - Nodejs Framework"
     },
     "facebook": {
         "clientID": "APP_ID",
