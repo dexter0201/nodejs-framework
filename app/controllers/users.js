@@ -1,4 +1,4 @@
-// 'use strict'
+'use strict'
 
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
@@ -8,17 +8,11 @@ exports.authCallback = function (req, res, next) {
 };
 
 exports.signin = function (req, res) {
-    res.render('users/signin', {
-        title: 'Sign in',
-        message: req.flash('error')
-    });
-};
+    if (req.isAuthenticated()) {
+        return res.redirect('/')
+    }
 
-exports.signup = function (req, res) {
-    res.render('users/signup', {
-        title: 'Sign up',
-        user: new User()
-    });
+    res.redirect('#!/login');
 };
 
 exports.signout = function (req, res) {
@@ -54,22 +48,31 @@ exports.create = function (req, res) {
     });
     var message = null;
     //var user = new User(req.body);
+console.log(user);
+console.log(req.body);
+    req.assert('email', 'You must enter a valid email address').isEmail();
+    req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
+    req.assert('username', 'Username cannot be more than 20 characters').len(1, 20);
+    req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+
+    var errors = req.validationErrors();
+
+    if (errors) {
+        return res.status(400).send(errors);
+    }
 
     user.save(function (err) {
         if (err) {
             switch (err.code) {
                 case 11000:
                 case 11001:
-                    message = 'Username already exists';
+                    res.status(400).send('Username already taken');
                     break;
                 default:
-                    message = 'Please fill all required fields';
+                    res.status(400).send('Please fill all the required fields');
             }
 
-            return res.render('users/signup', {
-                message: message,
-                user: user
-            });
+            return res.status(400);
         }
 
         req.logIn(user, function (err) {
@@ -78,5 +81,7 @@ exports.create = function (req, res) {
             }
             return res.redirect('/');
         });
+
+        res.status(200);
     });
 };

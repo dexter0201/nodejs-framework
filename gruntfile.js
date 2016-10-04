@@ -33,7 +33,6 @@ module.exports = function (grunt) {
                     'test/mocha/**/*.js',
                     'test/karma/**/*.js',
                     'app/**/*.js'
-                    '!test/coverage/**/*.js'
                 ],
                 options: {
                     jshintrc: true
@@ -90,17 +89,19 @@ module.exports = function (grunt) {
     grunt.option('force', true);
 
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+    //grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-bower-task');
 
-    grunt.registerTask('default', ['jshint', 'concurrent']);
+    grunt.registerTask('default', ['concurrent']);
 
     //Test task.
     grunt.registerTask('test', ['mochaTest', 'karma:unit']);
+
+    grunt.registerTask('test-karma', ['karma:unit']);
 
     //Bower task.
     grunt.registerTask('install', ['bower']);

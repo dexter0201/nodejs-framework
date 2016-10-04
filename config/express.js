@@ -5,6 +5,7 @@ var express = require('express'),
     consolidate = require('consolidate'),
     mongoStore = require('connect-mongo')(express),
     flash = require('connect-flash'),
+    expressValidator = require('express-validator'),
     config = require('./config');
 
 module.exports = function (app, passport, db) {
@@ -40,6 +41,7 @@ module.exports = function (app, passport, db) {
         //app.use(express.bodyParser());
         app.use(express.urlencoded());
         app.use(express.json());
+        app.use(expressValidator());
         app.use(express.methodOverride());
 
         app.use(express.session({

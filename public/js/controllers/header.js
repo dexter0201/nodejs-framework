@@ -1,15 +1,22 @@
 angular
     .module('dexter.system')
-    .controller('HeaderController', ['$scope', '$location', 'Global', function ($scope, $location, Global) {
+    .controller('HeaderController', ['$scope', '$rootScope', '$location', 'Global', function ($scope, $rootScope , $location, Global) {
         $scope.global = Global;
 
         $scope.menu = [
             {
                 "title": "Articles",
-                "link": "articles"
+                "link": "all articles"
             }, {
                 "title": "Create New Article",
-                "link": "articles/create"
+                "link": "create article"
             }
         ];
+
+        $rootScope.$on('loggedin', function () {
+            $scope.global = {
+                authenticated: !!$rootScope.user,
+                user: $rootScope.user
+            }
+        });
     }]);

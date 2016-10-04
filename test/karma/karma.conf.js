@@ -17,7 +17,7 @@ module.exports = function (config) {
             'public/lib/angular-cookies/angular-cookies.js',
             'public/lib/angular-resource/angular-resource.js',
             'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-            'public/lib/angular-bootstrap/ui-bootstrap.js',
+            // 'public/lib/angular-bootstrap/ui-bootstrap.js',
             'public/lib/angular-ui-utils/modules/route/route.js',
             'public/js/app.js',
             'public/js/config.js',
@@ -25,9 +25,11 @@ module.exports = function (config) {
             'public/js/filters.js',
             'public/js/services/global.js',
             'public/js/services/articles.js',
+            'public/js/services/interceptor.js',
             'public/js/controllers/articles.js',
             'public/js/controllers/index.js',
             'public/js/controllers/header.js',
+            'public/js/controllers/auth.js',
             'public/js/init.js',
             'test/karma/unit/**/*.js'
         ],
@@ -81,7 +83,7 @@ module.exports = function (config) {
         // - Safari (only Mac)
         // - PhantomJS
         // - IE (only Windows)
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
 
 
         // If browser does not capture in given timeout [ms], kill it

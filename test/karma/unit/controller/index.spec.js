@@ -4,7 +4,7 @@
     describe('DEXTER controller', function () {
         describe('IndexController', function () {
             // Load the controllers module
-            beforeEach(module('mean'));
+            beforeEach(module('dexter'));
 
             var scope,
                 IndexController;
