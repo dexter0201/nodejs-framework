@@ -68,7 +68,8 @@
     });
 
     // Initialize the modules
-    // @TODO: adding
+    require('./config/system/modules')(dexter);
+
     /**
      * @END: Dependable register modules
      */

@@ -64,6 +64,7 @@
                                                 }
 
                                                 if (data) {
+                                                    data = '(function () {' + data + '}());'
                                                     fs.appendFile('modules/public/js/sys/' + name + '.js', data, function (err) {
                                                         if (err) {
                                                             throw err;

@@ -6,3 +6,5 @@ public/lib
 test/coverage
 .bower-cache/*
 .bower-registry/*
+modules/public/
+modules/views/

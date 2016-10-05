@@ -9,6 +9,8 @@ var express = require('express'),
     config = require('./config');
 
 module.exports = function (app, passport, db) {
+    var dexter = module.parent.exports.dexter;
+
     app.set('showStackError', true);
 
     // pretty HTML
@@ -61,6 +63,8 @@ module.exports = function (app, passport, db) {
         app.use(passport.initialize());
         app.use(passport.session());
 
+        app.use(dexter.get('middleware').before);
+
         // connect flash for flash message
         app.use(flash());
 
@@ -69,6 +73,10 @@ module.exports = function (app, passport, db) {
 
         app.use(express.favicon());
         app.use(express.static(config.root + '/public'));
+        app.use(express.static(config.root + '/modules/public'));
+        app.use(express.static(config.root + '/modules/views'));
+
+        app.use(dexter.get('middleware').after);
 
         app.use(function (err, req, res, next) {
             if (~err.message.indexOf('not found')) {
