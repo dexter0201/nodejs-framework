@@ -1,3 +1,11 @@
+'use strict';
+
+/**
+ * Mean container for dependency injection
+ */
+var dependable = require('dependable');
+var dexter = module.exports.dexter = dependable.container();
+
 var express = require('express'),
     fs = require('fs'),
     passport = require('passport'),
@@ -34,6 +42,29 @@ require('./config/passport')(passport);
 
 // Express
 var app = express();
+
+// Register passport dependency
+dexter.register('passport', function () {
+    return passport;
+});
+
+// Register auth dependency
+dexter.register('auth', function () {
+    return require('./app/routers/middlewares/authorization');
+});
+
+// Register database dependency
+dexter.register('database', {
+    connection: db
+});
+
+// Register app dependency
+dexter.register('app', function () {
+    return app;
+});
+
+// Initialize the modules
+// @TODO: adding
 
 // Express setting
 require('./config/express')(app, passport, db);

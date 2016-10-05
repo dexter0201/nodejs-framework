@@ -37,7 +37,9 @@
     "passport-local": "latest",
     "swig": "~1.3.2",
     "underscore": "latest",
-    "view-helpers": "latest"
+    "view-helpers": "latest",
+    "mkdirp": "0.3.5",
+    "dependable": "0.2.5"
   },
   "devDependencies": {
     "supertest": "latest",
