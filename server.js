@@ -4,8 +4,10 @@
     /**
      * Mean container for dependency injection
      */
-    var dependable = require('dependable');
-    var dexter = module.exports.dexter = dependable.container();
+    //var dependable = require('dependable');
+    //var dexter = module.exports.dexter = dependable.container();
+    var nodejsIocContainer = require('nodejs-ioc-container');
+    var dexter = module.exports.dexter = nodejsIocContainer.container();
     var EventEmitter = require('events').EventEmitter;
 
     dexter.events = new EventEmitter();
