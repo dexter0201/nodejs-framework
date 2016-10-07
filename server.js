@@ -6,6 +6,9 @@
      */
     var dependable = require('dependable');
     var dexter = module.exports.dexter = dependable.container();
+    var EventEmitter = require('events').EventEmitter;
+
+    dexter.events = new EventEmitter();
 
     var express = require('express'),
         fs = require('fs'),
@@ -54,7 +57,7 @@
 
     // Register auth dependency
     dexter.register('auth', function () {
-        return require('./app/routers/middlewares/authorization');
+        return require('./app/routes/middlewares/authorization');
     });
 
     // Register database dependency
@@ -67,8 +70,68 @@
         return app;
     });
 
-    // Initialize the modules
-    require('./config/system/modules')(dexter);
+    dexter.register('events', function () {
+        return dexter.events;
+    });
+
+    dexter.register('middleware', function (app) {
+        var middleware = {};
+
+        middleware.add = function (event, weight, func) {
+            dexter.middleware[event].splice(weight, 0, {
+                weight: weight,
+                func: func
+            });
+            dexter.middleware[event].join();
+            dexter.middleware[event].sort(function (a, b) {
+                if (a.weight < b.weight) {
+                    a.next = b.func;
+                } else {
+                    b.next = a.func;
+                }
+
+                return (a.weight - b.weight);
+            });
+        };
+
+        middleware.before = function (req, res, next) {
+                if (!dexter.middleware.length) {
+                    return next();
+                }
+
+                chain('before', 0, req, res, next);
+            };
+
+            middleware.after = function (req, res, next) {
+                if (!dexter.middleware.length) {
+                    return next();
+                }
+
+                chain('after', 0, req, res, next);
+            };
+
+            function chain(operator, index, req, res, next) {
+                var args = [
+                    req,
+                    res,
+                    function (err) {
+                        if (dexter.middleware[operator][index + 1]) {
+                            chain('before', index + 1, req, res, next);
+                        } else {
+                            next();
+                        }
+                    }
+                ];
+
+                dexter.middleware[operator][index].func.apply(this, args);
+            }
+
+        return middleware;
+    });
+
+    dexter.register('modules', function (app, auth, database, events, middleware) {
+        require('./config/system/modules')(dexter, app, auth, database, events, middleware);
+    });
 
     /**
      * @END: Dependable register modules
@@ -95,6 +158,9 @@
     };
 
     walk2(routes_path);
+    dexter.resolve({}, function (modules) {
+
+    });
 
     // Start the app by listening on <port>
     var port = process.env.PORT || config.port;

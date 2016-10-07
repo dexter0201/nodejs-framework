@@ -73,26 +73,35 @@ module.exports = function (app, passport, db) {
 
         app.use(express.favicon());
         app.use(express.static(config.root + '/public'));
-        app.use(express.static(config.root + '/modules/public'));
-        app.use(express.static(config.root + '/modules/views'));
+        dexter.events.on('enableDexterModules', function () {
+            dexter.modules.forEach(function (module) {
+                app.use('/' + module.name, express.static(config.root + '/node_modules/' + module.name + '/public'));
+            });
+            app.use(dexter.get('middleware').after);
+            app.use(function (err, req, res, next) {
+                if (~err.message.indexOf('not found')) {
+                    return next();
+                }
 
-        app.use(dexter.get('middleware').after);
+                // log it
+                console.error(err.stack);
 
-        app.use(function (err, req, res, next) {
-            if (~err.message.indexOf('not found')) {
-                return next();
-            }
+                // error page
+                res.status(500)
+                    .render('500', {
+                        error: err.stack
+                    });
+            });
 
-            // log it
-            console.error(err.stack);
+            // assume 404 since no middleware responded
+            app.use(function(req, res){
+                res.status(404)
+                    .render('404', {
+                        url: req.originalUrl,
+                        error: 'Not found'
+                    });
+            });
 
-            // error page
-            res.status(500).render('500', { error: err.stack });
-        });
-
-        // assume 404 since no middleware responded
-        app.use(function(req, res){
-            res.status(404).render('404', { url: req.originalUrl, error: 'Not found' });
         });
     });
 };

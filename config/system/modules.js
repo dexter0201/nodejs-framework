@@ -1,35 +1,53 @@
 (function () {
-    // 'use strict';
+    'use strict';
 
-    module.exports = function (dexter) {
-        // Rebuild files structure
-        require('./cli/lib/dexter').rebuild();
+    var fs = require('fs'),
+        express = require('express');
 
-        // Middleware for adding chained function before or after routes
-        require('./chainware')(dexter);
+    module.exports = function (dexter, app, auth, database, events) {
+        dexter.modules = [];
+        dexter.middleware = {
+            before: [],
+            after: []
+        };
+        dexter.aggregated = {
+            js: '',
+            css: ''
+        };
 
-        // Events such as ready for modules to use
-        require('./events')(dexter);
+        findDexterModules();
+        enableDexterModules();
+        aggregateJs();
 
-        dexter.events.on('ready', ready);
+        app.get('/modules/aggregated.js', function (req, res, next) {
+            res.setHeader('content-type', 'text/javascript');
+            res.send(dexter.aggregated.js);
+        });
 
-        var fs = require('fs');
+        function findDexterModules() {
+            var modules = [];
 
-        fs.exists(process.cwd() + '/node_modules', function (exists) {
-            if (exists) {
-                fs.readdir(process.cwd() + '/node_modules', function (err, files) {
-                    if (err) {
-                        console.log(err);
-                    }
+            fs.stat(process.cwd() + '/node_modules', function (err, stats) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
 
-                    if (!files) {
-                        files = [];
-                    }
+                if (stats.isDirectory()) {
+                    fs.readdir(process.cwd() + '/node_modules', function (err, files) {
+                        if (err) {
+                            console.log(err);
+                        }
 
-                    remaining = files.length;
+                        if (!files) {
+                            files = [];
+                        }
 
-                    files.forEach(function (file) {
-                        if (file !== '.bin') {
+                        files.forEach(function (file, index) {
+                            if (file === '.bin') {
+                                return;
+                            }
+
                             fs.readFile(process.cwd() + '/node_modules/' + file + '/package.json', function (err, data) {
                                 if (err) {
                                     throw err;
@@ -39,33 +57,75 @@
                                     var json = JSON.parse(data.toString());
 
                                     if (json.dexter) {
-                                        require(process.cwd() + '/node_modules/' + file + '/app.js')(dexter);
-                                    } else {
-                                        ready();
+                                        console.log('WOWWWWWWW...Found Dexter...Pushing into dexter.modules...');
+                                        dexter.modules.push({
+                                            name: json.name,
+                                            version: json.version
+                                        });
                                     }
-                                } else {
-                                    ready();
                                 }
-                            });
-                        }
-                    });
-                });
-            }
-        });
 
-        // Process the ready event. WIll expand this in due course
-        ready: function ready(data) {
-            remaining--;
-            if (!remaining) {
-                resolve();
-            }
+                                if (files.length - 1 === index) {
+                                    dexter.events.emit('enableDexterModules');
+                                }
+                            })
+                        });
+                    });
+                }
+            });
         }
 
-        // Resolve the dependencies once all modules are ready
-        resolve: function resolve() {
-            dexter.modules.forEach(function (module) {
-                dexter.resolve.apply(this, [module.name]);
-                dexter.get(module.name);
+        function enableDexterModules() {
+            dexter.events.on('enableDexterModules', function () {
+                dexter.modules.forEach(function (module) {
+                    console.log('Enable dexter module: ', module.name);
+                    require(process.cwd() + '/node_modules/' + module.name + '/app.js')(dexter);
+                });
+
+                dexter.modules.forEach(function (module) {
+                    dexter.resolve.apply(this, [module.name]);
+                    dexter.get(module.name);
+                });
+
+                return dexter.modules;
+            });
+        }
+
+
+        function aggregateJs() {
+            dexter.aggregated.js = '';
+            dexter.events.on('enableDexterModules', function () {
+                var files = [
+                    'config',
+                    'services',
+                    'controllers'
+                ];
+
+                dexter.modules.forEach(function (module) {
+                    readFile(process.cwd() + '/node_modules/' + module.name + '/public/js/');
+
+                    function readFile(path) {
+                        fs.stat(path, function (stats) {
+                            if (stats.isDirectory()) {
+                                fs.readdir(path, function (err, files) {
+                                    files.forEach(function (file) {
+                                        fs.readFile(path + file, function (err, data) {
+                                            if (err) {
+                                                throw err;
+                                            }
+
+                                            if (!data) {
+                                                readFile(path + file + '/');
+                                            } else {
+                                                dexter.aggregated.js += '(function () { ' + data.toString() + ' }());';
+                                            }
+                                        });
+                                    });
+                                });
+                            }
+                        });
+                    }
+                });
             });
         }
     };
