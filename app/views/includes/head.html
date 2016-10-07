@@ -18,10 +18,7 @@
     <meta property="og:site_name" content="Dexter - Framework">
     <meta property="fb:admins" content="APP_ADMIN">
 
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="/css/common.css">
-
-    <link rel="stylesheet" href="/css/views/index.css">
-    <link rel="stylesheet" href="/css/views/articles.css">
+    {% for file in assets.main.css %}
+        <link rel="stylesheet" href="{{file}}">
+    {% endfor %}
 </head>

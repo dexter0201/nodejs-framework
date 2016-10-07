@@ -1,0 +1,21 @@
+{
+    "main": {
+        "css": {
+            "public/build/css/dist.min.css": [
+                "public/lib/bootstrap/css/bootstrap.css",
+                "public/css/**/*.css"
+            ]
+        },
+        "js": {
+            "public/build/js/dist.min.js": [
+                "public/lib/angular/angular.js",
+                "public/lib/angular-cookies/angular-cookies.js",
+                "public/lib/angular-resource/angular-resource.js",
+                "public/lib/angular-ui-router/angular-ui-router.min.js",
+                "public/lib/angular-bootstrap/ui-bootstrap-tpls.js",
+                "public/js/**/*.js",
+                "modules/aggregated.js"
+            ]
+        }
+    }
+}

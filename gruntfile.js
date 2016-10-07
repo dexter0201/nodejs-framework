@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        assets: grunt.file.readJSON('config/assets.json'),
         watch: {
             html: {
                 files: [
@@ -20,6 +21,7 @@ module.exports = function (grunt) {
             },
             css: {
                 files: ['public/css/**'],
+                tasks: ['csslint'],
                 options: {
                     livereload: true
                 }
@@ -37,6 +39,21 @@ module.exports = function (grunt) {
                 options: {
                     jshintrc: true
                 }
+            }
+        },
+        uglify: {
+            production: {
+                files: '<%= assets.main.js %>'
+            }
+        },
+        csslint: {
+            all: {
+                src: ['public/css/**/*.css']
+            }
+        },
+        cssmin: {
+            combine: {
+                files: '<%= assets.main.css %>'
             }
         },
         nodemon: {
@@ -88,6 +105,9 @@ module.exports = function (grunt) {
 
     grunt.option('force', true);
 
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     //grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-nodemon');
@@ -96,12 +116,18 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-bower-task');
 
-    grunt.registerTask('default', ['concurrent']);
+    if (process.env.NODE_ENV === 'production') {
+        grunt.registerTask('default', ['jshint', 'csslint', 'cssmin', 'uglify', 'concurrent']);
+    } else {
+        grunt.registerTask('default', ['concurrent']);
+    }
 
     //Test task.
     grunt.registerTask('test', ['mochaTest', 'karma:unit']);
 
     grunt.registerTask('test-karma', ['karma:unit']);
+
+    grunt.registerTask('min', ['uglify', 'cssmin']);
 
     //Bower task.
     grunt.registerTask('install', ['bower']);

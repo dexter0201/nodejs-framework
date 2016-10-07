@@ -6,6 +6,7 @@ var express = require('express'),
     mongoStore = require('connect-mongo')(express),
     flash = require('connect-flash'),
     expressValidator = require('express-validator'),
+    assetmanager = require('assetmanager'),
     config = require('./config');
 
 module.exports = function (app, passport, db) {
@@ -45,6 +46,19 @@ module.exports = function (app, passport, db) {
         app.use(express.json());
         app.use(expressValidator());
         app.use(express.methodOverride());
+
+        var assets = assetmanager.process({
+            assets: require('./assets.json'),
+            webroot: 'public',
+            debug: process.env.NODE_ENV !== 'production'
+        });
+        // Add assets to local veriables
+        app.use(function (req, res, next) {
+            res.locals({
+                assets: assets
+            });
+            next();
+        });
 
         app.use(express.session({
             secret: config.sessionSecret,
