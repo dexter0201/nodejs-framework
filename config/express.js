@@ -9,9 +9,7 @@ var express = require('express'),
     assetmanager = require('assetmanager'),
     config = require('./config');
 
-module.exports = function (app, passport, db) {
-    var dexter = module.parent.exports.dexter;
-
+module.exports = function (dexter, app, passport, db) {
     app.set('showStackError', true);
 
     // pretty HTML
