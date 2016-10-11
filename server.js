@@ -6,25 +6,32 @@
      */
     //var dependable = require('dependable');
     //var dexter = module.exports.dexter = dependable.container();
-    var nodejsIocContainer = require('nodejs-ioc-container');
-    var dexter = module.exports.dexter = nodejsIocContainer.container();
-    var EventEmitter = require('events').EventEmitter;
-
-    dexter.events = new EventEmitter();
-
-    var express = require('express'),
+    //var nodejsIocContainer = require('nodejs-ioc-container');
+    //var dexter = module.exports.dexter = nodejsIocContainer.container();
+    //var EventEmitter = require('events').EventEmitter;
+    //dexter.events = new EventEmitter();
+    var dexter = require('nodejscore'),
         passport = require('passport'),
         logger = require('mean-logger');
+
+    dexter.app('Dexter\'s NodeJs Framework', {
+
+    });
+
+    dexter.register('one', function () {
+        return {
+            echo: function (text) {
+                console.log(text);
+            }
+        };
+    });
 
     var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
         config = require('./config/config'),
         mongoose = require('mongoose');
 
     var db = mongoose.connect(config.db);
-    var app = require('./config/system/bootstrap')(dexter, passport, db);
-
-    dexter.resolve({}, function (modules) {
-    });
+    var app = require('./config/system/bootstrap')(passport, db);
 
     // Start the app by listening on <port>
     var port = process.env.PORT || config.port;

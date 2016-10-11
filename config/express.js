@@ -7,9 +7,10 @@ var express = require('express'),
     flash = require('connect-flash'),
     expressValidator = require('express-validator'),
     assetmanager = require('assetmanager'),
-    config = require('./config');
+    config = require('./config'),
+    dexter = require('nodejscore');
 
-module.exports = function (dexter, app, passport, db) {
+module.exports = function (app, passport, db) {
     app.set('showStackError', true);
 
     // pretty HTML
@@ -75,7 +76,7 @@ module.exports = function (dexter, app, passport, db) {
         app.use(passport.initialize());
         app.use(passport.session());
 
-        app.use(dexter.get('middleware').before);
+        app.use(dexter.chainware.before);
 
         // connect flash for flash message
         app.use(flash());
@@ -85,11 +86,24 @@ module.exports = function (dexter, app, passport, db) {
 
         app.use(express.favicon());
         app.use(express.static(config.root + '/public'));
-        dexter.events.on('enableDexterModules', function () {
+
+        app.get('/modules/aggregated.js', function (req, res, next) {
+            console.log('Express, getting aggregated.js');
+            res.setHeader('content-type', 'text/javascript');
+            res.send(dexter.aggregated.js);
+        });
+
+        app.get('/modules/aggregated.css', function (req, res, next) {
+            console.log('Express, getting aggreagted.css..');
+            res.setHeader('content-type', 'text/css');
+            res.send(dexter.aggregated.css);
+        });
+
+        dexter.events.on('modulesFound', function () {
             dexter.modules.forEach(function (module) {
                 app.use('/' + module.name, express.static(config.root + '/node_modules/' + module.name + '/public'));
             });
-            app.use(dexter.get('middleware').after);
+            app.use(dexter.chainware.after);
             app.use(function (err, req, res, next) {
                 if (~err.message.indexOf('not found')) {
                     return next();

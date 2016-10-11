@@ -3,9 +3,10 @@
 
     var fs = require('fs'),
         express = require('express'),
-        appPath = process.cwd();
+        appPath = process.cwd(),
+        dexter = require('nodejscore');
 
-    module.exports = function (dexter, passport, db) {
+    module.exports = function (passport, db) {
         var app;
 
         bootstrapModels();
@@ -13,7 +14,7 @@
         bootstrapDependencies();
         // Express settings
         app = express();
-        require(appPath + '/config/express')(dexter, app, passport, db);
+        require(appPath + '/config/express')(app, passport, db);
         bootstrapRoutes();
 
         function bootstrapModels() {
@@ -48,66 +49,6 @@
             });
             dexter.register('app', function () {
                 return app;
-            });
-            dexter.register('events', function () {
-                return dexter.events;
-            });
-            dexter.register('middleware', function () {
-                var middleware = {};
-
-                middleware.add = function (event, weight, func) {
-                    dexter.middleware[event].splice(weight, 0, {
-                        weight: weight,
-                        func: func
-                    });
-                    dexter.middleware[event].join();
-                    dexter.middleware[event].sort(function (a, b) {
-                        if (a.weight < b.weight) {
-                            a.next = b.func;
-                        } else {
-                            b.next = a.func;
-                        }
-
-                        return (a.weight - b.weight);
-                    });
-                };
-
-                middleware.before = function (req, res, next) {
-                        if (!dexter.middleware.length) {
-                            return next();
-                        }
-
-                        chain('before', 0, req, res, next);
-                    };
-
-                    middleware.after = function (req, res, next) {
-                        if (!dexter.middleware.length) {
-                            return next();
-                        }
-
-                        chain('after', 0, req, res, next);
-                    };
-
-                    function chain(operator, index, req, res, next) {
-                        var args = [
-                            req,
-                            res,
-                            function (err) {
-                                if (dexter.middleware[operator][index + 1]) {
-                                    chain('before', index + 1, req, res, next);
-                                } else {
-                                    next();
-                                }
-                            }
-                        ];
-
-                        dexter.middleware[operator][index].func.apply(this, args);
-                    }
-
-                return middleware;
-            });
-            dexter.register('modules', function (app, auth, database, events, middleware) {
-                require(appPath + '/config/system/modules')(dexter, app, auth, database, events, middleware);
             });
         }
 
