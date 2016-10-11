@@ -94,7 +94,10 @@ module.exports = function (app, passport, db) {
         });
 
         app.get('/modules/aggregated.css', function (req, res, next) {
-            console.log('Express, getting aggreagted.css..');
+            // dexter.get('one').echo.log('Express, getting aggreagted.css..');
+            dexter.resolve('one', function (one) {
+                one.echo('Express, getting aggreagted.css..');
+            });
             res.setHeader('content-type', 'text/css');
             res.send(dexter.aggregated.css);
         });

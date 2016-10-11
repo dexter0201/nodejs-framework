@@ -26,21 +26,21 @@
         };
     });
 
-    var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-        config = require('./config/config'),
-        mongoose = require('mongoose');
+    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+    var config = require('./config/config');
+    var mongoose = require('mongoose');
     var db = mongoose.connect(config.db);
     var app = require('./config/system/bootstrap')(passport, db);
-
-    // Start the app by listening on <port>
     var port = process.env.PORT || config.port;
-    app.listen(port);
-    console.log('Express app started on port: ' + port);
 
-    // Initialazing logger
+    app.listen(port);
+
+    dexter.resolve('one', function (one) {
+        one.echo('Express app started on port: ' + port);
+    });
+
     logger.init(app, passport, mongoose);
 
-    // Expose app
     exports = module.exports = app;
 }());

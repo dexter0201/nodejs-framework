@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    var fs = require('fs'),
-        express = require('express'),
-        appPath = process.cwd(),
-        dexter = require('nodejscore');
+    var fs = require('fs');
+    var express = require('express');
+    var appPath = process.cwd();
+    var dexter = require('nodejscore');
 
     module.exports = function (passport, db) {
         var app;
