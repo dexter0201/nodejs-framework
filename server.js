@@ -10,9 +10,9 @@
     //var dexter = module.exports.dexter = nodejsIocContainer.container();
     //var EventEmitter = require('events').EventEmitter;
     //dexter.events = new EventEmitter();
-    var dexter = require('nodejscore'),
-        passport = require('passport'),
-        logger = require('mean-logger');
+    var dexter = require('nodejscore');
+    var passport = require('passport');
+    var logger = require('mean-logger');
 
     dexter.app('Dexter\'s NodeJs Framework', {
 
@@ -28,10 +28,10 @@
 
     process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-    var config = require('./config/config');
+    var config = require('./server/config/config');
     var mongoose = require('mongoose');
     var db = mongoose.connect(config.db);
-    var app = require('./config/system/bootstrap')(passport, db);
+    var app = require('./server/config/system/bootstrap')(passport, db);
     var port = process.env.PORT || config.port;
 
     app.listen(port);

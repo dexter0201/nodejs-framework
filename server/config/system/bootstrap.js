@@ -10,15 +10,15 @@
         var app;
 
         bootstrapModels();
-        require(appPath + '/config/passport')(passport);
+        require(appPath + '/server/config/passport')(passport);
         bootstrapDependencies();
         // Express settings
         app = express();
-        require(appPath + '/config/express')(app, passport, db);
+        require(appPath + '/server/config/express')(app, passport, db);
         bootstrapRoutes();
 
         function bootstrapModels() {
-            var models_path = appPath + '/app/models';
+            var models_path = appPath + '/server/models';
             var walk = function (path) {
                 fs.readdirSync(path).forEach(function (file) {
                     var newPath = path + '/' + file;
@@ -42,7 +42,7 @@
                 return passport;
             });
             dexter.register('auth', function () {
-                return require(appPath + '/app/routes/middlewares/authorization');
+                return require(appPath + '/server/routes/middlewares/authorization');
             });
             dexter.register('database', {
                 connection: db
@@ -53,7 +53,7 @@
         }
 
         function bootstrapRoutes() {
-            var routes_path = appPath + '/app/routes';
+            var routes_path = appPath + '/server/routes';
             var walk = function (path) {
                 console.log('...bootstrap routes...: ', path);
                 fs.readdirSync(path).forEach(function (file) {

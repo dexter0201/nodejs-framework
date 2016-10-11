@@ -6,14 +6,14 @@ module.exports = function (grunt) {
             html: {
                 files: [
                     'public/views/**',
-                    'app/views/**'
+                    'server/views/**'
                 ],
                 options: {
                     livereload: true
                 }
             },
             js: {
-                files: ['public/js/**', 'app/**/*.js'],
+                files: ['public/js/**', 'server/**/*.js'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true
@@ -34,7 +34,7 @@ module.exports = function (grunt) {
                     'public/js/**/*.js',
                     'test/mocha/**/*.js',
                     'test/karma/**/*.js',
-                    'app/**/*.js'
+                    'server/**/*.js'
                 ],
                 options: {
                     jshintrc: true

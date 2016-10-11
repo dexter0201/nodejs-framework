@@ -33,7 +33,7 @@ module.exports = function (app, passport, db) {
     app.engine('html', consolidate[config.templateEngine]);
 
     // Set view path, template, engine, default layout
-    app.set('views', config.root + '/app/views');
+    app.set('views', config.root + '/server/views');
     app.set('view engine', 'html');
 
     app.enable('jsonp callback');
