@@ -8,7 +8,9 @@ var express = require('express'),
     expressValidator = require('express-validator'),
     assetmanager = require('assetmanager'),
     config = require('./config'),
-    dexter = require('nodejscore');
+    dexter = require('nodejscore'),
+    fs = require('fs'),
+    appPath = process.cwd();
 
 module.exports = function (app, passport, db) {
     app.set('showStackError', true);
@@ -103,9 +105,13 @@ module.exports = function (app, passport, db) {
         });
 
         dexter.events.on('modulesFound', function () {
+            console.log('modulesFound....WOW');
             dexter.modules.forEach(function (module) {
                 app.use('/' + module.name, express.static(config.root + '/node_modules/' + module.name + '/public'));
             });
+
+            bootstrapRoutes();
+
             app.use(dexter.chainware.after);
             app.use(function (err, req, res, next) {
                 if (~err.message.indexOf('not found')) {
@@ -133,4 +139,30 @@ module.exports = function (app, passport, db) {
 
         });
     });
+
+    function bootstrapRoutes() {
+        var routes_path = appPath + '/server/routes';
+        dexter.resolve('one', function (one) {
+            one.echo(routes_path);
+        });
+
+        var walk = function (path) {
+            console.log('...bootstrap routes...: ', path);
+            fs.readdirSync(path).forEach(function (file) {
+                var newPath = path + '/' + file;
+                var stats = fs.statSync(newPath);
+
+                if (stats.isFile()) {
+                    if (/(.*)\.(js$|coffee$)/.test(file)) {
+                        require(newPath)(app, passport);
+                    }
+                } else if (stats.isDirectory() && file !== 'middlewares') {
+                    walk(newPath);
+                }
+            });
+        };
+
+        walk(routes_path);
+    }
+
 };

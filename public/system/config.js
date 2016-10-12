@@ -70,7 +70,7 @@ angular.module('dexter').config(['$stateProvider', '$urlRouterProvider', '$locat
             })
             .state('home', {
                 url: '/',
-                templateUrl: 'system/views/index.html'
+                templateUrl: '/system/views/index.html'
             })
             .state('auth', {
                 templateUrl: 'auth/views/index.html'

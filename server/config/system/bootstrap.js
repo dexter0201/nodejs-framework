@@ -15,7 +15,6 @@
         // Express settings
         app = express();
         require(appPath + '/server/config/express')(app, passport, db);
-        bootstrapRoutes();
 
         function bootstrapModels() {
             var models_path = appPath + '/server/models';
@@ -50,27 +49,6 @@
             dexter.register('app', function () {
                 return app;
             });
-        }
-
-        function bootstrapRoutes() {
-            var routes_path = appPath + '/server/routes';
-            var walk = function (path) {
-                console.log('...bootstrap routes...: ', path);
-                fs.readdirSync(path).forEach(function (file) {
-                    var newPath = path + '/' + file;
-                    var stats = fs.statSync(newPath);
-
-                    if (stats.isFile()) {
-                        if (/(.*)\.(js$|coffee$)/.test(file)) {
-                            require(newPath)(app, passport);
-                        }
-                    } else if (stats.isDirectory() && file !== 'middlewares') {
-                        walk(newPath);
-                    }
-                });
-            };
-
-            walk(routes_path);
         }
 
         return app;
