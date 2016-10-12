@@ -3,7 +3,7 @@
         "css": {
             "public/build/css/dist.min.css": [
                 "public/lib/bootstrap/css/bootstrap.css",
-                "public/css/**/*.css"
+                "public/**/assets/css/*.css"
             ]
         },
         "js": {
