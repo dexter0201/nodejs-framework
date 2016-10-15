@@ -3,6 +3,7 @@
 {% block content %}
     <section data-ui-view></section>
      <script type='text/javascript'>
-         window.user = {{user | safe}};
+        window.user = {{ user | safe }};
+        window.roles = {{ roles | safe }};
      </script>
 {% endblock %}

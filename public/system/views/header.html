@@ -1,8 +1,8 @@
 <div class="navbar-inner" data-ng-controller="HeaderController">
     <ul class="nav">
         <li><a href="/" class="brand">Dexter - NodeJs Frameword</a></li>
-        <li data-ng-repeat="item in menu" data-ng-show="global.user" data-ng-class="{actice: $uiRoute}">
-            <a ui-sref="{{item.link}}">
+        <li data-ng-repeat="item in menus.main" ui-route="/{{ item.link }}" data-ng-class="{actice: $uiRoute}">
+            <a data-ng-if="global.hasRole(item.role)" ui-sref="{{item.link}}">
                 {{item.title}}
             </a>
         </li>

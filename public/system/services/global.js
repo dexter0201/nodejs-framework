@@ -3,7 +3,11 @@ angular.module('dexter.system').factory('Global', [function () {
 
     _this._data = {
         user: window.user,
-        authenticated: !!window.user
+        authenticated: !!window.user,
+        roles: window.userRoles,
+        hasRole: function (role) {
+            return role === 'annonymous' || window.roles.indexOf('admin') > -1 || window.roles.indexOf(role) > -1;
+        }
     };
 
     return _this._data;
