@@ -1,5 +1,5 @@
 module.exports = {
-    "db": "mongodb://localhost/mean",
+    "db": "mongodb://dbadmin:dbadmin@ds021943.mlab.com:21943/nodejs-framework",
     "app": {
         "name": "MEAN - A Modern Stack - Production"
     },

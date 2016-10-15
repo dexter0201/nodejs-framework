@@ -50,7 +50,7 @@ module.exports = function (app, passport, db) {
 
         var assets = assetmanager.process({
             assets: require('./assets.json'),
-            webroot: 'public',
+            webroot: 'public/public',
             debug: process.env.NODE_ENV !== 'production'
         });
         // Add assets to local veriables
@@ -87,7 +87,7 @@ module.exports = function (app, passport, db) {
         app.use(app.router);
 
         app.use(express.favicon());
-        app.use(express.static(config.root + '/public'));
+        app.use('/public', express.static(config.root + '/public'));
 
         app.get('/modules/aggregated.js', function (req, res, next) {
             console.log('Express, getting aggregated.js');
