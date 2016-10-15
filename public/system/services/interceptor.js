@@ -1,4 +1,4 @@
-// (function () {
+(function () {
     'use strict';
 
     angular.module('dexter-factory-interceptor', [])
@@ -26,7 +26,6 @@
             }
         }])
         .config(['$httpProvider', function ($httpProvider) {
-            $httpInterceptor.interceptors.push('httpInterceptor');
+            //$httpProvider.responseInterceptors.push('httpInterceptor');
         }]);
-
-// });
+}());
