@@ -7,9 +7,19 @@ var mongoose = require('mongoose'),
     _ = require('underscore');
 
 var UserSchema = new Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     email: String,
-    username: String,
+    username: {
+        type: String,
+        unique: true
+    },
+    roles: [{
+        type: String,
+        'default': 'authenticated'
+    }],
     salt: String,
     provider: String,
     hashed_password: String,

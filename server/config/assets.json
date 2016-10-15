@@ -13,6 +13,7 @@
                 "public/system/lib/angular-resource/angular-resource.js",
                 "public/system/lib/angular-ui-router/angular-ui-router.min.js",
                 "public/system/lib/angular-bootstrap/ui-bootstrap-tpls.js",
+                "public/init.js",
                 "public/*/*.js",
                 "public/*/*/*.js"
             ]
