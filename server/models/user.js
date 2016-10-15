@@ -91,6 +91,9 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
 }, 'Password cannot be blank');
 
 UserSchema.methods = {
+    hasRole: function (role) {
+        return (this.roles.indexOf('admin') > -1 || this.roles.indexOf(role) > -1);
+    },
 
     makeSalt: function () {
         return crypto.randomBytes(16).toString('base64');

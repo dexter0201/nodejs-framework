@@ -1,8 +1,16 @@
-//'use strict';
+'use strict';
 
 exports.requiresLogin = function (req, res, next) {
     if (!req.isAuthenticated()) {
         res.send(401, 'User is not authoried');
+    }
+
+    next();
+};
+
+module.exports.requiredAdmin = function (req, res, next) {
+    if (!req.isAuthenticated() || !req.user.hasRole('admin')) {
+        return res.send(400, 'User is not authenticated');
     }
 
     next();
