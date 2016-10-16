@@ -4,12 +4,6 @@
     /**
      * Mean container for dependency injection
      */
-    //var dependable = require('dependable');
-    //var dexter = module.exports.dexter = dependable.container();
-    //var nodejsIocContainer = require('nodejs-ioc-container');
-    //var dexter = module.exports.dexter = nodejsIocContainer.container();
-    //var EventEmitter = require('events').EventEmitter;
-    //dexter.events = new EventEmitter();
     var dexter = require('nodejscore');
     var passport = require('passport');
     var logger = require('mean-logger');
@@ -26,18 +20,15 @@
         };
     });
 
-    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
     var config = require('./server/config/config');
     var mongoose = require('mongoose');
     var db = mongoose.connect(config.db);
     var app = require('./server/config/system/bootstrap')(passport, db);
-    var port = process.env.PORT || config.port;
 
-    app.listen(port);
+    app.listen(config.port);
 
     dexter.resolve('one', function (one) {
-        one.echo('Express app started on port: ' + port);
+        one.echo('Express app started on port: ' + config.port);
     });
 
     logger.init(app, passport, mongoose);
