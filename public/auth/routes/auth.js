@@ -1,24 +1,24 @@
 (function () {
     'use strict';
 
-    angular.module('dexter.auth').config(['$stateProvider', '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
-            var checkLoggedIn = function ($q, $timeout, $http, $location) {
-                var deferred = $q.defer();
+    angular.module('dexter.auth').config(['$stateProvider',
+        function ($stateProvider) {
+            // var checkLoggedIn = function ($q, $timeout, $http, $location) {
+            //     var deferred = $q.defer();
 
-                $http.get('/loggedin').success(function (user) {
-                    if (user !== '0') {
-                        $timeout(deferred.resolve, 0);
-                    } else {
-                        $timeout(function () {
-                            deferred.reject();
-                        }, 0);
-                        $location.url('/login');
-                    }
-                });
+            //     $http.get('/loggedin').success(function (user) {
+            //         if (user !== '0') {
+            //             $timeout(deferred.resolve, 0);
+            //         } else {
+            //             $timeout(function () {
+            //                 deferred.reject();
+            //             }, 0);
+            //             $location.url('/login');
+            //         }
+            //     });
 
-                return deferred.promise;
-            };
+            //     return deferred.promise;
+            // };
 
             var checkLoggedOut = function ($q, $timeout, $http, $location) {
                 var deferred = $q.defer();

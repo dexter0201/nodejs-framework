@@ -23,9 +23,9 @@
 
                     return $q.reject(rejection);
                 }
-            }
-        }])
-        .config(['$httpProvider', function ($httpProvider) {
-            //$httpProvider.responseInterceptors.push('httpInterceptor');
+            };
         }]);
+        // .config([, function () {
+        //     //$httpProvider.responseInterceptors.push('httpInterceptor');
+        // }]);
 }());

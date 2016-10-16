@@ -1,10 +1,9 @@
 (function () {
     'use strict';
 
-    var fs = require('fs'),
-        express = require('express');
+    var fs = require('fs');
 
-    module.exports = function (dexter, app, auth, database, events) {
+    module.exports = function (dexter, app, auth) {
         dexter.modules = [];
         dexter.middleware = {
             before: [],
@@ -19,14 +18,12 @@
         enableDexterModules();
         aggregateJs();
 
-        app.get('/modules/aggregated.js', function (req, res, next) {
+        app.get('/modules/aggregated.js', function (req, res) {
             res.setHeader('content-type', 'text/javascript');
             res.send(dexter.aggregated.js);
         });
 
         function findDexterModules() {
-            var modules = [];
-
             fs.stat(process.cwd() + '/node_modules', function (err, stats) {
                 if (err) {
                     console.log(err);
@@ -68,7 +65,7 @@
                                 if (files.length - 1 === index) {
                                     dexter.events.emit('enableDexterModules');
                                 }
-                            })
+                            });
                         });
                     });
                 }
@@ -95,11 +92,11 @@
         function aggregateJs() {
             dexter.aggregated.js = '';
             dexter.events.on('enableDexterModules', function () {
-                var files = [
-                    'config',
-                    'services',
-                    'controllers'
-                ];
+                // var files = [
+                //     'config',
+                //     'services',
+                //     'controllers'
+                // ];
 
                 dexter.modules.forEach(function (module) {
                     readFile(process.cwd() + '/node_modules/' + module.name + '/public/js/');

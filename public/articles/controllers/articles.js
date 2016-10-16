@@ -50,7 +50,7 @@ angular
 
                 for (var i in $scope.artices) {
                     if ($scope.artices[i] == article) {
-                        scope.articles.splice(i, 1);
+                        $scope.articles.splice(i, 1);
                     }
                 }
             } else {
