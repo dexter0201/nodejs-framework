@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
 
-exports.authCallback = function (req, res, next) {
+exports.authCallback = function (req, res) {
     res.redirect('/');
 };
 
 exports.signin = function (req, res) {
     if (req.isAuthenticated()) {
-        return res.redirect('/')
+        return res.redirect('/');
     }
 
     res.redirect('#!/login');
@@ -46,10 +46,7 @@ exports.create = function (req, res) {
         email: req.body.email,
         provider: 'local'
     });
-    var message = null;
-    //var user = new User(req.body);
-console.log(user);
-console.log(req.body);
+
     req.assert('email', 'You must enter a valid email address').isEmail();
     req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
     req.assert('username', 'Username cannot be more than 20 characters').len(1, 20);
@@ -64,18 +61,18 @@ console.log(req.body);
     user.save(function (err) {
         if (err) {
             switch (err.code) {
-                case 11000:
-                case 11001:
-                    res.status(400).send('Username already taken');
-                    break;
-                default:
-                    res.status(400).send('Please fill all the required fields');
+            case 11000:
+            case 11001:
+                res.status(400).send('Username already taken');
+                break;
+            default:
+                res.status(400).send('Please fill all the required fields');
             }
 
             return res.status(400);
         }
 
-        req.logIn(user, function (err) {
+        req.logIn(user, function (err, next) {
             if (err) {
                 return next(err);
             }

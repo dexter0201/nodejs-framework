@@ -12,7 +12,7 @@ var express = require('express'),
     fs = require('fs'),
     appPath = process.cwd();
 
-module.exports = function (app, passport, db) {
+module.exports = function (app, passport) {
     app.set('showStackError', true);
 
     // pretty HTML
@@ -89,13 +89,13 @@ module.exports = function (app, passport, db) {
         app.use(express.favicon());
         app.use('/public', express.static(config.root + '/public'));
 
-        app.get('/modules/aggregated.js', function (req, res, next) {
+        app.get('/modules/aggregated.js', function (req, res) {
             console.log('Express, getting aggregated.js');
             res.setHeader('content-type', 'text/javascript');
             res.send(dexter.aggregated.js);
         });
 
-        app.get('/modules/aggregated.css', function (req, res, next) {
+        app.get('/modules/aggregated.css', function (req, res) {
             // dexter.get('one').echo.log('Express, getting aggreagted.css..');
             dexter.resolve('one', function (one) {
                 one.echo('Express, getting aggreagted.css..');

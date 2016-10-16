@@ -40,6 +40,10 @@ exports.update = function (req, res) {
     article = _.extend(article, req.body);
 
     article.save(function (err) {
+        if (err) {
+            throw err;
+        }
+
         res.jsonp(article);
     });
 };

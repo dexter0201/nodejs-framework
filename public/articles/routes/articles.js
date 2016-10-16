@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('dexter.articles')
-        .config(['$stateProvider', '$urlRouterProvider',
-            function ($stateProvider, $urlRouterProvider) {
+        .config(['$stateProvider',
+            function ($stateProvider) {
                 var checkLoggedIn = function ($q, $timeout, $http, $location) {
                     var deferred = $q.defer();
 
@@ -21,22 +21,22 @@
                     return deferred.promise;
                 };
 
-                var checkLoggedOut = function ($q, $timeout, $http, $location) {
-                    var deferred = $q.defer();
+                // var checkLoggedOut = function ($q, $timeout, $http, $location) {
+                //     var deferred = $q.defer();
 
-                    $http.get('/loggedin').success(function (user) {
-                        if (user !== '0') {
-                            $timeout(function () {
-                                deferred.reject();
-                            }, 0);
-                            $location.url('/login');
-                        } else {
-                            $timeout(deferred.resolve, 0);
-                        }
-                    });
+                //     $http.get('/loggedin').success(function (user) {
+                //         if (user !== '0') {
+                //             $timeout(function () {
+                //                 deferred.reject();
+                //             }, 0);
+                //             $location.url('/login');
+                //         } else {
+                //             $timeout(deferred.resolve, 0);
+                //         }
+                //     });
 
-                    return deferred.promise;
-                };
+                //     return deferred.promise;
+                // };
 
                 $stateProvider
                     .state('all articles', {

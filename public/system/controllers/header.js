@@ -18,7 +18,6 @@ angular
         Menus.query({
             name: 'main'
         }, function (mainMenu) {
-            console.log('mainMenu: ', mainMenu);
             $scope.menus.main = $scope.menus.main.concat(mainMenu);
         });
 

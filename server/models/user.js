@@ -2,9 +2,9 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    bcrypt = require('bcrypt'),
-    crypto = require('crypto'),
-    _ = require('underscore');
+    //bcrypt = require('bcrypt'),
+    crypto = require('crypto');
+    //_ = require('underscore');
 
 var UserSchema = new Schema({
     name: {

@@ -3,7 +3,7 @@
 
     var fs = require('fs');
 
-    module.exports = function (dexter, app, auth) {
+    module.exports = function (dexter, app) {
         dexter.modules = [];
         dexter.middleware = {
             before: [],
