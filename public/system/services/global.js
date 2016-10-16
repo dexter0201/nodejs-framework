@@ -5,8 +5,16 @@ angular.module('dexter.system').factory('Global', [function () {
         user: window.user,
         authenticated: !!window.user,
         roles: window.userRoles,
-        hasRole: function (role) {
-            return role === 'annonymous' || window.roles.indexOf('admin') > -1 || window.roles.indexOf(role) > -1;
+        hasRole: function (roles) {
+            var hasRole = false;
+
+            roles.forEach(function (role) {
+                if (role === 'annonymous' || window.roles.indexOf('admin') > -1 || window.roles.indexOf(role) > -1) {
+                    hasRole = true;
+                }
+            });
+
+            return hasRole;
         }
     };
 

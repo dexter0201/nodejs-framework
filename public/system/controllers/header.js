@@ -5,11 +5,11 @@ angular
 
         $scope.menus = {
             main: [{
-                role: 'authenticated',
+                roles: 'authenticated',
                 title: 'Articles',
                 link: 'all articles'
             }, {
-                role: 'authenticated',
+                roles: 'authenticated',
                 title: 'Create New Article',
                 link: 'create article'
             }]
