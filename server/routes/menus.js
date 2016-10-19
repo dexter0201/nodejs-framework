@@ -9,11 +9,20 @@
                 ? req.user.roles
                 : ['annonymous'];
             var menu = req.params.name || 'main';
+            var defaultMenu = req.query.defaultMenu ? req.query.defaultMenu : [];
+            var items;
 
-            res.jsonp(dexter.menus.get({
+            defaultMenu.forEach(function (item, index) {
+                defaultMenu[index] = JSON.parse(item);
+            });
+
+            items = dexter.menus.get({
                 roles: roles,
-                menu: menu
-            }));
+                menu: menu,
+                defaultMenu: defaultMenu
+            });
+
+            res.jsonp(items);
         });
     };
 }());

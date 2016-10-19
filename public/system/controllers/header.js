@@ -2,28 +2,34 @@ angular
     .module('dexter.system')
     .controller('HeaderController', ['$scope', '$rootScope', '$location', 'Global', 'Menus', function ($scope, $rootScope , $location, Global, Menus) {
         $scope.global = Global;
+        $scope.menus = {};
 
-        $scope.menus = {
-            main: [{
-                roles: 'authenticated',
-                title: 'Articles',
-                link: 'all articles'
-            }, {
-                roles: 'authenticated',
-                title: 'Create New Article',
-                link: 'create article'
-            }]
-        };
+        var defaultMainMenus = [{
+            roles: 'authenticated',
+            title: 'Articles',
+            link: 'all articles'
+        }, {
+            roles: 'authenticated',
+            title: 'Create New Article',
+            link: 'create article'
+        }];
 
-        Menus.query({
-            name: 'main'
-        }, function (mainMenu) {
-            $scope.menus.main = $scope.menus.main.concat(mainMenu);
-        });
+        function queryMenus(name, defaultMenu) {
+            Menus.query({
+                name: name,
+                defaultMenu: defaultMenu
+            }, function (menu) {
+                console.log(menu);
+                $scope.menus[name] = menu;
+            });
+        }
+
+        queryMenus('main', defaultMainMenus);
 
         $scope.isCollapsed = false;
 
         $rootScope.$on('loggedin', function () {
+            queryMenus('main', defaultMainMenus);
             $scope.global = {
                 authenticated: !!$rootScope.user,
                 user: $rootScope.user

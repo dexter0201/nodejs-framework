@@ -2,11 +2,12 @@
     <ul class="nav">
         <li><a href="/" class="brand">Dexter - NodeJs Frameword</a></li>
         <li data-ng-repeat="item in menus.main" ui-route="/{{ item.link }}" data-ng-class="{actice: $uiRoute}">
-            <a data-ng-if="global.hasRole(item.roles)" ui-sref='{{item.link}}'>
+            <a ui-sref='{{item.link}}()'>
                 {{item.title}}
             </a>
         </li>
     </ul>
+    <div class="pull-right" dexter-token-editable></div>
     <ul class="nav pull-right" data-ng-hide="global.authenticated">
         <li><a ui-sref="auth.register">Register</a></li>
         <li class="divider-vertical"></li>

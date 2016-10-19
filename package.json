@@ -37,7 +37,7 @@
     "mean-logger": "latest",
     "mkdirp": "0.3.5",
     "mongoose": "latest",
-    "nodejscore": "0.1.0",
+    "nodejscore": "0.1.1",
     "passport": "latest",
     "passport-facebook": "latest",
     "passport-local": "latest",

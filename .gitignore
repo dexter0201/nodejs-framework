@@ -9,3 +9,4 @@ test/coverage
 modules/public/
 modules/views/
 public/build/
+npm-debug.log
