@@ -5,11 +5,11 @@ angular
         $scope.menus = {};
 
         var defaultMainMenus = [{
-            roles: 'authenticated',
+            roles: ['authenticated'],
             title: 'Articles',
             link: 'all articles'
         }, {
-            roles: 'authenticated',
+            roles: ['authenticated'],
             title: 'Create New Article',
             link: 'create article'
         }];
@@ -17,7 +17,7 @@ angular
         function queryMenus(name, defaultMenu) {
             Menus.query({
                 name: name,
-                defaultMenu: defaultMenu
+                defaultMenu: JSON.stringify(defaultMenu)
             }, function (menu) {
                 console.log(menu);
                 $scope.menus[name] = menu;

@@ -8,13 +8,9 @@
             var roles = req.user
                 ? req.user.roles
                 : ['annonymous'];
-            var menu = req.params.name || 'main';
-            var defaultMenu = req.query.defaultMenu ? req.query.defaultMenu : [];
-            var items;
-
-            defaultMenu.forEach(function (item, index) {
-                defaultMenu[index] = JSON.parse(item);
-            });
+            var menu = req.params.name || 'main',
+                defaultMenu = req.query.defaultMenu ? JSON.parse(req.query.defaultMenu) : [],
+                items;
 
             items = dexter.menus.get({
                 roles: roles,
