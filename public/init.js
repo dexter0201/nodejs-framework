@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-console.log('Debug... window.modules: ', window.modules);
+    console.log('Debug... window.modules: ', window.modules);
     angular.element(document).ready(function() {
         // Fixing facebook bug with redirect
         // if (window.location.hash === '#_=_') {
