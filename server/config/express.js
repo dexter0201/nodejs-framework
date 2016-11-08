@@ -9,7 +9,7 @@ var express = require('express'),
     assetmanager = require('assetmanager'),
     config = require('./config'),
     dexter = require('nodejscore'),
-    fs = require('fs'),
+    util = require('./util'),
     appPath = process.cwd();
 
 module.exports = function (app, passport) {
@@ -140,28 +140,9 @@ module.exports = function (app, passport) {
     });
 
     function bootstrapRoutes() {
-        var routes_path = appPath + '/server/routes';
-        dexter.resolve('one', function (one) {
-            one.echo(routes_path);
+        util.walk(appPath + '/server/routes', 'middlewares', function (file) {
+            require(file)(app, passport);
         });
-
-        var walk = function (path) {
-            console.log('...bootstrap routes...: ', path);
-            fs.readdirSync(path).forEach(function (file) {
-                var newPath = path + '/' + file;
-                var stats = fs.statSync(newPath);
-
-                if (stats.isFile()) {
-                    if (/(.*)\.(js$|coffee$)/.test(file)) {
-                        require(newPath)(app, passport);
-                    }
-                } else if (stats.isDirectory() && file !== 'middlewares') {
-                    walk(newPath);
-                }
-            });
-        };
-
-        walk(routes_path);
     }
 
 };
