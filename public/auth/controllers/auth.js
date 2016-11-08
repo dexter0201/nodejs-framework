@@ -26,14 +26,14 @@
                 $scope.usernameError = null;
                 $scope.registerError = null;
                 $http.post('/register', {
-                    name: $scope.user.fullname,
+                    name: $scope.user.name,
                     username: $scope.user.username,
                     email: $scope.user.email,
                     password: $scope.user.password,
                     confirmPassword: $scope.user.confirmPassword
                 }).success(function () {
                     $scope.registerError = 0;
-                    $rootScope.user = $scope.user.fullname;
+                    $rootScope.user = $scope.user.name;
                     $rootScope.$emit('loggedin');
                     $location.url('/');
                 }).error(function (error) {
