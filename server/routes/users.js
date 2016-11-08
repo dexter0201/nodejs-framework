@@ -14,7 +14,10 @@ module.exports = function (app, passport) {
         .post(passport.authenticate('local', {
             failureFlash: true
         }), function (req, res) {
-            res.send(req.user);
+            res.send({
+                user: req.user,
+                redirect: req.user.roles.indexOf('admin') !== -1 ? req.get('referer') : false
+            });
         });
     app.route('/logout')
         .get(users.signout);

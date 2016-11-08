@@ -51,7 +51,7 @@ module.exports = function (app, passport) {
     app.use(methodOverride());
     app.use(cookieParser());
 
-    var assets = assetmanager.process({
+    assetmanager.process({
         assets: require('./assets.json'),
         webroot: 'public/public',
         debug: process.env.NODE_ENV !== 'production'

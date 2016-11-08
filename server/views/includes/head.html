@@ -22,5 +22,9 @@
         <link rel="stylesheet" href="{{file}}">
     {% endfor %}
 
+    {% if theme === true %}
+        <link rel="stylesheet" type="text/css" href="/themes/default.css">
+    {% endif %}
+
     <link rel="stylesheet" type="text/css" href="/modules/aggregated.css">
 </head>

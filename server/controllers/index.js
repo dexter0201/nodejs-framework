@@ -3,7 +3,9 @@
 var dexter = require('nodejscore');
 
 module.exports.render = function (req, res) {
+    var fs = require('fs');
     var modules = [];
+    var themeFilePath = __dirname + '/../../packages/admin/theme.css';
 
     for (var name in dexter.modules) {
         modules.push({
@@ -20,6 +22,7 @@ module.exports.render = function (req, res) {
             username: req.user.username,
             roles: req.user ? req.user.roles : ['annonymous']
         }) : null,
-        modules: JSON.stringify(modules)
+        modules: JSON.stringify(modules),
+        theme: fs.existsSync(themeFilePath)
     });
 };
