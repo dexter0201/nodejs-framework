@@ -105,9 +105,8 @@ module.exports = function (app, passport) {
         });
 
         dexter.events.on('modulesFound', function () {
-            console.log('modulesFound....WOW');
             for (var name in dexter.modules) {
-                app.use('/' + name, express.static(config.root + '/node_modules/' + name + '/public'));
+                app.use('/' + name, express.static(config.root + '/' + dexter.modules[name] +'/' + name + '/public'));
             }
 
             bootstrapRoutes();

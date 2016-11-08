@@ -13,7 +13,7 @@
         app.post('/login', passport.authenticate('local', {
             failureFlash: true
         }), function (req, res) {
-            res.send(req.user.name);
+            res.send(req.user);
         });
         app.get('/logout', users.signout);
         app.get('/users/me', users.me);
