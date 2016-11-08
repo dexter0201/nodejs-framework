@@ -11,11 +11,12 @@ var hasAuthorization = function (req, res, next) {
 };
 
 module.exports = function (app) {
-
-    app.get('/articles', articles.all);
-    app.post('/articles', authorization.requiresLogin, articles.create);
-    app.get('/articles/:articleId', articles.show);
-    app.put('/articles/:articleId', authorization.requiresLogin, hasAuthorization, articles.update);
-    app.del('/articles/:articleId', authorization.requiresLogin, hasAuthorization, articles.destroy);
+    app.route('/articles')
+        .get(articles.all)
+        .post(authorization.requiresLogin, articles.create);
+    app.route('/articles/:articleId')
+        .get(articles.show)
+        .put(authorization.requiresLogin, hasAuthorization, articles.update)
+        .delete(authorization.requiresLogin, hasAuthorization, articles.destroy);
     app.param('articleId', articles.article);
 };

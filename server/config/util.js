@@ -10,7 +10,7 @@ module.exports.walk = function (path, excludeDir, callback) {
         if (stat.isFile() && /(.*)\.(js|coffee)$/.test(file)) {
             callback(newPath);
         } else if (stat.isDirectory() && file !== excludeDir) {
-            module.exports.walk(newPath);
+            module.exports.walk(newPath, excludeDir, callback);
         }
     });
 };
