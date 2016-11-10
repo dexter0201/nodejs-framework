@@ -10,10 +10,31 @@
 
         bootstrapModels();
         require(appPath + '/server/config/passport')(passport);
-        bootstrapDependencies(db);
+        bootstrapDependencies();
 
         app = express();
         require(appPath + '/server/config/express')(app, passport, db);
+
+        function bootstrapModels() {
+            require('../util').walk(appPath + '/server/models', null, function (file) {
+                require(file);
+            });
+        }
+
+        function bootstrapDependencies() {
+            dexter.register('passport', function () {
+                return passport;
+            });
+            dexter.register('auth', function () {
+                return require(appPath + '/server/routes/middlewares/authorization');
+            });
+            dexter.register('database', {
+                connection: db
+            });
+            dexter.register('app', function () {
+                return app;
+            });
+        }
 
         return app;
     };
@@ -22,24 +43,24 @@
      * Private section
      */
 
-    function bootstrapModels() {
-        require('../util').walk(appPath + '/server/models', null, function (file) {
-            require(file);
-        });
-    }
+    // function bootstrapModels() {
+    //     require('../util').walk(appPath + '/server/models', null, function (file) {
+    //         require(file);
+    //     });
+    // }
 
-    function bootstrapDependencies(db) {
-        dexter.register('passport', function (passport) {
-            return passport;
-        });
-        dexter.register('auth', function () {
-            return require(appPath + '/server/routes/middlewares/authorization');
-        });
-        dexter.register('database', {
-            connection: db
-        });
-        dexter.register('app', function (app) {
-            return app;
-        });
-    }
+    // function bootstrapDependencies(db) {
+    //     dexter.register('passport', function (passport) {
+    //         return passport;
+    //     });
+    //     dexter.register('auth', function () {
+    //         return require(appPath + '/server/routes/middlewares/authorization');
+    //     });
+    //     dexter.register('database', {
+    //         connection: db
+    //     });
+    //     dexter.register('app', function (app) {
+    //         return app;
+    //     });
+    // }
 }());

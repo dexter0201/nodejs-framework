@@ -2,8 +2,4 @@
     <script type="text/javascript" src="{{file}}"></script>
 {% endfor %}
 
-{% if (process.env.NODE_ENV == 'development') %}
-    <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
-{% endif %}
-
 <script type="text/javascript" src="/modules/aggregated.js"></script>

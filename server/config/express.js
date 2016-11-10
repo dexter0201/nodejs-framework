@@ -88,7 +88,6 @@ module.exports = function (app, passport) {
     app.use('/public', express.static(config.root + '/public'));
 
     app.get('/modules/aggregated.js', function (req, res) {
-        console.log('Express, getting aggregated.js');
         res.setHeader('content-type', 'text/javascript');
         res.send(dexter.aggregated.js);
     });
@@ -137,7 +136,6 @@ module.exports = function (app, passport) {
         if (process.env.NODE_ENV === 'development') {
             app.use(errorHander());
         }
-
     });
 
     function bootstrapRoutes() {
@@ -145,5 +143,4 @@ module.exports = function (app, passport) {
             require(file)(app, passport);
         });
     }
-
 };

@@ -6,3 +6,7 @@ module.exports.requiresLogin = function (req, res, next) {
     }
     next();
 };
+
+module.exports.requiresAdmin = function () {
+    return true;
+};
