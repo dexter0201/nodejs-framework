@@ -9,11 +9,9 @@
     var config = require('./server/config/config');
     var mongoose = require('mongoose');
     var db = mongoose.connect(config.db);
-    var app = require('./server/config/system/bootstrap')(passport, db);
+    var app = {};
 
-    dexter.app('Dexter\'s NodeJs Framework', {
-
-    });
+    dexter.app('Dexter\'s NodeJs Framework', {});
 
     dexter.register('one', function () {
         return {
@@ -23,6 +21,7 @@
         };
     });
 
+    app = require('./server/config/system/bootstrap')(passport, db);
     app.listen(config.port);
 
     dexter.resolve('one', function (one) {

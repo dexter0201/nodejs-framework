@@ -10,10 +10,10 @@
 
         bootstrapModels();
         require(appPath + '/server/config/passport')(passport);
-        bootstrapDependencies();
 
         app = express();
         require(appPath + '/server/config/express')(app, passport, db);
+        bootstrapDependencies();
 
         function bootstrapModels() {
             require('../util').walk(appPath + '/server/models', null, function (file) {
@@ -38,29 +38,4 @@
 
         return app;
     };
-
-    /**
-     * Private section
-     */
-
-    // function bootstrapModels() {
-    //     require('../util').walk(appPath + '/server/models', null, function (file) {
-    //         require(file);
-    //     });
-    // }
-
-    // function bootstrapDependencies(db) {
-    //     dexter.register('passport', function (passport) {
-    //         return passport;
-    //     });
-    //     dexter.register('auth', function () {
-    //         return require(appPath + '/server/routes/middlewares/authorization');
-    //     });
-    //     dexter.register('database', {
-    //         connection: db
-    //     });
-    //     dexter.register('app', function (app) {
-    //         return app;
-    //     });
-    // }
 }());

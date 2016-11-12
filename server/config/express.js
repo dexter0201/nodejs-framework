@@ -21,6 +21,7 @@ var express = require('express'),
     appPath = process.cwd();
 
 module.exports = function (app, passport) {
+    app.locals.title = 'Dexter\'s application';
     app.set('showStackError', true);
 
     // pretty HTML
@@ -103,7 +104,7 @@ module.exports = function (app, passport) {
 
     dexter.events.on('modulesFound', function () {
         for (var name in dexter.modules) {
-            app.use('/' + name, express.static(config.root + '/' + dexter.modules[name] +'/' + name + '/public'));
+            app.use('/' + name, express.static(config.root + '/' + dexter.modules[name].source +'/' + name + '/public'));
         }
 
         bootstrapRoutes();

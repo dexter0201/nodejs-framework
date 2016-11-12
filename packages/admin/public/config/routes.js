@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dexter')
-    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
             .state('users', {
                 url: '/admin/users',

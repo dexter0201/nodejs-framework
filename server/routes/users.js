@@ -3,13 +3,8 @@
 var users = require('../controllers/users');
 
 module.exports = function (app, passport) {
-    // app.get('/signup', users.signup);
     app.route('/register')
         .post(users.create);
-    // app.post('/users/session', passport.authenticate('local', {
-    //     failureRedirect: '/signin',
-    //     failureFlash: true
-    // }), users.session);
     app.route('/login')
         .post(passport.authenticate('local', {
             failureFlash: true

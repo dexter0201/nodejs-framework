@@ -45,6 +45,7 @@ module.exports.create = function (req, res) {
 };
 
 module.exports.user = function (req, res, next, id) {
+    console.log('admin...get all users');
     User
         .findOne({
             _id: id
@@ -68,6 +69,10 @@ module.exports.update = function (req, res) {
 
     user = _.extend(user, req.body);
     user.save(function (err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
         res.jsonp(user);
     });
 };
@@ -87,6 +92,7 @@ module.exports.destroy = function (req, res) {
 };
 
 module.exports.all = function (req, res) {
+    console.log('Admin get users....');
     User
         .find()
         .sort('-created')

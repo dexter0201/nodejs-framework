@@ -7,5 +7,5 @@ angular.module('dexter').factory('Users', ['$resource', function ($resource) {
         update: {
             method: 'PUT'
         }
-    })
+    });
 }]);

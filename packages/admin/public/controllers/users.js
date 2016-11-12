@@ -61,7 +61,7 @@ angular.module('dexter').controller('UsersController', ['$scope', 'Globals', 'Me
                 $scope.users.push(_user);
             });
 
-            this.firstName = this.lastName = this.email = this.password = this.role = "";
+            this.firstName = this.lastName = this.email = this.password = this.role = '';
         };
 
         $scope.update = function (user) {

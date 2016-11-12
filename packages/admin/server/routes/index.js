@@ -1,7 +1,11 @@
 'use strict';
 
-module.exports = function (Admin, app, auth, database) {
+module.exports = function (Admin, app, auth) {
     var users = require('../controllers/users');
+
+    app.get('/admin', function (req, res) {
+        res.send('My name is Dexer. I\'m a Admin for this site');
+    });
 
     app.route('/admin/users')
         .get(auth.requiresAdmin, users.all)
