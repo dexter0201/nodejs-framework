@@ -4,12 +4,12 @@
 <body data-ng-app="dexter">
     <nav class="navbar navbar-inverse" data-ng-include="'/public/system/views/header.html'"></nav>
     {% if roles.indexOf('admin') > -1 && modules.indexOf('admin') > -1 %}
-    <section class="admin-menu">
+    <section class="col-md-2">
         <div data-ng-include="'/admin/views/index.html'"></div>
     </section>
     {% endif %}
 
-    <section class="content">
+    <section class="col-md-10">
         <section class="container">
             {% block content %}{% endblock %}
         </section>
