@@ -95,7 +95,6 @@ module.exports = function (app, passport) {
 
     app.get('/modules/aggregated.css', function (req, res) {
         res.setHeader('content-type', 'text/css');
-        console.log('dexter.aggregated.css', dexter.aggregated.css);
         res.send(dexter.aggregated.css);
     });
 
