@@ -7,6 +7,10 @@ module.exports.requiresLogin = function (req, res, next) {
     next();
 };
 
-module.exports.requiresAdmin = function () {
-    return true;
+module.exports.requiresAdmin = function (req, res, next) {
+    if (!req.isAuthenticated() || !req.user.hasRole('admin')) {
+        return res.status(401).send('User is not authorized');
+    }
+
+    next();
 };
