@@ -12,6 +12,9 @@
         "json3": "~3.2.4",
         "jquery": "~1.9.1"
     },
+    "resolutions": {
+        "angular": "1.0.8"
+    },
     "exportsOverride": {
         "bootstrap": {
             "css": "docs/assets/css/bootstrap*.css",
