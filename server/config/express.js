@@ -94,19 +94,14 @@ module.exports = function (app, passport) {
     });
 
     app.get('/modules/aggregated.css', function (req, res) {
-        // dexter.get('one').echo.log('Express, getting aggreagted.css..');
-        dexter.resolve('one', function (one) {
-            one.echo('Express, getting aggreagted.css..');
-        });
         res.setHeader('content-type', 'text/css');
+        console.log('dexter.aggregated.css', dexter.aggregated.css);
         res.send(dexter.aggregated.css);
     });
 
     dexter.events.on('modulesFound', function () {
         for (var name in dexter.modules) {
             app.use('/' + name, express.static(config.root + '/' + dexter.modules[name].source +'/' + name + '/public'));
-            console.log('used: ', '/' + name);
-            console.log('public: ', config.root + '/' + dexter.modules[name].source +'/' + name + '/public');
         }
 
         bootstrapRoutes();

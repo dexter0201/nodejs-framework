@@ -1,11 +1,11 @@
 {
-  "name": "kalel-node-framework",
+  "name": "dexter-node-framework",
   "version": "0.0.1",
-  "description": "This is the kalel's node framework",
+  "description": "This is the dexter's node framework",
   "author": "Dexter Nguyen",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Kalel0201/nodejs-framework.git"
+    "url": "git@github.com:dexter0201/nodejs-framework.git"
   },
   "scripts": {
     "start": "node node_modules/grunt-cli/bin/grunt",
@@ -13,8 +13,8 @@
     "postinstall": "node node_modules/grunt-cli/bin/grunt install"
   },
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
+    "node": "6.4.x",
+    "npm": "3.10.x"
   },
   "dependencies": {
     "assetmanager": "0.1.3",
@@ -46,7 +46,7 @@
     "mean-logger": "latest",
     "mkdirp": "0.3.5",
     "mongoose": "^4.6.4",
-    "nodejscore": "0.2.4",
+    "nodejscore": "0.2.5",
     "passport": "latest",
     "passport-facebook": "latest",
     "passport-local": "latest",

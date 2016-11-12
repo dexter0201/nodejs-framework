@@ -19,7 +19,6 @@ angular
                 name: name,
                 defaultMenu: JSON.stringify(defaultMenu)
             }, function (menu) {
-                console.log(menu);
                 $scope.menus[name] = menu;
             });
         }
