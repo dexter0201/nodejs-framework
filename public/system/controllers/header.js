@@ -1,6 +1,6 @@
 angular
     .module('dexter.system')
-    .controller('HeaderController', ['$scope', '$rootScope', '$location', 'Global', 'Menus', function ($scope, $rootScope , $location, Global, Menus) {
+    .controller('HeaderController', ['$scope', '$rootScope', '$location', 'Global', 'Menus', '$state', function ($scope, $rootScope , $location, Global, Menus, $state) {
         $scope.global = Global;
         $scope.menus = {};
 
@@ -22,6 +22,10 @@ angular
                 $scope.menus[name] = menu;
             });
         }
+
+        $scope.goState = function (link) {
+            $state.go(link);
+        };
 
         queryMenus('main', defaultMainMenus);
 

@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        assets: grunt.file.readJSON('config/assets.json'),
+        assets: grunt.file.readJSON('server/config/assets.json'),
         watch: {
             html: {
                 files: [
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
         bower: {
             install: {
                 options: {
-                    targetDir: './public/lib',
+                    targetDir: './public/system/lib',
                     layout: 'byComponent',
                     install: true,
                     verbose: true,
