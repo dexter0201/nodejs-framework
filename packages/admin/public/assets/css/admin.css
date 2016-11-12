@@ -5,3 +5,7 @@
 .admin-menu {
     float: left;
 }
+
+a {
+    cursor: pointer;
+}
