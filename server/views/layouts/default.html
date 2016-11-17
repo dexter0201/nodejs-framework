@@ -3,7 +3,7 @@
 {% include '../includes/head.html' %}
 <body data-ng-app="dexter">
     <nav class="navbar navbar-inverse" data-ng-include="'/public/system/views/header.html'"></nav>
-    {% if user && user.roles.indexOf('admin') > -1 && modules.indexOf('admin') > -1 %}
+    {% if enableAdmin %}
     <section class="col-md-2">
         <div data-ng-include="'/admin/views/index.html'"></div>
     </section>

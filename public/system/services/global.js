@@ -3,7 +3,7 @@ angular.module('dexter.system').factory('Global', [function () {
 
     _this._data = {
         user: window.user,
-        authenticated: !!window.user
+        authenticated: window.authenticated.length
     };
 
     return _this._data;
