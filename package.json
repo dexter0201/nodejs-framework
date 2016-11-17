@@ -46,13 +46,14 @@
     "mean-logger": "latest",
     "mkdirp": "0.3.5",
     "mongoose": "^4.6.4",
-    "nodejscore": "0.2.7",
+    "nodejscore": "0.2.8",
     "passport": "latest",
     "passport-facebook": "latest",
     "passport-local": "latest",
     "swig": "~1.3.2",
     "underscore": "latest",
-    "view-helpers": "latest"
+    "view-helpers": "latest",
+    "gridfs-stream": "0.4.1"
   },
   "devDependencies": {
     "grunt-contrib-cssmin": "^0.9.0",

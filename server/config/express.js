@@ -18,9 +18,14 @@ var express = require('express'),
     config = require('./config'),
     dexter = require('nodejscore'),
     util = require('./util'),
-    appPath = process.cwd();
+    appPath = process.cwd(),
+    fs = require('fs'),
+    Grid = require('gridfs-stream'),
+    path = require('path');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, db) {
+    var gfs = Grid(db.connections[0].db, db.mongo);
+
     app.locals.title = 'Dexter\'s application';
     app.set('showStackError', true);
 
@@ -93,6 +98,30 @@ module.exports = function (app, passport) {
         res.send(dexter.aggregated.js);
     });
 
+    app.get('/theme.css', function (req, res) {
+        res.setHeader('content-type', 'text/css');
+        gfs.files.findOne({
+            filename: 'theme.css'
+        }, function (err, file) {
+            if (!file) {
+                fs.createReadStream(
+                    path.join(process.cwd(), 'public/system/lib/bootstrap/css/bootstrap.css')
+                ).pipe(res);
+            } else {
+                var readStream = gfs.createReadStream({
+                    filename: 'theme.css'
+                });
+
+                readStream.on('error', function (err) {
+                    console.log('An error occurred!', err.message);
+                });
+
+                readStream.pipe(res);
+            }
+        });
+
+    });
+
     app.get('/modules/aggregated.css', function (req, res) {
         res.setHeader('content-type', 'text/css');
         res.send(dexter.aggregated.css);
@@ -136,8 +165,8 @@ module.exports = function (app, passport) {
     });
 
     function bootstrapRoutes() {
-        util.walk(appPath + '/server/routes', 'middlewares', function (file) {
-            require(file)(app, passport);
+        util.walk(path.join(appPath, 'server/routes'), 'middlewares', function (route) {
+            require(route)(app, passport);
         });
     }
 };
