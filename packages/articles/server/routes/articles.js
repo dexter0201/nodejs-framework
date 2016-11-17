@@ -1,7 +1,6 @@
 'use strict';
 
 var articles = require('../controllers/articles');
-var authorization = require('./middlewares/authorization');
 
 var hasAuthorization = function (req, res, next) {
     if (req.article.user.id != req.user.id) {
@@ -10,13 +9,13 @@ var hasAuthorization = function (req, res, next) {
     next();
 };
 
-module.exports = function (app) {
+module.exports = function (Articles, app, auth) {
     app.route('/articles')
         .get(articles.all)
-        .post(authorization.requiresLogin, articles.create);
+        .post(auth.requiresLogin, articles.create);
     app.route('/articles/:articleId')
         .get(articles.show)
-        .put(authorization.requiresLogin, hasAuthorization, articles.update)
-        .delete(authorization.requiresLogin, hasAuthorization, articles.destroy);
+        .put(auth.requiresLogin, hasAuthorization, articles.update)
+        .delete(auth.requiresLogin, hasAuthorization, articles.destroy);
     app.param('articleId', articles.article);
 };

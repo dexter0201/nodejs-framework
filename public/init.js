@@ -18,7 +18,6 @@
             'ui.bootstrap',
             'ui.router',
             'dexter.system',
-            'dexter.articles',
             'dexter.auth'
         ];
 

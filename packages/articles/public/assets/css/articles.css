@@ -9,3 +9,6 @@ ul {
 li:not(:last-child) {
     border-bottom: 1px solid #ccc;
 }*/
+a {
+    cursor: pointer;
+}

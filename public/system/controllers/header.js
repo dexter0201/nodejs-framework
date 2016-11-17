@@ -4,15 +4,7 @@ angular
         $scope.global = Global;
         $scope.menus = {};
 
-        var defaultMainMenus = [{
-            roles: ['authenticated'],
-            title: 'Articles',
-            link: 'all articles'
-        }, {
-            roles: ['authenticated'],
-            title: 'Create New Article',
-            link: 'create article'
-        }];
+        var defaultMainMenus = [];
 
         function queryMenus(name, defaultMenu) {
             Menus.query({
