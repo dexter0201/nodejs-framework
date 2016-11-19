@@ -1,10 +1,20 @@
-angular.module('dexter.system').factory('Global', [function () {
-    var _this = this;
+(function () {
+    'use strict';
 
-    _this._data = {
-        user: window.user,
-        authenticated: window.user && window.user.roles
-    };
+    angular.module('dexter.system').factory('Global', [function () {
+        var _this = this;
 
-    return _this._data;
-}]);
+        _this._data = {
+            user: window.user,
+            authenticated: false,
+            isAdmin: false
+        };
+
+        if (window.user && window.user.roles) {
+            _this._data.authenticated = window.user.roles.length;
+            _this._data.isAdmin = ~window.user.roles.indexOf('admin');
+        }
+
+        return _this._data;
+    }]);
+}());
