@@ -3,9 +3,7 @@
 var articles = require('../controllers/articles');
 
 var hasAuthorization = function (req, res, next) {
-    var adminEnabled = req.user && req.user.roles && req.user.roles.indexOf('admin');
-
-    if (adminEnabled || req.article.user.id === req.user.id) {
+    if (req.user.isAdmin() || req.article.user.id === req.user.id) {
         next();
     } else {
         res.send(401, 'User is not authorized');

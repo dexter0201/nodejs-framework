@@ -70,6 +70,10 @@ UserSchema.methods = {
         return (this.roles.indexOf('admin') > -1 || this.roles.indexOf(role) > -1);
     },
 
+    isAdmin: function () {
+        return this.roles.indexOf('admin') > -1;
+    },
+
     makeSalt: function () {
         return crypto.randomBytes(16).toString('base64');
     },
