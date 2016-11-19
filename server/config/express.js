@@ -24,7 +24,7 @@ var express = require('express'),
     path = require('path');
 
 module.exports = function (app, passport, db) {
-    var gfs = new Grid(db.connections[0].db, db.mongo);
+    var gfs = new Grid(db.connection.db, db.mongo);
 
     app.locals.title = 'Dexter\'s application';
     app.set('showStackError', true);

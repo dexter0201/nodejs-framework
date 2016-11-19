@@ -4,27 +4,20 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto');
 
-
-var validatePresenceOf = function (value) {
-    return (this.provider && this.provider !== 'local') || value.length;
-};
-
 var UserSchema = new Schema({
     name: {
         type: String,
         required: true,
-        validate: [validatePresenceOf, 'Name cannot be blank']
     },
     email: {
         type: String,
         required: true,
-        validate: [validatePresenceOf, 'Email cannot be blank'],
         match: [/.+\@.+\..+/, 'Please enter a valid email']
     },
     username: {
         type: String,
         unique: true,
-        validate: [validatePresenceOf, 'Username cannot be blank']
+        required: true
     },
     roles: {
         type: Array,
@@ -37,7 +30,7 @@ var UserSchema = new Schema({
     },
     hashed_password: {
         type: String,
-        validate: [validatePresenceOf, 'Password cannot be blank']
+        required: true
     },
     facebook: {}
 });
