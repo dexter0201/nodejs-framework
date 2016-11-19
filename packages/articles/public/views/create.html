@@ -1,6 +1,6 @@
 <section data-ng-controller="ArticlesController">
     <h1>Create an article</h1>
-    <form data-ng-submit="create()" class="form-horizontal">
+    <form name="articleForm" data-ng-submit="articleForm.$valid && create()" class="form-horizontal" novalidate>
         <div class="control-group">
             <label dexter-token="'create article'" class="control-label">Title</label>
             <div class="controls">
