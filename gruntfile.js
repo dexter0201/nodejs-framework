@@ -2,6 +2,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         assets: grunt.file.readJSON('server/config/assets.json'),
+        clean: ['public/build'],
         watch: {
             html: {
                 files: [
@@ -42,8 +43,11 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-            production: {
-                files: '<%= assets.main.js %>'
+            core: {
+                options: {
+                    mangle: false
+                },
+                files: '<%= assets.core.js %>'
             }
         },
         csslint: {
@@ -52,8 +56,8 @@ module.exports = function (grunt) {
             }
         },
         cssmin: {
-            combine: {
-                files: '<%= assets.main.css %>'
+            core: {
+                files: '<%= assets.core.css %>'
             }
         },
         nodemon: {
@@ -103,23 +107,24 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.option('force', true);
+    // grunt.option('force', true);
 
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-csslint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    //grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-nodemon');
-    grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-concurrent');
-    grunt.loadNpmTasks('grunt-bower-task');
+    // grunt.loadNpmTasks('grunt-contrib-cssmin');
+    // grunt.loadNpmTasks('grunt-contrib-csslint');
+    // grunt.loadNpmTasks('grunt-contrib-uglify');
+    // grunt.loadNpmTasks('grunt-contrib-watch');
+    // //grunt.loadNpmTasks('grunt-contrib-jshint');
+    // grunt.loadNpmTasks('grunt-nodemon');
+    // grunt.loadNpmTasks('grunt-mocha-test');
+    // grunt.loadNpmTasks('grunt-karma');
+    // grunt.loadNpmTasks('grunt-concurrent');
+    // grunt.loadNpmTasks('grunt-bower-task');
+    require('load-grunt-tasks')(grunt);
 
     if (process.env.NODE_ENV === 'production') {
-        grunt.registerTask('default', ['jshint', 'csslint', 'cssmin', 'uglify', 'concurrent']);
+        grunt.registerTask('default', ['clean', 'cssmin', 'uglify', 'concurrent']);
     } else {
-        grunt.registerTask('default', ['concurrent']);
+        grunt.registerTask('default', ['clean', 'concurrent']);
     }
 
     //Test task.

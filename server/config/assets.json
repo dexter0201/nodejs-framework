@@ -1,5 +1,5 @@
 {
-    "main": {
+    "core": {
         "css": {
             "public/build/css/dist.min.css": [
                 "public/system/lib/bootstrap/css/bootstrap.css",
@@ -9,15 +9,15 @@
         "js": {
             "public/build/js/dist.min.js": [
                 "public/system/lib/angular/angular.js",
+                "public/system/lib/angular-mocks/angular-mocks.js",
                 "public/system/lib/angular-cookies/angular-cookies.js",
                 "public/system/lib/angular-resource/angular-resource.js",
-                "public/system/lib/jquery/jquery.min.js",
                 "public/system/lib/angular-ui-router/angular-ui-router.min.js",
+                "public/system/lib/jquery/jquery.min.js",
                 "public/system/lib/angular-bootstrap/ui-bootstrap-tpls.js",
                 "public/init.js",
                 "public/*/*.js",
-                "public/*/*/*.js",
-                "!public/build/**"
+                "public/*/{controllers,routes,services}/*.js"
             ]
         }
     }
