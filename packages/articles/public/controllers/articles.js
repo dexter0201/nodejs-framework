@@ -61,8 +61,9 @@ angular
                     }
                 }
             } else {
-                $scope.article.$remove();
-                $location.path('articles');
+                $scope.article.$remove(function () {
+                    $location.path('articles');
+                });
             }
         };
     }]);

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('dexter')
+    angular.module('dexter.articles')
         .config(['$stateProvider',
             function ($stateProvider) {
                 var checkLoggedIn = function ($q, $timeout, $http, $location) {
