@@ -8,7 +8,7 @@
 
                 $http.get('/loggedin').success(function (user) {
                     if (user !== '0') {
-                        $timeout(function () {
+                        $setTimeout(function() {
                             deferred.reject();
                         }, 0);
                         $location.url('/login');
