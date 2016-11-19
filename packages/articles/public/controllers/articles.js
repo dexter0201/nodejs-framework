@@ -1,7 +1,14 @@
+'use strict';
+
 angular
     .module('dexter.articles')
     .controller('ArticlesController', ['$scope', 'Global', 'Articles', '$location', '$stateParams', function ($scope, Global, Articles, $location, $stateParams) {
         $scope.global = Global;
+
+        $scope.hasAuthentization = function (article) {
+            return $scope.global.isAdmin
+                || (article.user._id === $scope.global.user._id);
+        };
 
         $scope.create = function () {
             var article = new Articles({
@@ -48,8 +55,8 @@ angular
             if (article) {
                 article.$remove();
 
-                for (var i in $scope.artices) {
-                    if ($scope.artices[i] == article) {
+                for (var i in $scope.articles) {
+                    if ($scope.articles[i] === article) {
                         $scope.articles.splice(i, 1);
                     }
                 }

@@ -2,11 +2,11 @@
     <span>{{ article.created | date: 'medium' }}</span> /
     <span>{{ article.user.name }}</span>
     <h2>{{ article.title }}
-        <a href="/#!/articles/{{article._id}}/edit" data-ng-show="global.user._id == article.user._id">
-            edit
+        <a class="btn" href="/#!/articles/{{article._id}}/edit" data-ng-show="hasAuthentization(article)">
+            <i class="glyphicon glyphicon-edit"></i>
         </a>
-        <a class="btn" data-ng-click="remove()">
-            <i class="icon-trash"></i>
+        <a class="btn" data-ng-click="remove()" data-ng-show="hasAuthentization(article)">
+            <i class="glyphicon glyphicon-trash"></i>
         </a>
     </h2>
     <div>{{ article.content }}</div>

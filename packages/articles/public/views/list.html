@@ -9,6 +9,14 @@
                 </a>
             </h2>
             <div>{{ article.content }}</div>
+            <div data-ng-show="hasAuthentization(article)">
+                <a href="/#!/articles/{{article._id}}/edit" class="btn">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn" data-ng-click="remove(article)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
         </li>
     </ul>
     <h1 data-ng-hide="!articles || articles.length">No articles yet.<br/>Why don't you <a ui-sref="create article">Create One?</a></h1>
