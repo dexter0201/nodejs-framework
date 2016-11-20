@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose'),
     Article = mongoose.model('Article'),
     _ = require('underscore');
@@ -24,13 +26,12 @@ exports.create = function (req, res) {
 
     article.save(function (err) {
         if (err) {
-            return res.send('users/signup', {
-                errors: err.errors,
-                article: article
+            return res.jsonp(500, {
+                error: 'Cannot save the article'
             });
-        } else {
-            res.jsonp(article);
         }
+
+        res.jsonp(article);
     });
 };
 
@@ -41,7 +42,9 @@ exports.update = function (req, res) {
 
     article.save(function (err) {
         if (err) {
-            throw err;
+            return res.jsonp(500, {
+                error: 'Cannot update the article'
+            });
         }
 
         res.jsonp(article);
@@ -53,8 +56,8 @@ exports.destroy = function (req, res) {
 
     article.remove(function (err) {
         if (err) {
-            res.render('error', {
-                status: 500
+            return res.jsonp(500, {
+                error: 'Cannot delete the article'
             });
         }
 
@@ -73,9 +76,11 @@ exports.all = function (req, res) {
         .populate('user', 'name username')
         .exec(function (err, articles) {
             if (err) {
-                res.render('error', { status: 500 });
-            } else {
-                res.jsonp(articles);
+                return res.jsonp(500, {
+                    error: 'Cannot list the articles'
+                });
             }
+
+            res.jsonp(articles);
         });
 };

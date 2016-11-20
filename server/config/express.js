@@ -73,7 +73,9 @@ module.exports = function (app, passport, db) {
             //db: db.connection.db,
             url: config.db,
             collection : config.sessionController
-        })
+        }),
+        cookie: config.sessionCookie,
+        name: config.sessionName
     }));
 
 

@@ -7,5 +7,12 @@ module.exports = {
     db: process.env.MONGOHQ_URL,
     sessionSecret: 'Dexter',
     sessionController: 'sessions',
-    templateEngine: 'swig'
+    templateEngine: 'swig',
+    sessionCookie: {
+        path: '/',
+        httpOnly: true,
+        secure: false,
+        maxAge: null
+    },
+    sessionName: 'connect.sid'
 };

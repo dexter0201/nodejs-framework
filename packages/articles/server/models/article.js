@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
@@ -8,12 +10,12 @@ var ArticleSchema = new Schema({
     },
     title: {
         type: String,
-        'default': '',
+        require: true,
         trim: true
     },
     content: {
         type: String,
-        'default': '',
+        require: true,
         trim: true
     },
     user: {
@@ -23,8 +25,12 @@ var ArticleSchema = new Schema({
 });
 
 ArticleSchema.path('title').validate(function (title) {
-    return title.length;
+    return !!title;
 }, 'Title cannot empty');
+
+ArticleSchema.path('content').validate(function (content) {
+    return !!content;
+}, 'Content cannot empty');
 
 ArticleSchema.statics.load = function (id, cb) {
     //'use strict';
