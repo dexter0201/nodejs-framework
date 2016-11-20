@@ -16,7 +16,7 @@
         bootstrapDependencies();
 
         function bootstrapModels() {
-            require('../util').walk(appPath + '/server/models', null, function (file) {
+            require('../util').walk(appPath + '/server', 'models', null, function (file) {
                 require(file);
             });
         }

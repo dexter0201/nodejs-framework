@@ -164,7 +164,7 @@ module.exports = function (app, passport, db) {
     });
 
     function bootstrapRoutes() {
-        util.walk(path.join(appPath, 'server/routes'), 'middlewares', function (route) {
+        util.walk(path.join(appPath, 'server'), 'routes', 'middlewares', function (route) {
             require(route)(app, passport);
         });
     }
