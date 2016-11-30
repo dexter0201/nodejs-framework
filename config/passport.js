@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
     LocalStrategy = require('passport-local').Strategy,
     FacebookStrategy = require('passport-facebook').Strategy,
     User = mongoose.model('User'),
-    config = require('./config');
+    dexter = require('nodejscore'),
+    config = dexter.loadConfig();
 
 module.exports = function (passport) {
 

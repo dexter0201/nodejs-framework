@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        assets: grunt.file.readJSON('server/config/assets.json'),
+        assets: grunt.file.readJSON('config/assets.json'),
         clean: ['public/build'],
         watch: {
             html: {
