@@ -1,7 +1,6 @@
 //'use strict';
 
-var express = require('express'),
-    helpers = require('view-helpers'),
+var helpers = require('view-helpers'),
     consolidate = require('consolidate'),
     favicon = require('static-favicon'),
     morgan = require('morgan'),
@@ -10,22 +9,16 @@ var express = require('express'),
     methodOverride = require('method-override'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
-    errorHander = require('errorhandler'),
     mongoStore = require('connect-mongo')(session),
     flash = require('connect-flash'),
     expressValidator = require('express-validator'),
     assetmanager = require('assetmanager'),
     dexter = require('nodejscore'),
     config = dexter.loadConfig(),
-    util = require('./util'),
     appPath = process.cwd(),
-    fs = require('fs'),
-    Grid = require('gridfs-stream'),
     path = require('path');
 
 module.exports = function (app, passport, db) {
-    var gfs = new Grid(db.connection.db, db.mongo);
-
     app.locals.title = 'Dexter\'s application';
     app.set('showStackError', true);
 
@@ -92,82 +85,4 @@ module.exports = function (app, passport, db) {
     app.use(flash());
 
     app.use(favicon());
-    app.use('/public', express.static(config.root + '/public'));
-
-    app.get('/modules/aggregated.js', function (req, res) {
-        res.setHeader('content-type', 'text/javascript');
-        res.send(dexter.aggregated.js);
-    });
-
-    app.get('/theme.css', function (req, res) {
-        res.setHeader('content-type', 'text/css');
-        gfs.files.findOne({
-            filename: 'theme.css'
-        }, function (err, file) {
-            if (!file) {
-                fs.createReadStream(
-                    path.join(process.cwd(), 'public/system/lib/bootstrap/css/bootstrap.css')
-                ).pipe(res);
-            } else {
-                var readStream = gfs.createReadStream({
-                    filename: 'theme.css'
-                });
-
-                readStream.on('error', function (err) {
-                    console.log('An error occurred!', err.message);
-                });
-
-                readStream.pipe(res);
-            }
-        });
-
-    });
-
-    app.get('/modules/aggregated.css', function (req, res) {
-        res.setHeader('content-type', 'text/css');
-        res.send(dexter.aggregated.css);
-    });
-
-    dexter.events.on('modulesFound', function () {
-        for (var name in dexter.modules) {
-            app.use('/' + name, express.static(config.root + '/' + dexter.modules[name].source +'/' + name + '/public'));
-        }
-
-        bootstrapRoutes();
-
-        app.use(dexter.chainware.after);
-        app.use(function (err, req, res, next) {
-            if (~err.message.indexOf('not found')) {
-                return next();
-            }
-
-            // log it
-            console.error(err.stack);
-
-            // error page
-            res.status(500)
-                .render('500', {
-                    error: err.stack
-                });
-        });
-
-        // assume 404 since no middleware responded
-        app.use(function(req, res){
-            res.status(404)
-                .render('404', {
-                    url: req.originalUrl,
-                    error: 'Not found'
-                });
-        });
-
-        if (process.env.NODE_ENV === 'development') {
-            app.use(errorHander());
-        }
-    });
-
-    function bootstrapRoutes() {
-        util.walk(path.join(appPath, 'server'), 'routes', 'middlewares', function (route) {
-            require(route)(app, passport);
-        });
-    }
 };
