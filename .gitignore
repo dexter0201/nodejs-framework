@@ -2,7 +2,6 @@
 .vscode/*
 node_modules/*
 .DS_Store
-public/lib
 test/coverage
 .bower-cache/*
 .bower-registry/*
@@ -10,3 +9,4 @@ modules/public/
 modules/views/
 public/build/
 npm-debug.log
+bower_components

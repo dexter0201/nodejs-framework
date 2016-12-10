@@ -2,7 +2,6 @@
 
 var helpers = require('view-helpers'),
     consolidate = require('consolidate'),
-    favicon = require('static-favicon'),
     morgan = require('morgan'),
     compression = require('compression'),
     bodyParser = require('body-parser'),
@@ -15,7 +14,6 @@ var helpers = require('view-helpers'),
     assetmanager = require('assetmanager'),
     dexter = require('nodejscore'),
     config = dexter.loadConfig(),
-    appPath = process.cwd(),
     path = require('path');
 
 module.exports = function (app, passport, db) {
@@ -37,8 +35,6 @@ module.exports = function (app, passport, db) {
 
     // Assign the template engine to .html files
     app.engine('html', consolidate[config.templateEngine]);
-    // Set view path, template, engine, default layout
-    app.set('views', config.root + '/server/views');
     app.set('view engine', 'html');
 
     app.enable('jsonp callback');
@@ -82,6 +78,4 @@ module.exports = function (app, passport, db) {
 
     // connect flash for flash message
     app.use(flash());
-
-    app.use(favicon());
 };

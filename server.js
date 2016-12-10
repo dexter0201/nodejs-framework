@@ -3,5 +3,5 @@
 var dexter = require('nodejscore');
 
 dexter.serve({}, function (app, config) {
-    console.log('running...');
+
 });
