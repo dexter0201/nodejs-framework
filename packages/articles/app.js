@@ -1,7 +1,7 @@
 'use strict';
 
 var Module = require('nodejscore').Module;
-var Articles = new Module('Articles');
+var Articles = new Module('articles');
 
 Articles.register(function (app, auth, database) {
     Articles.routes(app, auth, database);

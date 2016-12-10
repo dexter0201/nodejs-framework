@@ -10,9 +10,6 @@
                     .state('home', {
                         url: '/',
                         templateUrl: '/public/system/views/index.html'
-                    })
-                    .state('auth', {
-                        templateUrl: '/users/views/index.html'
                     });
             }
         ])

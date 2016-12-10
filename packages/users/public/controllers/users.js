@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.controllers.login', [])
+angular.module('dexter.users', [])
     .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
         $scope.user = {};
 

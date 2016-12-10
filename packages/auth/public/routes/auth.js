@@ -20,10 +20,6 @@ angular.module('dexter.users').config(['$stateProvider',
         };
 
         $stateProvider
-            .state('auth', {
-                url: '/auth',
-                templateUrl: 'users/views/index.html'
-            })
             .state('auth.login', {
                 url: '/login',
                 templateUrl: '/users/views/login.html',
