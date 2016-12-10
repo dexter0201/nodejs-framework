@@ -17,8 +17,7 @@
             'ngResource',
             'ui.bootstrap',
             'ui.router',
-            'dexter.system',
-            'dexter.auth'
+            'dexter.system'
         ];
 
     for (var index in window.modules) {

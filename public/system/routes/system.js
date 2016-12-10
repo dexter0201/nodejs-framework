@@ -12,7 +12,7 @@
                         templateUrl: '/public/system/views/index.html'
                     })
                     .state('auth', {
-                        templateUrl: '/public/auth/views/index.html'
+                        templateUrl: '/users/views/index.html'
                     });
             }
         ])

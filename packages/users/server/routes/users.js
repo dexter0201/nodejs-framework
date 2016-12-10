@@ -2,7 +2,7 @@
 
 var users = require('../controllers/users');
 
-module.exports = function (app, passport) {
+module.exports = function (Users, app, auth, database, passport) {
     app.route('/register')
         .post(users.create);
     app.route('/login')

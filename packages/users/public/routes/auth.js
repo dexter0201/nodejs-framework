@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('dexter.auth').config(['$stateProvider',
+    angular.module('dexter.users').config(['$stateProvider',
         function ($stateProvider) {
             var checkLoggedOut = function ($q, $timeout, $http, $location) {
                 var deferred = $q.defer();
@@ -23,14 +23,14 @@
             $stateProvider
                 .state('auth.login', {
                     url: '/login',
-                    templateUrl: '/public/auth/views/login.html',
+                    templateUrl: '/users/views/login.html',
                     resolve: {
                         loggedin: checkLoggedOut
                     }
                 })
                 .state('auth.register', {
                     url: '/register',
-                    templateUrl: '/public/auth/views/register.html',
+                    templateUrl: '/users/views/register.html',
                     resolve: {
                         loggedin: checkLoggedOut
                     }
