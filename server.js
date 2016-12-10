@@ -2,6 +2,6 @@
 
 var dexter = require('nodejscore');
 
-dexter.sever({}, function (app, config) {
+dexter.serve({}, function (app, config) {
     console.log('running...');
 });

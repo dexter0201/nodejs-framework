@@ -2,7 +2,7 @@
 .vscode/*
 node_modules/*
 .DS_Store
-public/system/lib/*
+public/lib
 test/coverage
 .bower-cache/*
 .bower-registry/*

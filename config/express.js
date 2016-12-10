@@ -37,7 +37,6 @@ module.exports = function (app, passport, db) {
 
     // Assign the template engine to .html files
     app.engine('html', consolidate[config.templateEngine]);
-
     // Set view path, template, engine, default layout
     app.set('views', config.root + '/server/views');
     app.set('view engine', 'html');

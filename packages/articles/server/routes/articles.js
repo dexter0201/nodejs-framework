@@ -10,13 +10,25 @@ var hasAuthorization = function (req, res, next) {
     }
 };
 
-module.exports = function (Articles, app, auth) {
+// module.exports = function (Articles, app, auth) {
+//     app.route('/articles')
+//         .get(articles.all)
+//         .post(auth.requiresLogin, articles.create);
+//     app.route('/articles/:articleId')
+//         .get(articles.show)
+//         .put(auth.requiresLogin, hasAuthorization, articles.update)
+//         .delete(auth.requiresLogin, hasAuthorization, articles.destroy);
+//     app.param('articleId', articles.article);
+// };
+
+module.exports = function (Articles, app) {
     app.route('/articles')
         .get(articles.all)
-        .post(auth.requiresLogin, articles.create);
+        .post(articles.create);
     app.route('/articles/:articleId')
         .get(articles.show)
-        .put(auth.requiresLogin, hasAuthorization, articles.update)
-        .delete(auth.requiresLogin, hasAuthorization, articles.destroy);
+        .put(hasAuthorization, articles.update)
+        .delete(hasAuthorization, articles.destroy);
     app.param('articleId', articles.article);
 };
+
