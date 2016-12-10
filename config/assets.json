@@ -2,7 +2,6 @@
     "core": {
         "css": {
             "bower_components/build/css/dist.min.css": [
-                "bower_components/build/css/dist.min.css"
             ]
         },
         "js": {
@@ -13,8 +12,7 @@
                 "bower_components/angular-resource/angular-resource.js",
                 "bower_components/angular-ui-router/release/angular-ui-router.min.js",
                 "bower_components/jquery/jquery.min.js",
-                "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
-                "system/public/init.js"
+                "bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
             ]
         }
     }
