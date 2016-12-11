@@ -18,10 +18,12 @@
     <meta property="og:site_name" content="Dexter - Framework">
     <meta property="fb:admins" content="APP_ADMIN">
 
-    {% for file in assets.core.css %}
-        <link rel="stylesheet" href="{{file}}">
-    {% endfor %}
 
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/modules/aggregated.css">
+    <script type="text/javascript" src="/modules/aggregated.js?group=header"></script>
+
+    {% for file in assets.core.css %}
+        <link rel="stylesheet" href="{{file}}">
+    {% endfor %}
 </head>

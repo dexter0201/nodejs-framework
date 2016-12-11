@@ -18,6 +18,11 @@ Articles.register(function (app, auth, database) {
         link: 'create article'
     });
 
+    Articles.aggregateAsset('js', 'test.js', {
+        group: 'footer',
+        weight: -1
+    });
+
     Articles.aggregateAsset('css', 'articles.css');
 
     return Articles;
