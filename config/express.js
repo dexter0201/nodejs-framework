@@ -63,7 +63,9 @@ module.exports = function (app, passport, db) {
             collection : config.sessionController
         }),
         cookie: config.sessionCookie,
-        name: config.sessionName
+        name: config.sessionName,
+        resave: true,
+        saveUninitialized: true
     }));
 
 
