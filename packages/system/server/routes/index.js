@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (System, app, auth, database) {
+module.exports = function (System, app/*, auth, database*/) {
     var index = require('../controllers/index');
 
     app.route('/')

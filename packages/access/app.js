@@ -6,7 +6,7 @@ var dexter = require('nodejscore'),
 
 var Access = new Module('access');
 
-Access.register(function(database) {
+Access.register(function() {
 
     var auth = require('./server/config/authorization');
 

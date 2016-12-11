@@ -13,10 +13,9 @@ var helpers = require('view-helpers'),
     expressValidator = require('express-validator'),
     assetmanager = require('assetmanager'),
     dexter = require('nodejscore'),
-    config = dexter.loadConfig(),
-    path = require('path');
+    config = dexter.loadConfig();
 
-module.exports = function (app, passport, db) {
+module.exports = function (app, passport/*, db*/) {
     app.locals.title = 'Dexter\'s application';
     app.set('showStackError', true);
 
