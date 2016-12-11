@@ -10,3 +10,4 @@ modules/views/
 public/build/
 npm-debug.log
 bower_components
+public/system/lib
