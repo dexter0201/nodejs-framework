@@ -51,7 +51,11 @@ module.exports = function (app, passport/*, db*/) {
     // Add assets to local veriables
     app.use(function (req, res, next) {
         res.locals.assets = assetmanager.assets;
-        next();
+
+        dexter.aggregated('js', 'header', function (data) {
+            res.locals.headerJs = data;
+            next();
+        });
     });
 
     app.use(session({
