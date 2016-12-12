@@ -64,10 +64,23 @@ exports.create = function (req, res) {
             switch (err.code) {
             case 11000:
             case 11001:
-                res.status(400).send('Username already taken');
+                res.status(400).send({
+                    msg: 'Username already taken',
+                    param: 'username'
+                });
                 break;
             default:
-                res.status(400).send('Please fill all the required fields');
+                var errorModel = [];
+
+                for (var error in err.errors) {
+                    errorModel.push({
+                        param: error,
+                        msg: err.errors[error].message,
+                        value: err.errors[error].value
+                    });
+                }
+
+                res.status(400).send(errorModel);
             }
 
             return res.status(400);

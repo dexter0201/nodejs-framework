@@ -4,6 +4,16 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto');
 
+function validateUniqueEmail(value, callback) {
+    var User = mongoose.model('User');
+
+    User.find({
+        email: value
+    }, function (err, user) {
+        callback(err || user.length === 0)
+    });
+}
+
 var UserSchema = new Schema({
     name: {
         type: String,
@@ -12,7 +22,8 @@ var UserSchema = new Schema({
     email: {
         type: String,
         required: true,
-        match: [/.+\@.+\..+/, 'Please enter a valid email']
+        match: [/.+\@.+\..+/, 'Please enter a valid email'],
+        validate: [validateUniqueEmail, 'Email address is already in-use']
     },
     username: {
         type: String,
