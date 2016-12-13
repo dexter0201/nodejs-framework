@@ -21,7 +21,7 @@ exports.signout = function (req, res) {
 };
 
 exports.me = function (req, res) {
-    res.jsonp(req.user || null);
+    res.json(req.user || null);
 };
 
 // Show profile

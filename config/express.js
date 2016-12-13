@@ -36,8 +36,6 @@ module.exports = function (app, passport/*, db*/) {
     app.engine('html', consolidate[config.templateEngine]);
     app.set('view engine', 'html');
 
-    app.enable('jsonp callback');
-
     app.use(cookieParser());
     app.use(expressValidator());
     app.use(bodyParser());
