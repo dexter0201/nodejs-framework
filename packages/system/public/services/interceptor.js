@@ -5,7 +5,7 @@ angular.module('dexter-factory-interceptor', [])
         return {
             response: function (res) {
                 if (res.status === 401) {
-                    $location.path('/login');
+                    $location.path('/auth/login');
 
                     return $q.reject(res);
                 }
@@ -15,7 +15,7 @@ angular.module('dexter-factory-interceptor', [])
 
             responseError: function (rejection) {
                 if (rejection.status === 401) {
-                    $location.url('/login');
+                    $location.url('/auth/login');
 
                     return $q.reject(rejection);
                 }
@@ -24,6 +24,3 @@ angular.module('dexter-factory-interceptor', [])
             }
         };
     }]);
-    // .config([, function () {
-    //     //$httpProvider.responseInterceptors.push('httpInterceptor');
-    // }]);
