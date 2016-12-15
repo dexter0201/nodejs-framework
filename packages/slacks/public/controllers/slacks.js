@@ -6,7 +6,5 @@ angular.module('dexter.slacks').controller('SlackController', ['$scope', 'Global
         $scope.package = {
             name: 'slacks'
         };
-
-        console.log($scope.package);
     }
 ]);

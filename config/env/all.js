@@ -3,6 +3,17 @@ var path = require('path'),
 
 module.exports = {
     root: rootPath,
+    http: {
+        port: process.env.PORT || 3000
+    },
+    https: {
+        port: false,
+        ssl: {
+            key: '',
+            cert: ''
+        }
+    },
+    hostname: process.env.HOST || process.env.HOSTNAME,
     port: process.env.PORT || 3000,
     db: process.env.MONGOHQ_URL,
     sessionSecret: 'Dexter',
