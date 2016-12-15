@@ -1,40 +1,55 @@
 <div data-ng-controller="LoginCtrl">
-    <div class="alert alert-danger animated fadeIn" ng-show="loginError">
-        {{ loginError }}
+    <div class="login-form">
+        <div class="login-form__left">
+            <div class="alert alert-danger animated fadeIn" ng-show="loginError">
+                {{ loginError }}
+            </div>
+
+            <header>
+                <h2>Login</h2>
+                <p>Welcome to NodeJs Framework</p>
+            </header>
+
+            <form class="signin form-horizontal" ng-submit="login()" method="post">
+                <div class="form-group">
+                    <label for="email" class="col-md-4 control-label">Email</label>
+                    <div class="col-md-8">
+                        <input type="text"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            ng-model="user.email"
+                            required
+                            class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-md-4 control-label">Password</label>
+                    <div class="col-md-8">
+                        <input type="password"
+                            name="password"
+                            id="password"
+                            class="form-control"
+                            placeholder="Password"
+                            ng-model="user.password" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        &nbsp;or&nbsp;
+                        <a ui-sref="auth.register" class="show-signup">Sign up</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+         <div class="login-form__center">
+            <p>or</p>
+        </div>
+
+        <div class="backtrack-logo">
+            <img src="/users/assets/img/backtrack_logo.png" width="350px" height="350px" alt="#">
+        </div>
     </div>
-
-    <h1>Login</h1>
-
-    <form class="signin form-horizontal" ng-submit="login()" method="post">
-        <div class="form-group">
-            <label for="email" class="col-md-4 control-label">Email</label>
-            <div class="col-md-8">
-                <input type="text"
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    ng-model="user.email"
-                    required
-                    class="form-control" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password" class="col-md-4 control-label">Password</label>
-            <div class="col-md-8">
-                <input type="password"
-                    name="password"
-                    id="password"
-                    class="form-control"
-                    placeholder="Password"
-                    ng-model="user.password" required />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-4 col-md-8">
-                <button type="submit" class="btn btn-primary">Sign in</button>
-                &nbsp;or&nbsp;
-                <a ui-sref="auth.register" class="show-signup">Sign up</a>
-            </div>
-        </div>
-    </form>
 </div>

@@ -4,8 +4,11 @@
     </div>
     <div class="alert alert-danger animated fadeIn" ng-show="usernameError">{{ usernameError }}</div>
 
-    <h1>Register</h1>
-    <form ng-submit="register()" class="signup form-horizontal">
+    <header>
+        <h2>Register</h1>
+    </header>
+
+    <form ng-submit="register()" class="signup form-horizontal registration_form">
         <div class="form-group">
             <label for="name" class="control-label col-md-4">Full Name</label>
             <div class="col-md-8">

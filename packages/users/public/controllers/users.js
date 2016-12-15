@@ -1,7 +1,11 @@
 'use strict';
 
-angular.module('dexter.users', [])
-    .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
+angular.module('dexter.users', []).controller('AuthController', ['$scope',
+    function ($scope) {
+        $scope.socialButtons = {};
+    }
+]).controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location',
+    function ($scope, $rootScope, $http, $location) {
         $scope.user = {};
 
         $scope.login = function () {
@@ -26,8 +30,9 @@ angular.module('dexter.users', [])
                 $scope.loginError = 'Authentication failed.';
             });
         };
-    }])
-    .controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
+    }
+]).controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location',
+    function ($scope, $rootScope, $http, $location) {
         $scope.user = {};
 
         $scope.register = function () {
@@ -52,4 +57,5 @@ angular.module('dexter.users', [])
                 }
             });
         };
-    }]);
+    }
+]);

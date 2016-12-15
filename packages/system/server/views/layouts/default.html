@@ -9,7 +9,7 @@
     </section>
     {% endif %}
 
-    <section class="col-md-10">
+    <section class="{% if adminEnabled() %} col-md-10 {% else %} col-md-12 {% endif %}">
         <section class="container">
             {% block content %}{% endblock %}
         </section>
