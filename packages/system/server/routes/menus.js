@@ -9,13 +9,19 @@ module.exports = function (System, app/*, auth, database*/) {
                 ? req.user.roles
                 : ['annonymous'];
             var menu = req.params.name || 'main',
-                defaultMenu = req.query.defaultMenu ? JSON.parse(req.query.defaultMenu) : [],
+                defaultMenu = req.query.defaultMenu || [],
                 items;
+
+            if (!Array.isArray(defaultMenu)) {
+                defaultMenu = [defaultMenu];
+            }
 
             items = dexter.menus.get({
                 roles: roles,
                 menu: menu,
-                defaultMenu: defaultMenu
+                defaultMenu: defaultMenu.map(function (item) {
+                    return JSON.parse(item);
+                })
             });
 
             res.json(items);
