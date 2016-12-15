@@ -2,8 +2,8 @@
 
 angular.module('dexter.slacks').config(['$stateProvider',
     function ($stateProvider) {
-        $stateProvider.state('dexter example page', {
-            url: '/slacks/example',
+        $stateProvider.state('slacks dashboard', {
+            url: '/slacks/dashboard',
             templateUrl: 'slacks/views/index.html'
         });
     }

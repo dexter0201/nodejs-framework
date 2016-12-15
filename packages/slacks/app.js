@@ -8,7 +8,7 @@ Slacks.register(function (app, auth, database) {
 
     Slacks.menus.add({
         title: 'Slacks Dashboard',
-        link: 'Slacks Dashboard',
+        link: 'slacks dashboard',
         roles: ['authenticated'],
         menu: 'main'
     });
