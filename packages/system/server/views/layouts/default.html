@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"xmlns='http://www.w3.org/1999/xhtml', xmlns:fb='https://www.facebook.com/2008/fbml', itemscope='itemscope', itemtype='http://schema.org/Product'>
 {% include '../includes/head.html' %}
-<body data-ng-app="dexter">
+<body data-ng-controller="ThemeController" ng-class="state.name">
     <nav class="navbar navbar-inverse" data-ng-include="'/system/views/header.html'"></nav>
     {% if adminEnabled() %}
     <section class="col-md-2">
