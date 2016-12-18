@@ -1,6 +1,6 @@
 'use strict';
 
-var dexter = require('nodejscore');
+var nodejscore = require('nodejscore');
 
 module.exports = function (System, app/*, auth, database*/) {
     app.route('/admin/menu/:name')
@@ -16,7 +16,7 @@ module.exports = function (System, app/*, auth, database*/) {
                 defaultMenu = [defaultMenu];
             }
 
-            items = dexter.menus.get({
+            items = nodejscore.menus.get({
                 roles: roles,
                 menu: menu,
                 defaultMenu: defaultMenu.map(function (item) {
