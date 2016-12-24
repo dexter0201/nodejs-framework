@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('dexter.users').config(['$stateProvider', '$viewPathProvider',
-    function ($stateProvider, $viewPathProvider) {
+angular.module('dexter.users').config(['$nodeJsCoreStateProvider',
+    function ($nodeJsCoreStateProvider) {
         var checkLoggedOut = function ($q, $timeout, $http, $location) {
             var deferred = $q.defer();
 
@@ -19,21 +19,21 @@ angular.module('dexter.users').config(['$stateProvider', '$viewPathProvider',
             return deferred.promise;
         };
 
-        $stateProvider
+        $nodeJsCoreStateProvider
             .state('auth', {
                 url: '/auth',
-                templateUrl: $viewPathProvider.path('users/views/index.html')
+                templateUrl: 'users/views/index.html'
             })
             .state('auth.login', {
                 url: '/login',
-                templateUrl: $viewPathProvider.path('/users/views/login.html'),
+                templateUrl: '/users/views/login.html',
                 resolve: {
                     loggedin: checkLoggedOut
                 }
             })
             .state('auth.register', {
                 url: '/register',
-                templateUrl: $viewPathProvider.path('/users/views/register.html'),
+                templateUrl: '/users/views/register.html',
                 resolve: {
                     loggedin: checkLoggedOut
                 }
