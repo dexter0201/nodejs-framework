@@ -16,6 +16,8 @@ angular.module('dexter.system').provider('$viewPath', function () {
             }
 
             overrides[defaultPath] = newPath;
+
+            return this;
         };
 
         this.$get = function () {
@@ -28,19 +30,23 @@ angular.module('dexter.system').provider('$viewPath', function () {
 
 angular.module('dexter.system').provider('$nodeJsCoreState', ['$stateProvider', '$viewPathProvider',
     function ($stateProvider, $viewPathProvider) {
-        this.state = function (stateName, data) {
-            if (data.templateUrl) {
-                data.templateUrl = $viewPathProvider.path(data.templateUrl);
-            }
+        function NodeJsCoreStateProvider() {
+            this.state = function (stateName, data) {
+                if (data.templateUrl) {
+                    data.templateUrl = $viewPathProvider.path(data.templateUrl);
+                }
 
-            $stateProvider.state(stateName, data);
+                $stateProvider.state(stateName, data);
 
-            return this;
-        };
+                return this;
+            };
 
-        this.$get = function () {
-            return this;
-        };
+            this.$get = function () {
+                return this;
+            };
+        }
+
+        return new NodeJsCoreStateProvider();
     }
 ]);
 
