@@ -43,7 +43,7 @@
         "jade": "1.11.0",
         "mkdirp": "0.3.5",
         "mongoose": "^4.6.4",
-        "nodejscore": "0.4.6",
+        "nodejscore": "0.4.7",
         "passport": "0.3.2",
         "passport-facebook": "2.1.1",
         "passport-local": "1.0.0",

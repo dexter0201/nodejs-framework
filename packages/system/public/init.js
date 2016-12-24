@@ -10,7 +10,7 @@ angular.element(document).ready(function() {
 });
 
 var packageModules = [],
-    modules = [
+    initModules = [
         'ngCookies',
         'ngResource',
         'ui.bootstrap',
@@ -25,5 +25,5 @@ for (var index in window.modules) {
     packageModules.push(module);
 }
 
-modules = modules.concat(packageModules);
-angular.module('dexter', modules);
+initModules = initModules.concat(packageModules);
+angular.module('dexter', initModules);
