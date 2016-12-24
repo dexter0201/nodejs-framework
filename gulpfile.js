@@ -146,4 +146,24 @@
                 );
         }
     });
+
+    gulp.task('env:develop', () => {
+        process.env.NODE_ENV = 'development';
+    });
+
+    gulp.task('env:production', () => {
+        process.env.NODE_ENV = 'production';
+    });
+
+    gulp.task('develop', ['env:develop'], () => {
+        plugins.nodemon({
+            script: 'server.js',
+            ext: 'html js',
+            env: {
+                'NODE_ENV': 'development'
+            },
+            ignore: ['./node_modules'],
+            nodeArgs: ['--debug']
+        });
+    });
 }());
