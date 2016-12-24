@@ -2,7 +2,8 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    crypto = require('crypto');
+    crypto = require('crypto'),
+    _ = require('lodash');
 
 function validateUniqueEmail(value, callback) {
     var User = mongoose.model('User');
@@ -14,10 +15,16 @@ function validateUniqueEmail(value, callback) {
     });
 }
 
+function escapeProperty(value) {
+    return _.escape(value);
+}
+
 var UserSchema = new Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
+        get: escapeProperty
     },
     email: {
         type: String,
@@ -95,6 +102,15 @@ UserSchema.methods = {
     authenticate: function (plainText) {
         return this.encryptPassword(plainText) === this.hashed_password;
         //return bcrypt.compareSync(plainText, this.hashed_password);
+    },
+
+    toJSON: function() {
+        var obj = this.toObject();
+
+        delete obj.hashed_password;
+        delete obj.salt;
+
+        return obj;
     }
 };
 
