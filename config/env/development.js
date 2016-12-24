@@ -1,6 +1,7 @@
 module.exports = {
     db: 'mongodb://localhost/nodejs-framework',
     debug: true,
+    aggregate: true,
     app: {
         name: 'Dexter Nguyen - Nodejs Framework'
     },

@@ -12,8 +12,13 @@ var helpers = require('view-helpers'),
     flash = require('connect-flash'),
     expressValidator = require('express-validator'),
     assetmanager = require('assetmanager'),
-    dexter = require('nodejscore'),
-    config = dexter.loadConfig();
+    nodejscore = require('nodejscore'),
+    config = nodejscore.loadConfig();
+
+function onAggregatedSrc(position, ext, res, next, data) {
+    res.locals.aggregatedAssets[position][ext] = data;
+    next && next();
+}
 
 module.exports = function (app, passport/*, db*/) {
     app.locals.title = 'Dexter\'s application';
@@ -46,14 +51,44 @@ module.exports = function (app, passport/*, db*/) {
         webroot: 'public/public',
         debug: process.env.NODE_ENV !== 'production'
     });
+
+    for (var i in assetmanager.assets.core.css) {
+        nodejscore.aggregate(
+            'css',
+            assetmanager.assets.core.css[i],
+            {
+                group: 'header',
+                singleFile: true
+            },
+            nodejscore.config.clean
+        );
+    }
+
+    for (var i in assetmanager.assets.core.js) {
+        nodejscore.aggregate(
+            'js',
+            assetmanager.assets.core.js[i],
+            {
+                group: 'footer',
+                singleFile: true,
+                global: true,
+                weight: -1000000 + i
+            },
+            nodejscore.config.clean
+        );
+    }
+
     // Add assets to local veriables
     app.use(function (req, res, next) {
-        res.locals.assets = assetmanager.assets;
+        res.locals.aggregatedAssets = {
+            header: {},
+            footer: {}
+        };
 
-        dexter.aggregated('js', 'header', function (data) {
-            res.locals.headerJs = data;
-            next();
-        });
+        nodejscore.aggregatedSrc('css', 'header', onAggregatedSrc.bind(null, 'header', 'css', res, null));
+        nodejscore.aggregatedSrc('js', 'header', onAggregatedSrc.bind(null, 'header', 'js', res, null));
+        nodejscore.aggregatedSrc('css', 'footer', onAggregatedSrc.bind(null, 'footer', 'css', res, null));
+        nodejscore.aggregatedSrc('js', 'footer', onAggregatedSrc.bind(null, 'footer', 'js', res, next));
     });
 
     app.use(session({
@@ -77,7 +112,7 @@ module.exports = function (app, passport/*, db*/) {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use(dexter.chainware.before);
+    app.use(nodejscore.chainware.before);
 
     // connect flash for flash message
     app.use(flash());

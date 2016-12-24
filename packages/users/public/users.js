@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('dexter.users', []);
+angular.module('dexter.users', ['dexter.system']);

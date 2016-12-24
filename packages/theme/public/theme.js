@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('dexter.theme', []);
+angular.module('dexter.theme', ['dexter.system']);

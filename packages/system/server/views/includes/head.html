@@ -20,12 +20,16 @@
 
 
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/modules/aggregated.css">
-    <script type="text/javascript">
-        {{ headerJs | raw }}
-    </script>
 
-    {% for file in assets.core.css %}
-        <link rel="stylesheet" href="{{file}}">
+    {% for file in aggregatedAssets.header.css %}
+        <link type="text/css" rel="stylesheet" href="{{file}}">
+    {% endfor %}
+
+    {% for file in aggregatedAssets.footer.css %}
+        <link type="text/css" rel="stylesheet" href="{{file}}">
+    {% endfor %}
+
+    {% for file in aggregatedAssets.header.js %}
+        <script type="text/javascript" src="{{file}}"></script>
     {% endfor %}
 </head>
