@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('dexter.theme').config(['$stateProvider',
-    function ($stateProvider) {
-
+angular.module('dexter.theme').config(['$stateProvider', '$viewPathProvider',
+    function ($stateProvider, $viewPathProvider) {
         $stateProvider
             .state('theme example page', {
                 url: '/theme example page',
-                templateUrl: 'users/views/index.html'
+                templateUrl: $viewPathProvider.path('users/views/index.html')
             });
     }
 ]);
