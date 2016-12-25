@@ -1,8 +1,8 @@
 'use strict';
 
-var dexter = require('nodejscore');
+var nodejscore = require('nodejscore');
 
-dexter.serve({}, function (app, config) {
+nodejscore.runInstance({}, function (app, config) {
     console.log('Dexter\'s app started on port ' + config.http.port + ' (' + process.env.NODE_ENV + ')');
 
     if (config.https && config.https.port) {
