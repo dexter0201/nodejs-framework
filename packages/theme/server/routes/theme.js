@@ -1,6 +1,6 @@
 'use strict';
 
 
-module.exports = function (Users, app, auth, database, passport) {
+module.exports = function (/*Users, app, auth, database, passport*/) {
 
 };

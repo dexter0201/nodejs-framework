@@ -21,6 +21,8 @@ function onAggregatedSrc(position, ext, res, next, data) {
 }
 
 module.exports = function (app, passport/*, db*/) {
+    var i;
+
     app.locals.title = 'Dexter\'s application';
     app.set('showStackError', true);
 
@@ -52,7 +54,7 @@ module.exports = function (app, passport/*, db*/) {
         debug: process.env.NODE_ENV !== 'production'
     });
 
-    for (var i in assetmanager.assets.core.css) {
+    for (i in assetmanager.assets.core.css) {
         nodejscore.aggregate(
             'css',
             assetmanager.assets.core.css[i],
@@ -64,7 +66,7 @@ module.exports = function (app, passport/*, db*/) {
         );
     }
 
-    for (var i in assetmanager.assets.core.js) {
+    for (i in assetmanager.assets.core.js) {
         nodejscore.aggregate(
             'js',
             assetmanager.assets.core.js[i],

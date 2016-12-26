@@ -11,7 +11,7 @@ function validateUniqueEmail(value, callback) {
     User.find({
         email: value
     }, function (err, user) {
-        callback(err || user.length === 0)
+        callback(err || user.length === 0);
     });
 }
 

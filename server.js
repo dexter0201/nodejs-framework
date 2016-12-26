@@ -15,7 +15,7 @@ if (cluster.isMaster &&
     }
 
     cluster.on('exit', function (worker) {
-        console.log('Worker ', worder.id, ' died :(');
+        console.log('Worker ', worker.id, ' died :(');
         cluster.fork();
     });
 } else {
@@ -28,7 +28,7 @@ if (cluster.isMaster &&
 
         console.log(
             'Dexter\'s app started on port ',
-            config.https.port,
+            port,
             ' (',
             process.env.NODE_ENV,
             ') cluster.worker.id ',

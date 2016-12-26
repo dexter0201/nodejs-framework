@@ -71,7 +71,7 @@
     function count(taskName, message) {
         var fileCount = 0;
 
-        function countFiles(file) {
+        function countFiles() {
             fileCount++;
         }
 
