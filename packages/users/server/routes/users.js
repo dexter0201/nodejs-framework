@@ -1,6 +1,7 @@
 'use strict';
 
-var users = require('../controllers/users');
+var users = require('../controllers/users'),
+    config = require('nodejscore').loadConfig();
 
 module.exports = function (Users, app, auth, database, passport) {
     app.route('/register')
@@ -28,5 +29,24 @@ module.exports = function (Users, app, auth, database, passport) {
     app.route('/loggedin')
         .get(function (req, res) {
             res.send(req.isAuthenticated() ? req.user : '0');
+        });
+
+    app.route('/get-config')
+        .get(function (req, res) {
+            var clientIdProperty = 'clientID',
+                defaultPrefix = 'DEFAULT_',
+                socialNetworks = ['facebook', 'linkedin', 'twitter', 'github', 'google'],
+                configureApps = {};
+
+            for (var network in socialNetworks) {
+                var netObject = config[socialNetworks[network]];
+
+                if (netObject && netObject.hasOwnProperty(clientIdProperty) &&
+                    netObject[clientIdProperty].indexOf(defaultPrefix) < 0) {
+                    configureApps[socialNetworks[network]] = true;
+                }
+            }
+
+            res.send(configureApps);
         });
 };

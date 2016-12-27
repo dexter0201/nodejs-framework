@@ -1,8 +1,14 @@
 'use strict';
 
-angular.module('dexter.users', []).controller('AuthController', ['$scope',
-    function ($scope) {
-        $scope.socialButtons = {};
+angular.module('dexter.users', []).controller('AuthController', ['$scope', '$http',
+    function ($scope, $http) {
+        $scope.socialButtonsCounter = 0;
+
+        $http.get('/get-config')
+            .success(function (config) {
+                $scope.socialButtons = config;
+            }
+        );
     }
 ]).controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location',
     function ($scope, $rootScope, $http, $location) {
