@@ -50,8 +50,8 @@ module.exports = function (app, passport/*, db*/) {
 
     assetmanager.process({
         assets: require('./assets.json'),
-        webroot: 'public/public',
-        debug: process.env.NODE_ENV !== 'production'
+        webroot: /public\/|packages\//g,
+        debug: !(config.aggregate || false)//process.env.NODE_ENV !== 'production'
     });
 
     for (i in assetmanager.assets.core.css) {
