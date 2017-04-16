@@ -3,22 +3,22 @@
 const cluster = require('cluster');
 var nodejscore = require('nodejscore');
 
-if (cluster.isMaster &&
-    process.execArgv.indexOf('--debug') < 0 &&
-    process.env.NODE_ENV !== 'test' &&
-    process.execArgv.indexOf('--singleProcess') < 0) {
-    var cpuCount = require('os').cpus().length;
+// if (cluster.isMaster &&
+//     process.execArgv.indexOf('--debug') < 0 &&
+//     process.env.NODE_ENV !== 'test' &&
+//     process.execArgv.indexOf('--singleProcess') < 0) {
+//     var cpuCount = require('os').cpus().length;
 
-    for (var i = 0; i < cpuCount; i++) {
-        console.log('forking ', i);
-        cluster.fork();
-    }
+//     for (var i = 0; i < cpuCount; i++) {
+//         console.log('forking ', i);
+//         cluster.fork();
+//     }
 
-    cluster.on('exit', function (worker) {
-        console.log('Worker ', worker.id, ' died :(');
-        cluster.fork();
-    });
-} else {
+//     cluster.on('exit', function (worker) {
+//         console.log('Worker ', worker.id, ' died :(');
+//         cluster.fork();
+//     });
+// } else {
     var workerid = !cluster.isMaster ? cluster.worker.id : 0;
 
     nodejscore.runInstance({
@@ -35,4 +35,4 @@ if (cluster.isMaster &&
             workerid
         );
     });
-}
+// }

@@ -8,9 +8,7 @@
         "url": "git@github.com:dexter0201/nodejs-framework.git"
     },
     "scripts": {
-        "start": "node node_modules/grunt-cli/bin/grunt",
-        "test": "make test",
-        "postinstall": "node node_modules/grunt-cli/bin/grunt install"
+        "test": "make test"
     },
     "engines": {
         "node": "6.4.x",
@@ -43,7 +41,7 @@
         "jade": "1.11.0",
         "mkdirp": "0.3.5",
         "mongoose": "^4.6.4",
-        "nodejscore": "0.4.12",
+        "nodejscore": "git://git@github.com:dexter0201/nodejscore.git#feature/massive-changes",
         "passport": "0.3.2",
         "passport-facebook": "2.1.1",
         "passport-local": "1.0.0",
@@ -66,6 +64,7 @@
         "gulp-uglify": "^1.0.1",
         "gulp-concat": "^2.4.1",
         "gulp-cssmin": "^0.1.6",
-        "gulp-nodemon": "^1.0.4"
+        "gulp-nodemon": "^1.0.4",
+        "should": "^11.2.1"
     }
 }
