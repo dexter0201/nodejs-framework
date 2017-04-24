@@ -9,7 +9,8 @@
         "angular-ui-router": "0.2.0",
         "angular-mocks": "~1.0.8",
         "json3": "~3.2.4",
-        "jquery": "~1.9.1"
+        "jquery": "~1.9.1",
+        "web-bootstrap": "./node_modules/nodejscore/resources/web-bootstrap.js"
     },
     "resolutions": {
         "angular": "1.0.8"
