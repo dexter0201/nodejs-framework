@@ -10,10 +10,12 @@ function NodeJsCoreUser() {
 }
 
 NodeJsCoreUser.prototype = Object.create(Module.prototype, {
-    value: NodeJsCoreUser,
-    configurable: false,
-    enumerable: false,
-    writable: false
+    constructor: {
+        value: NodeJsCoreUser,
+        configurable: false,
+        enumerable: false,
+        writable: false
+    }
 });
 
 var nodejscoreUser = new NodeJsCoreUser();
