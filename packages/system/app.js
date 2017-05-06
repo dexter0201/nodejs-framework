@@ -8,7 +8,7 @@ var System = new Module('system');
 System.register(function (app, auth, database) {
     System.routes(app, auth, database);
     System.aggregateAsset('css', 'common.css');
-    System.angularDependencies(['ui.router',  'nodejscore-factory-interceptor']);
+    System.angularDependencies(['ui.router', 'nodejscore-factory-interceptor']);
 
     app.set('views', __dirname + '/server/views');
 

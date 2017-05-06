@@ -2,7 +2,6 @@
 
 var nodejscore = require('nodejscore');
 var Module = nodejscore.Module;
-var Users = new Module('users');
 
 function NodeJsCoreUser() {
     Module.call(this, 'users');
