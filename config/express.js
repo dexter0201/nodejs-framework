@@ -6,7 +6,8 @@ var helpers = require('view-helpers'),
     compression = require('compression'),
     flash = require('connect-flash'),
     nodejscore = require('nodejscore'),
-    config = nodejscore.loadConfig();
+    config = nodejscore.loadConfig(),
+    express = require('express');
 
 function onAggregatedSrc(position, ext, res, next, data) {
     res.locals.aggregatedAssets[position][ext] = data;
@@ -27,6 +28,8 @@ module.exports = function (app, db) {
     app.use(compression({
         level: 9
     }));
+
+    app.use('/bower_components', express.static(config.root + '/bower_components'));
 
     if (process.env.ENV === 'development') {
         app.use(morgan('dev'));
