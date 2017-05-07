@@ -59,6 +59,13 @@ angular.module('nodejscore.system').config(['$nodeJsCoreStateProvider', '$urlRou
                 url: '/',
                 templateUrl: '/system/views/index.html'
             });
+
+        $nodeJsCoreStateProvider
+            .state('Log Out', {
+                controller: function () {
+                    window.location = '/logout';
+                }
+            });
     }
 ]).config(['$locationProvider',
     function ($locationProvider) {

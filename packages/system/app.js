@@ -15,5 +15,12 @@ System.register(function (app, auth, database) {
     app.use(favicon(__dirname + '/public/assets/img/favicon.ico'));
     app.useStatic(__dirname + '/public/assets/static');
 
+    System.menus.add({
+        title: 'Log Out',
+        link: 'Log Out',
+        roles: ['authenticated'],
+        menu: 'account'
+    });
+
     return System;
 });

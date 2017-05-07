@@ -20,6 +20,7 @@ angular
         };
 
         queryMenus('main', defaultMainMenus);
+        queryMenus('account', []);
 
         $scope.isCollapsed = false;
 

@@ -31,9 +31,11 @@ module.exports = function (app, db) {
 
     app.use('/bower_components', express.static(config.root + '/bower_components'));
 
-    if (process.env.ENV === 'development') {
-        app.use(morgan('dev'));
-    }
+    app.enable('trust proxy'); // Log real IP (X-Forwarded-For)
+    app.use(morgan('combined'));
+    // if (process.env.ENV === 'development') {
+    //     app.use(morgan('dev'));
+    // }
 
     // Assign the template engine to .html files
     app.engine('html', consolidate[config.templateEngine]);

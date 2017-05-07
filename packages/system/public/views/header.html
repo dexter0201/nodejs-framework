@@ -41,6 +41,10 @@
                     role="button"
                     aria-expanded="false">Hi {{ global.user.name }} <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
+                    <!--<li data-ng-repeat="item in menus.account" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
+                        <a href="/logout">Logout</a>
+                        <a ui-sref="{{ item.link }}">{{ item.title }}</a>
+                    </li>-->
                     <li>
                         <a href="/logout">Logout</a>
                     </li>
