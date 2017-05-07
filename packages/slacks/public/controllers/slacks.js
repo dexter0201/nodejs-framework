@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.slacks').controller('SlackController', ['$scope', 'Global',
+angular.module('nodejscore.slacks').controller('SlackController', ['$scope', 'Global',
     function ($scope, Global) {
         $scope.global = Global;
         $scope.package = {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.users').config(['$nodeJsCoreStateProvider',
+angular.module('nodejscore.users').config(['$nodeJsCoreStateProvider',
     function ($nodeJsCoreStateProvider) {
         var checkLoggedOut = function ($q, $timeout, $http, $location) {
             var deferred = $q.defer();

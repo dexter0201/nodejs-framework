@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.users', []).controller('AuthController', ['$scope', '$http',
+angular.module('nodejscore.users', []).controller('AuthController', ['$scope', '$http',
     function ($scope, $http) {
         $scope.socialButtonsCounter = 0;
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.theme').config(['$nodeJsCoreStateProvider',
+angular.module('nodejscore.theme').config(['$nodeJsCoreStateProvider',
     function ($nodeJsCoreStateProvider) {
         $nodeJsCoreStateProvider
             .state('theme example page', {

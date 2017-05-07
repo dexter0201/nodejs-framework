@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.system').factory('Global', [function () {
+angular.module('nodejscore.system').factory('Global', [function () {
     var _this = this;
 
     _this._data = {

@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('dexter.slacks', []);
+angular.module('nodejscore.slacks', []);

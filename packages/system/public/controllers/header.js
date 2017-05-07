@@ -1,5 +1,5 @@
 angular
-    .module('dexter.system')
+    .module('nodejscore.system')
     .controller('HeaderController', ['$scope', '$rootScope', '$location', 'Global', 'Menus', '$state', function ($scope, $rootScope , $location, Global, Menus, $state) {
         $scope.global = Global;
         $scope.menus = {};

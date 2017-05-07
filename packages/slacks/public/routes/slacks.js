@@ -1,6 +1,6 @@
 'user strict';
 
-angular.module('dexter.slacks').config(['$stateProvider',
+angular.module('nodejscore.slacks').config(['$stateProvider',
     function ($stateProvider) {
         $stateProvider.state('slacks dashboard', {
             url: '/slacks/dashboard',

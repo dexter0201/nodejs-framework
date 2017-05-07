@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.system').provider('$viewPath', function () {
+angular.module('nodejscore.system').provider('$viewPath', function () {
     function ViewPathProvider() {
         var overrides = {};
 
@@ -28,7 +28,7 @@ angular.module('dexter.system').provider('$viewPath', function () {
     return new ViewPathProvider();
 });
 
-angular.module('dexter.system').provider('$nodeJsCoreState', ['$stateProvider', '$viewPathProvider',
+angular.module('nodejscore.system').provider('$nodeJsCoreState', ['$stateProvider', '$viewPathProvider',
     function ($stateProvider, $viewPathProvider) {
         function NodeJsCoreStateProvider() {
             this.state = function (stateName, data) {
@@ -50,7 +50,7 @@ angular.module('dexter.system').provider('$nodeJsCoreState', ['$stateProvider', 
     }
 ]);
 
-angular.module('dexter.system').config(['$nodeJsCoreStateProvider', '$urlRouterProvider',
+angular.module('nodejscore.system').config(['$nodeJsCoreStateProvider', '$urlRouterProvider',
     function ($nodeJsCoreStateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.users').factory('Users', [function () {
+angular.module('nodejscore.users').factory('Users', [function () {
     return {
         name: 'users'
     };

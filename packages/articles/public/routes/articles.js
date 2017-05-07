@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter.articles')
+angular.module('nodejscore.articles')
     .config(['$stateProvider',
         function ($stateProvider) {
             var checkLoggedIn = function ($q, $timeout, $http, $location) {

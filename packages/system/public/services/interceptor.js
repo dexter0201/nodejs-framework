@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dexter-factory-interceptor', [])
+angular.module('nodejscore-factory-interceptor', [])
     .factory('httpInterceptor', ['$q', '$location', function ($q, $location) {
         return {
             response: function (res) {

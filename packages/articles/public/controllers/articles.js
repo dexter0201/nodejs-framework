@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('dexter.articles')
+    .module('nodejscore.articles')
     .controller('ArticlesController', ['$scope', 'Global', 'Articles', '$location', '$stateParams', function ($scope, Global, Articles, $location, $stateParams) {
         $scope.global = Global;
 
