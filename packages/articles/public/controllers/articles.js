@@ -6,8 +6,8 @@ angular
         $scope.global = Global;
 
         $scope.hasAuthentization = function (article) {
-            return $scope.global.isAdmin
-                || (article.user._id === $scope.global.user._id);
+            return $scope.global.isAdmin ||
+                (article.user._id === $scope.global.user._id);
         };
 
         $scope.create = function () {

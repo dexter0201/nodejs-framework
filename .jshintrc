@@ -1,0 +1,13 @@
+{
+    "globals": {
+        "angular": true,
+        "describe": true,
+        "it": true,
+        "afterEach": true,
+        "beforeEach": true,
+        "JSON": true
+    },
+    "node": true,
+    "browser": true,
+    "esnext": true
+}

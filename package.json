@@ -65,6 +65,9 @@
         "gulp-concat": "^2.4.1",
         "gulp-cssmin": "^0.1.6",
         "gulp-nodemon": "^1.0.4",
-        "should": "^11.2.1"
+        "should": "^11.2.1",
+        "gulp-less": "3.3.0",
+        "gulp-csslint": "1.0.0",
+        "gulp-livereload": "^2.1.1"
     }
 }

@@ -8,8 +8,8 @@
                     toEqualData: function (expected) {
                         return angular.equals(this.actual, expected);
                     }
-                })
-            })
+                });
+            });
 
             beforeEach(module('dexter'));
 
@@ -55,4 +55,4 @@
             });
         });
     });
-});
+})();

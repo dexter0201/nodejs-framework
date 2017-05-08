@@ -66,10 +66,10 @@ UserSchema
 
 // Pre-save hook
 UserSchema.pre('save', function (next) {
-    if (this.isNew
-        && this.provider === 'local'
-        && this.password
-        && !this.password.length) {
+    if (this.isNew &&
+        this.provider === 'local' &&
+        this.password &&
+        !this.password.length) {
         return next(new Error('Invalid password'));
     }
 

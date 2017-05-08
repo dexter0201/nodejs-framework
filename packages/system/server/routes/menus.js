@@ -5,8 +5,8 @@ var nodejscore = require('nodejscore');
 module.exports = function (System, app/*, auth, database*/) {
     app.route('/admin/menu/:name')
         .get(function (req, res) {
-            var roles = req.user
-                ? req.user.roles
+            var roles = req.user ?
+                req.user.roles
                 : ['annonymous'];
             var menu = req.params.name || 'main',
                 defaultMenu = req.query.defaultMenu || [],
