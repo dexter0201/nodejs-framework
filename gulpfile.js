@@ -6,28 +6,31 @@ const gulpLoadPlugin = require('gulp-load-plugins');
 const plugins = gulpLoadPlugin();
 const through = require('through');
 const gutil = require('gulp-util');
+const _ = require('lodash');
+const path = require('path');
 
 var paths = {
-    js: [
-        '*.js',
-        '!*_bk.js',
-        'test/**/*.js',
-        '!bower_components/**',
-        'packages/**/*.js',
-        '!packages/**/node_modules/**'
-    ],
-    css: [
-        '!bower_components/**',
-        'packages/**/public/**/css/*.css'
-    ],
-    html: [
-        'packages/**/public/**/views/**',
-        'packages/**/server/views/**'
-    ],
-    less: [
-        '**/public/**/css/*.less'
-    ]
-};
+        js: [
+            '*.js',
+            '!*_bk.js',
+            'test/**/*.js',
+            '!bower_components/**',
+            'packages/**/*.js',
+            '!packages/**/node_modules/**'
+        ],
+        css: [
+            '!bower_components/**',
+            'packages/**/public/**/css/*.css'
+        ],
+        html: [
+            'packages/**/public/**/views/**',
+            'packages/**/server/views/**'
+        ],
+        less: [
+            '**/public/**/css/*.less'
+        ]
+    },
+    assets = require('./config/assets.json');
 
 function log(taskName, message) {
     var fileCount = 0;
@@ -41,10 +44,6 @@ function log(taskName, message) {
         this.emit('end');
     });
 }
-
-gulp.task('csslint', function () {
-
-});
 
 gulp.task('clean', function (cb) {
     return del(['bower_components/build'], cb);
@@ -77,6 +76,10 @@ gulp.task('env:develop', function () {
     process.env.NODE_ENV = 'development';
 });
 
+gulp.task('env:production', function () {
+    process.env.NODE_ENV = 'production';
+});
+
 gulp.task('develop', ['env:develop'] , function () {
     plugins.nodemon({
         script: 'server.js',
@@ -99,6 +102,46 @@ gulp.task('watch', function () {
     });
 });
 
+function tokenizeConfig(config) {
+    var destTokens = _.keys(config)[0].split('/');
+
+    return {
+        srcGlob: _.flatten(_.values(config)),
+        destDir: destTokens[destTokens.length - 2],
+        destFile: destTokens[destTokens.length - 1]
+    };
+}
+
+gulp.task('cssmin', function () {
+    var config = tokenizeConfig(assets.core.css);
+
+    if (config.srcGlob.length) {
+        return gulp.src(config.srcGlob)
+            .pipe(plugins.cssmin({
+                keepBreaks: true
+            }))
+            .pipe(plugins.concat(config.destFile))
+            .pipe(gulp.dest(path.join('bower_components/build', config.destDir)));
+    }
+});
+
+gulp.task('uglify', function () {
+    var config = tokenizeConfig(assets.core.js);
+
+    if (config.srcGlob.length) {
+        return gulp.src(config.srcGlob)
+            .pipe(plugins.concat(config.destFile))
+            .pipe(plugins.uglify({
+                mangle: false
+            }))
+            .pipe(gulp.dest(path.join('bower_components/build', config.destDir)));
+    }
+});
+
 var defaultTasks = ['clean', 'jshint', 'less', 'csslint', 'develop', 'watch'];
+
+if (process.env.NODE_ENV === 'production') {
+    defaultTasks = ['clean', 'cssmin', 'uglify'];
+}
 
 gulp.task('default', defaultTasks);
