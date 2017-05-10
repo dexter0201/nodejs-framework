@@ -6,6 +6,7 @@ var nodejscore = require('nodejscore');
 if (cluster.isMaster &&
     process.execArgv.indexOf('--debug') < 0 &&
     process.env.NODE_ENV !== 'test' &&
+    process.env.NODE_ENV!=='development' &&
     process.execArgv.indexOf('--singleProcess') < 0) {
     var cpuCount = require('os').cpus().length;
 
