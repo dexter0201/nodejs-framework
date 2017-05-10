@@ -2,8 +2,10 @@
 
 const gulp = require('gulp');
 
+var env = process.env.NODE_ENV || 'development';
+
 gulp.paths = {
-    develop: 'default',
+    development: 'default',
     production: 'production',
     test: 'test',
     server: 'server'
@@ -11,6 +13,6 @@ gulp.paths = {
 
 require('require-dir')('./gulp');
 
-gulp.task('default', ['clean'], function () {
-    gulp.start('develop');
+gulp.task('default', ['clean'], function (defaultTasks) {
+    gulp.start(env);
 });

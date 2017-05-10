@@ -6,8 +6,28 @@ const gulpLoadPlugin = require('gulp-load-plugins');
 const plugins = gulpLoadPlugin();
 const _ = require('lodash');
 
-var paths = gulp.paths;
-var defaultTasks = ['clean', 'jshint', 'less', 'csslint', 'develop', 'watch'];
+var paths = {
+        js: [
+            '*.js',
+            '!*_bk.js',
+            'test/**/*.js',
+            '!bower_components/**',
+            'packages/**/*.js',
+            '!packages/**/node_modules/**'
+        ],
+        css: [
+            '!bower_components/**',
+            'packages/**/public/**/css/*.css'
+        ],
+        html: [
+            'packages/**/public/**/views/**',
+            'packages/**/server/views/**'
+        ],
+        less: [
+            '**/public/**/css/*.less'
+        ]
+    },
+    defaultTasks = ['clean', 'jshint', 'less', 'csslint', 'develop', 'watch'];
 
 gulp.task('clean', function (cb) {
     return del(['bower_components/build'], cb);
@@ -68,4 +88,4 @@ function tokenizeConfig(config) {
     };
 }
 
-gulp.task('default', defaultTasks);
+gulp.task('development', defaultTasks);
