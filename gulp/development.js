@@ -63,7 +63,7 @@ gulp.task('develop', ['env:develop'] , function () {
         env: {
             'NODE_ENV': 'development'
         },
-        ignore: ['./node_modules/**'],
+        ignore: ['node_modules/'],
         nodeArgs: ['--debug']
     });
 });
