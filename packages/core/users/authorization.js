@@ -7,6 +7,11 @@ module.exports.requiresLogin = function (req, res, next) {
     if (!req.isAuthenticated()) {
         return res.status(401).send('User is not authorized');
     }
+
+    if (typeof req.user === 'string') {
+        req.user = JSON.parse(decodeURI(req.user));
+    }
+
     next();
 };
 
