@@ -1,8 +1,12 @@
 angular
     .module('nodejscore.system')
-    .controller('HeaderController', ['$scope', '$rootScope', '$location', 'Global', 'Menus', '$state', function ($scope, $rootScope , $location, Global, Menus, $state) {
-        $scope.global = Global;
+    .controller('HeaderController', ['$scope', '$rootScope', '$location', 'Menus', '$state', 'Users', function ($scope, $rootScope , $location, Menus, $state, Users) {
         $scope.menus = {};
+        $scope.headerValues = {
+            authenticated: Users.loggedin,
+            user: Users.user,
+            isAdmin: Users.isAdmin
+        };
 
         var defaultMainMenus = [];
 
@@ -26,9 +30,24 @@ angular
 
         $rootScope.$on('loggedin', function () {
             queryMenus('main', defaultMainMenus);
-            $scope.global = {
-                authenticated: !!$rootScope.user,
-                user: $rootScope.user
+
+            $scope.headerValues = {
+                authenticated: Users.loggedin,
+                user: Users.user,
+                isAdmin: Users.isAdmin
             };
+        });
+
+        $scope.logout = function () {
+            Users.logout();
+        };
+
+        $rootScope.$on('logout', function () {
+            $scope.headerValues = {
+                authenticated: false,
+                user: {},
+                isAdmin: false
+            };
+            $scope.menus = {};
         });
     }]);

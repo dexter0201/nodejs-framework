@@ -11,6 +11,7 @@ module.exports = {
     dbs: {
         dev: 'mongodb://localhost/nodejs-framework-dev'
     },
+    secret: 'TOKEN_KEY',
     facebook: {
         clientID: 'APP_ID',
         clientSecret: 'APP_SECRET',

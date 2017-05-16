@@ -1,7 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    config = require('nodejscore').loadConfig(),
+    User = mongoose.model('User'),
+    jwt = require('jsonwebtoken');
 
 exports.authCallback = function (req, res) {
     res.redirect('/');
@@ -86,11 +88,22 @@ exports.create = function (req, res) {
             return res.status(400);
         }
 
+        var payload = user;
+
+        payload.redirect = req.body.redirect;
+        payload = JSON.stringify(payload);
+        payload = encodeURI(payload);
+
         req.logIn(user, function (err, next) {
             if (err) {
                 return next(err);
             }
-            return res.redirect('/');
+
+            var token = jwt.sign(payload, config.secret);
+            
+            res.json({
+                token: token
+            });
         });
 
         res.status(200);

@@ -1,18 +1,32 @@
 'use strict';
 
 var users = require('../controllers/users'),
-    config = require('nodejscore').loadConfig();
+    config = require('nodejscore').loadConfig(),
+    jwt = require('jsonwebtoken'),
+    expressJwt = require('express-jwt');
 
 module.exports = function (Users, app, auth, database, passport) {
+    app.use('/api', expressJwt({
+        secret: config.secret
+    }));
+
     app.route('/register')
         .post(users.create);
     app.route('/login')
         .post(passport.authenticate('local', {
             failureFlash: true
         }), function (req, res) {
-            res.send({
-                user: req.user,
-                redirect: req.user.roles.indexOf('admin') !== -1 ? req.get('referer') : false
+            var payload = req.user,
+                token,
+                escaped;
+
+            payload.redirect = req.body.redirect;
+            escaped = JSON.stringify(payload);
+            escaped = encodeURI(escaped);
+            token = jwt.sign(escaped, config.secret);
+
+            res.json({
+                token: token
             });
         });
     app.route('/logout')

@@ -2,12 +2,12 @@
 
 angular
     .module('nodejscore.articles')
-    .controller('ArticlesController', ['$scope', 'Global', 'Articles', '$location', '$stateParams', function ($scope, Global, Articles, $location, $stateParams) {
+    .controller('ArticlesController', ['$scope', 'Global', 'Articles', '$location', '$stateParams', 'Users', function ($scope, Global, Articles, $location, $stateParams, Users) {
         $scope.global = Global;
 
         $scope.hasAuthentization = function (article) {
-            return $scope.global.isAdmin ||
-                (article.user._id === $scope.global.user._id);
+            return Users.isAdmin ||
+                (article.user._id === Users.user._id);
         };
 
         $scope.create = function () {

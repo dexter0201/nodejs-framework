@@ -6,6 +6,7 @@ module.exports = {
     logging: {
         format: 'combined'
     },
+    secret: 'TOKEN_KEY',
     'facebook': {
         'clientID': 'APP_ID',
         'clientSecret': 'APP_SECRET',

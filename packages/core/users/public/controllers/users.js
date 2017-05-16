@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nodejscore.users', []).controller('AuthController', ['$scope', '$http',
+angular.module('nodejscore.users').controller('AuthController', ['$scope', '$http',
     function ($scope, $http) {
         $scope.socialButtonsCounter = 0;
 
@@ -10,58 +10,68 @@ angular.module('nodejscore.users', []).controller('AuthController', ['$scope', '
             }
         );
     }
-]).controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location',
-    function ($scope, $rootScope, $http, $location) {
+]).controller('LoginCtrl', ['$scope', '$rootScope', 'Users',
+    function ($scope, $rootScope, Users) {
         $scope.user = {};
+
+        $scope.input = {
+            type: 'password',
+            placeholder: 'Password',
+            confirmPasswordPlaceholder: 'Repeat Password',
+            iconClass: '',
+            tooltipText: 'Show Password'
+        };
+
+        $scope.togglePasswordVisible = function () {
+            $scope.input.type = $scope.input.type === 'text' ? 'password' : 'text';
+            $scope.placeholder = $scope.input.placeholder === 'Password' ? 'Visible Password' : 'Password';
+            $scope.iconClass = $scope.input.iconClass === 'icon_hide_password' ? '' : 'icon_hide_password';
+            $scope.tooltipText = $scope.input.tooltipText === 'Show Password' ? 'Hide Password' : 'Show Password';
+        };
+
+        $rootScope.$on('loginfail', function () {
+            $scope.loginError = Users.loginError;
+        });
 
         $scope.login = function () {
-            $http.post('/login', {
-                email: $scope.user.email,
-                password: $scope.user.password
-            }).success(function (response) {
-                $scope.loginError = 0;
-                $rootScope.user = response.user;
-                $rootScope.$emit('loggedin');
-
-                if (response.redirect) {
-                    if (window.location.href === response.redirect) {
-                        window.location.reload();
-                    } else {
-                        window.location = response.redirect;
-                    }
-                } else {
-                    $location.url('/');
-                }
-            }).error(function () {
-                $scope.loginError = 'Authentication failed.';
-            });
+            Users.login($scope.user);  
         };
     }
-]).controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location',
-    function ($scope, $rootScope, $http, $location) {
+]).controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location', 'Users',
+    function ($scope, $rootScope, $http, $location, Users) {
         $scope.user = {};
 
+        $scope.registerForm = Users.registerForm = true;
+
+        $scope.input = {
+            type: 'password',
+            placeholder: 'Password',
+            placeholderConfirmPass: 'Repeat Password',
+            iconClassConfirmPass: '',
+            tooltipText: 'Show Password',
+            tooltipTextConfirmPass: 'Show password'
+        };
+
+        $scope.togglePasswordVisible = function () {
+            $scope.input.type = $scope.input.type === 'text' ? 'password' : 'text';
+            $scope.placeholder = $scope.input.placeholder === 'Password' ? 'Visible Password' : 'Password';
+            $scope.iconClass = $scope.input.iconClass === 'icon_hide_password' ? '' : 'icon_hide_password';
+            $scope.tooltipText = $scope.input.tooltipText === 'Show Password' ? 'Hide Password' : 'Show Password';
+        };
+
+        $scope.togglePasswordConfirmVisible = function() {
+            $scope.input.type = $scope.input.type === 'text' ? 'password' : 'text';
+            $scope.input.placeholderConfirmPass = $scope.input.placeholderConfirmPass === 'Repeat Password' ? 'Visible Password' : 'Repeat Password';
+            $scope.input.iconClassConfirmPass = $scope.input.iconClassConfirmPass === 'icon_hide_password' ? '' : 'icon_hide_password';
+            $scope.input.tooltipTextConfirmPass = $scope.input.tooltipTextConfirmPass === 'Show password' ? 'Hide password' : 'Show password';
+        };
+
+        $rootScope.$on('loginfail', function () {
+            $scope.registerError = Users.registerError;
+        });
+
         $scope.register = function () {
-            $scope.usernameError = null;
-            $scope.registerError = null;
-            $http.post('/register', {
-                name: $scope.user.name,
-                username: $scope.user.username,
-                email: $scope.user.email,
-                password: $scope.user.password,
-                confirmPassword: $scope.user.confirmPassword
-            }).success(function () {
-                $scope.registerError = 0;
-                $rootScope.user = $scope.user.name;
-                $rootScope.$emit('loggedin');
-                $location.url('/');
-            }).error(function (error) {
-                if (error === 'Username already taken') {
-                    $scope.usernameError = error;
-                } else {
-                    $scope.registerError = error;
-                }
-            });
+            Users.register($scope.user);
         };
     }
 ]);

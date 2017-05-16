@@ -24,7 +24,7 @@ nodejscoreUser.register(function (app, database, passport) {
     require('./passport')(passport);
     nodejscore.register('auth', nodejscoreUser.auth);
     nodejscoreUser.routes(app, nodejscoreUser.auth, database, passport);
-    nodejscoreUser.angularDependencies(['nodejscore.system']);
+    nodejscoreUser.angularDependencies(['nodejscore.system', 'angular-jwt']);
 
     return nodejscoreUser;
 });

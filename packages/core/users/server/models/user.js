@@ -1,4 +1,4 @@
-//'use strict'
+'use strict';
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
@@ -76,42 +76,38 @@ UserSchema.pre('save', function (next) {
     next();
 });
 
-UserSchema.methods = {
-    hasRole: function (role) {
-        return (this.roles.indexOf('admin') > -1 || this.roles.indexOf(role) > -1);
-    },
+UserSchema.methods.hasRole = function (role) {
+    return (this.roles.indexOf('admin') > -1 || this.roles.indexOf(role) > -1);
+};
 
-    isAdmin: function () {
-        return this.roles.indexOf('admin') > -1;
-    },
+UserSchema.methods.isAdmin = function () {
+    return this.roles.indexOf('admin') > -1;
+};
 
-    makeSalt: function () {
-        return crypto.randomBytes(16).toString('base64');
-    },
+UserSchema.methods.makeSalt = function () {
+    return crypto.randomBytes(16).toString('base64');
+};
 
-    encryptPassword: function (password) {
-        if (!password || !this.salt) {
-            return '';
-        }
-
-        var salt = new Buffer(this.salt, 'base64');
-        return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
-        //return bcrypt.hashSync(password, 10);
-    },
-
-    authenticate: function (plainText) {
-        return this.encryptPassword(plainText) === this.hashed_password;
-        //return bcrypt.compareSync(plainText, this.hashed_password);
-    },
-
-    toJSON: function() {
-        var obj = this.toObject();
-
-        delete obj.hashed_password;
-        delete obj.salt;
-
-        return obj;
+UserSchema.methods.encryptPassword = function (password) {
+    if (!password || !this.salt) {
+        return '';
     }
+
+    var salt = new Buffer(this.salt, 'base64');
+    return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+};
+
+UserSchema.methods.authenticate = function (plainText) {
+    return this.encryptPassword(plainText) === this.hashed_password;
+};
+
+UserSchema.methods.toJSON = function () {
+    var obj = this.toObject();
+
+    delete obj.hashed_password;
+    delete obj.salt;
+
+    return obj;
 };
 
 mongoose.model('User', UserSchema);
