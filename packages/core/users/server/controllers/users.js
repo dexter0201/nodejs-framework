@@ -23,7 +23,10 @@ exports.signout = function (req, res) {
 };
 
 exports.me = function (req, res) {
-    res.json(req.user || null);
+    var user = req.user === 'object' ?
+        req.user : JSON.parse(decodeURI(req.user));
+
+    res.json(user);
 };
 
 // Show profile

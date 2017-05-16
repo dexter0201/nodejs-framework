@@ -31,7 +31,7 @@ module.exports = function (Users, app, auth, database, passport) {
         });
     app.route('/logout')
         .get(users.signout);
-    app.route('/users/me')
+    app.route('/api/users/me')
         .get(users.me);
 
     app.route('/auth/facebook')

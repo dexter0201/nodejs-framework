@@ -9,8 +9,13 @@ module.exports = function (System, app/*, auth, database*/) {
                 req.user.roles
                 : ['annonymous'];
             var menu = req.params.name || 'main',
-                defaultMenu = req.query.defaultMenu || [],
-                items;
+                items, defaultMenu;
+ 
+            try {
+                defaultMenu = JSON.parse(req.query.defaultMenu) || [];
+            } catch (e) {
+                defaultMenu = [];
+            }
 
             if (!Array.isArray(defaultMenu)) {
                 defaultMenu = [defaultMenu];
