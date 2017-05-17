@@ -22,6 +22,8 @@ module.exports.render = function (req, res) {
             roles: roles
         } : {},
         modules: modules,
+        menus: req.menus,
+        isAdmin: req.user && req.user.roles.indexOf('admin') > -1,
         adminEnabled: function () {
             return req.user && req.user.roles && req.user.roles.indexOf('admin') && nodejscore.moduleEnabled('admin');
         }

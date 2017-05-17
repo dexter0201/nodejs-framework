@@ -1,8 +1,10 @@
 angular
     .module('nodejscore.system')
     .controller('HeaderController', ['$scope', '$rootScope', '$location', 'Menus', '$state', 'Users', function ($scope, $rootScope , $location, Menus, $state, Users) {
-        $scope.menus = {};
-        $scope.headerValues = {
+        var vm = this;
+
+        vm.menus = {};
+        vm.headerValues = {
             authenticated: Users.loggedin,
             user: Users.user,
             isAdmin: Users.isAdmin
@@ -15,11 +17,11 @@ angular
                 name: name,
                 defaultMenu: JSON.stringify(defaultMenu)
             }, function (menu) {
-                $scope.menus[name] = menu;
+                vm.menus[name] = menu;
             });
         }
 
-        $scope.goState = function (link) {
+        vm.goState = function (link) {
             $state.go(link);
         };
 
@@ -31,23 +33,24 @@ angular
         $rootScope.$on('loggedin', function () {
             queryMenus('main', defaultMainMenus);
 
-            $scope.headerValues = {
+            vm.headerValues = {
                 authenticated: Users.loggedin,
                 user: Users.user,
                 isAdmin: Users.isAdmin
             };
         });
 
-        $scope.logout = function () {
+        vm.logout = function () {
             Users.logout();
         };
 
         $rootScope.$on('logout', function () {
-            $scope.headerValues = {
+            vm.headerValues = {
                 authenticated: false,
                 user: {},
                 isAdmin: false
             };
-            $scope.menus = {};
+            vm.menus = {};
+            window.location.reload();
         });
     }]);

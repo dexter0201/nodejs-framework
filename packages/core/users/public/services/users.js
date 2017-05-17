@@ -39,6 +39,7 @@ angular
                     }
 
                     $rootScope.$emit('loggedin');
+                    window.location.reload();
 
                     if (payload.redirect) {
                         $location.path(payload.redirect);
@@ -49,7 +50,7 @@ angular
                 this.user = response;
                 this.loggedin = true;
 
-                if (this.user.roles.indexOf('admin') > -1) {
+                if (this.user.roles && this.user.roles.indexOf('admin') > -1) {
                     this.isAdmin = true;
                 }
 
@@ -112,8 +113,9 @@ angular
             this.isAdmin = false;
             this.loggedin = false;
             localStorage.removeItem('JWT');
-            $rootScope.$emit('logout');
-            $http.get('/api/logout');
+            $http.get('/api/logout').success(function () {
+                $rootScope.$emit('logout');
+            });
         };
 
         function escape(html) {

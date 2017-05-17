@@ -7,7 +7,7 @@ angular
 
         $scope.hasAuthentization = function (article) {
             return Users.isAdmin ||
-                (article.user._id === Users.user._id);
+                (article && article.user._id === Users.user._id);
         };
 
         $scope.create = function () {
