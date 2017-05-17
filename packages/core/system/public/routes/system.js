@@ -69,9 +69,10 @@ angular.module('nodejscore.system').config(['$nodeJsCoreStateProvider', '$urlRou
     }
 ]).config(['$locationProvider',
     function ($locationProvider) {
-        $locationProvider.html5Mode({
-            enable: true,
-            requireBase: false
-        });
+        $locationProvider.hashPrefix('!');
+        // $locationProvider.html5Mode({
+        //     enable: true,
+        //     requireBase: false
+        // });
     }
 ]);

@@ -23,8 +23,12 @@ exports.signout = function (req, res) {
 };
 
 exports.me = function (req, res) {
-    var user = req.user === 'object' ?
-        req.user : JSON.parse(decodeURI(req.user));
+    var user = {};
+
+    if (req.user) {
+        user = typeof req.user === 'object' ?
+            req.user : JSON.parse(decodeURI(req.user));
+    }
 
     res.json(user);
 };
