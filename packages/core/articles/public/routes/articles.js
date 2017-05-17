@@ -6,7 +6,7 @@ angular.module('nodejscore.articles')
             var checkLoggedIn = function ($q, $timeout, $http, $location) {
                 var deferred = $q.defer();
 
-                $http.get('/loggedin').success(function (user) {
+                $http.get('/api/loggedin').success(function (user) {
                     if (user !== '0') {
                         $timeout(deferred.resolve, 0);
                     } else {

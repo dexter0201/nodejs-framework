@@ -69,7 +69,7 @@ angular
         NodejscoreUser.prototype.login = function (user) {
             var destination = $location.path().indexOf('/login') > -1 ? $location.absUrl() : false;
 
-            $http.post('/login', {
+            $http.post('/api/login', {
                 email: user.email,
                 password: user.password,
                 redirect: destination
@@ -79,7 +79,7 @@ angular
         };
 
         NodejscoreUser.prototype.register = function (user) {
-            $http.post('/register', {
+            $http.post('/api/register', {
                 email: user.email,
                 password: user.password,
                 confirmPassword: user.confirmPassword,
@@ -91,7 +91,7 @@ angular
         };
 
         NodejscoreUser.prototype.resetpassword = function (user) {
-            $http.post('/reset/' + $stateParams.tokenID, {
+            $http.post('/api/reset/' + $stateParams.tokenID, {
                 password: user.password,
                 confirmPassword: user.confirmPassword
             })
@@ -100,7 +100,7 @@ angular
         };
 
         NodejscoreUser.prototype.forgotpassword = function (user) {
-            $http.post('/reset-password', {
+            $http.post('/api/reset-password', {
                 text: user.email
             })
             .success(this.onIndentity.bind(this))
@@ -113,7 +113,7 @@ angular
             this.loggedin = false;
             localStorage.removeItem('JWT');
             $rootScope.$emit('logout');
-            $http.get('/logout');
+            $http.get('/api/logout');
         };
 
         function escape(html) {

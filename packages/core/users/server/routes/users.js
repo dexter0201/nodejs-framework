@@ -6,13 +6,13 @@ var users = require('../controllers/users'),
     expressJwt = require('express-jwt');
 
 module.exports = function (Users, app, auth, database, passport) {
-    app.use('/api', expressJwt({
-        secret: config.secret
-    }));
+    // app.use('/api', expressJwt({
+    //     secret: config.secret
+    // }));
 
-    app.route('/register')
+    app.route('/api/register')
         .post(users.create);
-    app.route('/login')
+    app.route('/api/login')
         .post(passport.authenticate('local', {
             failureFlash: true
         }), function (req, res) {
@@ -29,23 +29,23 @@ module.exports = function (Users, app, auth, database, passport) {
                 token: token
             });
         });
-    app.route('/logout')
+    app.route('/api/logout')
         .get(users.signout);
     app.route('/api/users/me')
         .get(users.me);
 
-    app.route('/auth/facebook')
+    app.route('/api/auth/facebook')
         .get(passport.authenticate('facebook', {
             scope: [ 'email', 'user_about_me' ],
             failureRedirect: '/signin'
         }), users.signin);
 
-    app.route('/loggedin')
+    app.route('/api/loggedin')
         .get(function (req, res) {
             res.send(req.isAuthenticated() ? req.user : '0');
         });
 
-    app.route('/get-config')
+    app.route('/api/get-config')
         .get(function (req, res) {
             var clientIdProperty = 'clientID',
                 defaultPrefix = 'DEFAULT_',
