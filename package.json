@@ -1,0 +1,22 @@
+{
+  "name": "nodejs-framework",
+  "version": "2.0.0",
+  "description": "NodeJs framework builds by Dexter Nguyen",
+  "main": "server",
+  "scripts": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dexter0201/nodejs-framework.git"
+  },
+  "keywords": [
+    "nodejsframework"
+  ],
+  "author": "Dexter Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dexter0201/nodejs-framework/issues"
+  },
+  "homepage": "https://github.com/dexter0201/nodejs-framework#readme"
+}
